@@ -12,6 +12,10 @@ import java.util.ArrayList;
  */
 public class ProjectList {
     private ArrayList<Project> projectList;
+    
+    public ProjectList(){
+        super();
+    }
 
     public ArrayList<Project> getProjectList() {
         return projectList;
