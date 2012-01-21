@@ -47,6 +47,10 @@ public class Project {
     private String unwantedExperts;
     private ArrayList<String> suggestedExperts;
     
+    public Project(){
+        super();
+    }
+    
     public String getAcronym() {
         return acronym;
     }
