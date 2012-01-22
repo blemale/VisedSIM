@@ -21,11 +21,20 @@ public class MapConverter {
     public static Project convertMapToProject(Map<Integer, String> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Project project = new Project();
         for (String column : columnsOrder.keySet()) {
+            List<Integer> colList = columnsOrder.get(column);
             String methodeName = "set" + column;
-            for (Integer columnIndex : columnsOrder.get(column)) {
-                String[] methodeArgs = {map.get(columnIndex)};
-                ReflectionTools.launchMethod(project, methodeArgs, methodeName);
+            Object[] methodeArgs = new Object[1];
+            if (colList.size() > 1) {
+                List<String> valuesOfColumn = new ArrayList<String>();
+                for (Integer columnIndex : columnsOrder.get(column)) {
+                    valuesOfColumn.add(map.get(columnIndex));
+                }
+                methodeArgs[0] = valuesOfColumn;
+
+            } else {
+                methodeArgs[0] = map.get(colList.get(0));
             }
+            ReflectionTools.launchMethod(project, methodeArgs, methodeName);
         }
         return project;
     }
