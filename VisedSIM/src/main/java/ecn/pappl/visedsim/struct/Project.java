@@ -331,4 +331,8 @@ public class Project {
         this.unwantedExperts = unwantedExperts;
     }
     
+    public int compareTo(Project p){
+        return this.getAcronym().compareTo(p.getAcronym());
+    }
+    
 }
