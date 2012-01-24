@@ -27,12 +27,22 @@ public class MapConverter {
             if (colList.size() > 1) {
                 List<String> valuesOfColumn = new ArrayList<String>();
                 for (Integer columnIndex : columnsOrder.get(column)) {
-                    valuesOfColumn.add(map.get(columnIndex));
+                    String value = map.get(columnIndex);
+                    if(value != null){
+                        valuesOfColumn.add(map.get(columnIndex));
+                    }
                 }
+                
                 methodeArgs[0] = valuesOfColumn;
 
             } else {
-                methodeArgs[0] = map.get(colList.get(0));
+                String value = map.get(colList.get(0));
+                if(value != null){
+                    methodeArgs[0] = map.get(colList.get(0));
+                } else {
+                    methodeArgs[0] = "";
+                }
+               
             }
             ReflectionTools.launchMethod(project, methodeArgs, methodeName);
         }
@@ -41,7 +51,7 @@ public class MapConverter {
 
     public static ProjectList convertMapToProjectList(Map<Integer, Map<Integer, String>> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ProjectList projectList = new ProjectList();
-        ArrayList<Project> projects = projectList.getProjectList();
+        List<Project> projects = projectList.getProjectList();
         for (Integer rowNumber : map.keySet()) {
             Project project = convertMapToProject(map.get(rowNumber), columnsOrder);
             projects.add(project);
