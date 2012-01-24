@@ -44,6 +44,7 @@ public class Project {
     private String nonPermanentCDD;
     private String fullCost;
     private String requestedFunding;
+    private String requestedEffort;
     private String unwantedExperts;
     private ArrayList<String> suggestedExperts;
     
@@ -234,6 +235,15 @@ public class Project {
     public void setRdClass(String rdClass) {
         this.rdClass = rdClass;
     }
+
+    public String getRequestedEffort() {
+        return requestedEffort;
+    }
+
+    public void setRequestedEffort(String requestedEffort) {
+        this.requestedEffort = requestedEffort;
+    }
+    
 
     public String getRequestedFunding() {
         return requestedFunding;
