@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+ <object class="java.util.HashMap"> 
+  <void method="put"> 
+   <string>Summary</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>8</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>InternationalCooperation</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>16</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>PermanentCDD</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>34</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>SecondaryCommitteeKeywords</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>15</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>FollowingProjectPreviouslyFunded</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>23</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Title</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>1</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>NonPermanentCDD</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>36</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>AppKeywords</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>5</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>AnrFundedNonPermanentCDD</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>35</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>PartnershipProject</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>11</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Thematic</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>2</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Admissibility</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>18</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>PreviousProjectAcronym</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>22</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>UnwantedExperts</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>40</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>SubmittedProject</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>12</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>MainDiscipline</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>10</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>SecondaryCommittee</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>14</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>PreviousFundedProjectAcronym</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>24</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>RequestedFunding</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>38</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Acronym</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>0</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>InvolvementTime</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>25</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Multidisciplinary</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>13</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>CoordinatorMail</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>26</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>RdClass</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>7</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>FilledPreviousEdition</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>20</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>ProjectKeywords</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>6</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>FullCost</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>37</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>ThematicOtherThemes</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>4</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>ThematicSubThemes</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>3</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>TransnationalProject</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>17</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>SuggestedExperts</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>41</int> 
+    </void>    
+    <void method="add"> 
+     <int>42</int> 
+    </void>
+    <void method="add"> 
+     <int>43</int> 
+    </void>
+    <void method="add"> 
+     <int>44</int> 
+    </void> 
+    <void method="add"> 
+     <int>45</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Duration</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>9</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>CompetitivePoles</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>27</int> 
+    </void>
+     <void method="add"> 
+     <int>28</int> 
+    </void> 
+    <void method="add"> 
+     <int>29</int> 
+    </void> 
+    <void method="add"> 
+     <int>30</int> 
+    </void> 
+    <void method="add"> 
+     <int>31</int> 
+    </void> 
+    <void method="add"> 
+     <int>32</int> 
+    </void> 
+    <void method="add"> 
+     <int>33</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>FilingYear</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>21</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="put"> 
+   <string>Eligibility</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>19</int> 
+    </void> 
+   </object> 
+  </void> 
+    <void method="put"> 
+   <string>RequestedEffort</string> 
+   <object class="java.util.ArrayList"> 
+    <void method="add"> 
+     <int>39</int> 
+    </void> 
+   </object> 
+  </void>
+ </object> 
+</java> 
