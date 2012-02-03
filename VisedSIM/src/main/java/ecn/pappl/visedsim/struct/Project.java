@@ -7,21 +7,58 @@ package ecn.pappl.visedsim.struct;
 import java.util.ArrayList;
 
 /**
- *
+ * Java Bean representing an ANR project.
+ * 
  * @author bastien
  */
 public class Project {
+    /**
+     * Field representing the acronym of the project.
+     */
     private String acronym;
+    /**
+     * Field representing the title of the project.
+     */
     private String title;
+    /**
+     * Field representing the thematic of the project.
+     */
     private String thematic;
+    /**
+     * Field representing the thematic's subthemes of the project.
+     */
     private String thematicSubThemes;
+      /**
+     * Field representing the other themes of the thematic of the project.
+     */
     private String thematicOtherThemes;
+    /**
+     * Field representing the AAP keywords of the project.
+     */
     private String appKeywords;
+    /**
+     * Field representing the keywords of the project.
+     */
     private String projectKeywords;
+    /**
+     * Field representing the R&D class of the project.
+     */
     private String rdClass;
+    /**
+     * Field representing the summary of the project.
+     */
     private String summary;
+    /**
+     * Field representing the duration of the project.
+     */
     private String duration;
+    /**
+     * Field representing the main deiscipline of the project.
+     */
     private String mainDiscipline;
+    /**
+     * 
+     */
     private String partnershipProject;
     private String submittedProject;
     private String multidisciplinary;
