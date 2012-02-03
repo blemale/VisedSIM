@@ -8,11 +8,23 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- *
+ * Class providing tools for reflection.
+ * 
  * @author bastien
  */
 public final class ReflectionTools {
 
+    /**
+     * Launches a method of a given {@link Class} using reflection. 
+     * @param obj A given {@link Object}.
+     * @param args The arguments of the method.
+     * @param nomMethode The name of the method to launch.
+     * @return An {@link Object}
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException 
+     */
     public static Object launchMethod(Object obj, Object[] args, String nomMethode) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Class[] paramTypes = null;
         if (args != null) {
