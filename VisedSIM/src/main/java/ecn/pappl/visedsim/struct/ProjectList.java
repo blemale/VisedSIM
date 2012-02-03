@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Class representing the list of projects of an ANR session.
  * @author bastien
  */
 public class ProjectList {
+    
+    /**
+     * Field representing the {@link List} of {@link Project}.
+     */
     private List<Project> projectList = new ArrayList<Project>();
+    
     
     public ProjectList(){
         super();
