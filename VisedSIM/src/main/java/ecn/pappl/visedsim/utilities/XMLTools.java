@@ -12,7 +12,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- *
+ * Class processing the XML (de)serialization of an {@link Object}.
+ * 
  * @author bastien
  */
 public final class XMLTools {
