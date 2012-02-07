@@ -53,13 +53,16 @@ public class Project {
      */
     private String duration;
     /**
-     * Field representing the main deiscipline of the project.
+     * Field representing the main discipline of the project.
      */
     private String mainDiscipline;
     /**
-     * 
+     * Field representing the partnership of the project
      */
     private String partnershipProject;
+    /**
+     * 
+     */
     private String submittedProject;
     private String multidisciplinary;
     private String secondaryCommittee;
@@ -378,6 +381,12 @@ public class Project {
         this.unwantedExperts = unwantedExperts;
     }
     
+    /**
+     * Compare the acronym of two different projects
+     * 
+     * @param p
+     * @return the difference number of difference between the two acronyme 
+     */
     public int compareTo(Project p){
         return this.getAcronym().compareTo(p.getAcronym());
     }
