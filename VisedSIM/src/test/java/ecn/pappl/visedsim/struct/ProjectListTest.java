@@ -5,7 +5,6 @@
 package ecn.pappl.visedsim.struct;
 
 import java.util.ArrayList;
-import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -21,7 +20,7 @@ public class ProjectListTest extends TestCase {
     public ProjectListTest(String testName) {
         super(testName);
         pl = new ProjectList();
-        assertTrue(pl != null);
+        assertNotNull("project is not null", pl);
     }
     
     @Override
@@ -36,11 +35,6 @@ public class ProjectListTest extends TestCase {
         p2.setTitle("MonProjet2");
         
     }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
 
     /**
      * Test of setProjectList method, of class ProjectList.
@@ -51,6 +45,6 @@ public class ProjectListTest extends TestCase {
         ArrayList<Project> l = new ArrayList<Project>();
         l.add(p1); l.add(p2);
         pl.setProjectList(l);
-        assertTrue(pl.getProjectList().size() == 2);
+        assertSame("The project list has two projects", pl.getProjectList().size(),2);
     }
 }

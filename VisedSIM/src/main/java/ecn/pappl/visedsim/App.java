@@ -11,8 +11,12 @@ import java.util.ArrayList;
  * Hello world!
  *
  */
-public class App 
+public final class App 
 {
+    
+    private App(){
+    }
+    
     public static void main( String[] args ) throws FileNotFoundException, IOException
     {
         Project p1 = new Project();

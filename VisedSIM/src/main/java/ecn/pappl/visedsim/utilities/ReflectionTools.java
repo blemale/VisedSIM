@@ -13,7 +13,10 @@ import java.lang.reflect.Method;
  * @author bastien
  */
 public final class ReflectionTools {
-
+    
+    private ReflectionTools(){
+    }
+    
     /**
      * Launches a method of a given {@link Class} using reflection. 
      * @param obj A given {@link Object}.

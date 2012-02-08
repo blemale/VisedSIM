@@ -17,7 +17,10 @@ import java.util.Map;
  * 
  * @author bastien
  */
-public class MapConverter {
+public final class MapConverter {
+    
+    private MapConverter(){
+    }
 
     /**
      * Converts a given {@link Map} into a {@link Project}
@@ -31,7 +34,6 @@ public class MapConverter {
      * @throws InvocationTargetException 
      */
     public static Project convertMapToProject(Map<Integer, String> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        // TODO problème avec la map pour deux attributs du projet (qui requièrent des List<String>
         Project project = new Project();
         for (String column : columnsOrder.keySet()) {
             List<Integer> colList = columnsOrder.get(column);
@@ -50,10 +52,10 @@ public class MapConverter {
 
             } else {
                 String value = map.get(colList.get(0));
-                if(value != null){
-                    methodeArgs[0] = map.get(colList.get(0));
-                } else {
+                if(value == null){
                     methodeArgs[0] = "";
+                } else {
+                    methodeArgs[0] = map.get(colList.get(0));
                 }
                
             }
