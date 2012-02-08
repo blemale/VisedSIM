@@ -31,6 +31,7 @@ public class MapConverter {
      * @throws InvocationTargetException 
      */
     public static Project convertMapToProject(Map<Integer, String> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        // TODO problème avec la map pour deux attributs du projet (qui requièrent des List<String>
         Project project = new Project();
         for (String column : columnsOrder.keySet()) {
             List<Integer> colList = columnsOrder.get(column);
