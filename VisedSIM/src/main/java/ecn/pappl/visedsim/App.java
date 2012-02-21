@@ -1,11 +1,19 @@
 package ecn.pappl.visedsim;
 
+import ecn.pappl.visedsim.io.ExcelDatasExtractor;
+import ecn.pappl.visedsim.io.MapCleaner;
+import ecn.pappl.visedsim.io.MapConverter;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.XMLTools;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  * Hello world!
@@ -13,21 +21,20 @@ import java.util.ArrayList;
  */
 public class App 
 {
-    public static void main( String[] args ) throws FileNotFoundException, IOException
+    public static void main( String[] args ) throws Exception
     {
-        Project p1 = new Project();
-        p1.setAcronym("PPP1");
-        p1.setTitle("MonProjet1");
+        long l1 = System.currentTimeMillis();
+        Map<Integer, Map<Integer, String>> datas = ExcelDatasExtractor.procFile(new File("Data-CE-v2.xls"));
+        MapCleaner.removeRow(datas, 0);
+        MapCleaner.removeRow(datas, 1);
+        MapCleaner.removeRow(datas, 2);
         
-        Project p2 = new Project();
-        p1.setAcronym("PPP2");
-        p1.setTitle("MonProjet2");
+        Map<String, List<Integer>> colOrder = ( Map<String, List<Integer>>)XMLTools.decodeFromFile("myColumnsOrder.xml");
         
-        ProjectList pl = new ProjectList();
-        ArrayList<Project> l = new ArrayList<Project>();
-        l.add(p1); l.add(p2);
-        pl.setProjectList(l);
+        ProjectList projectList = MapConverter.convertMapToProjectList(datas, colOrder);
         
-        XMLTools.encodeToFile(l, "MaListeDeProjets.xml");
+        XMLTools.encodeToFile(projectList, "myProjectsList.xml");
+        long l2 = System.currentTimeMillis();
+        System.out.println(l2-l1);
     }
 }
