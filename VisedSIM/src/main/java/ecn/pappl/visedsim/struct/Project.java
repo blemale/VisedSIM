@@ -5,6 +5,7 @@
 package ecn.pappl.visedsim.struct;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Java Bean representing an ANR project.
@@ -75,7 +76,7 @@ public class Project {
     private String previousFundedProjectAcronym;
     private String involvementTime;
     private String coordinatorMail;
-    private ArrayList<String> competitivePoles;
+    private List<String> competitivePoles;
     private String permanentCDD;
     private String anrFundedNonPermanentCDD;
     private String nonPermanentCDD;
@@ -83,7 +84,7 @@ public class Project {
     private String requestedFunding;
     private String requestedEffort;
     private String unwantedExperts;
-    private ArrayList<String> suggestedExperts;
+    private List<String> suggestedExperts;
     
     public Project(){
         super();
@@ -121,11 +122,11 @@ public class Project {
         this.appKeywords = appKeywords;
     }
 
-    public ArrayList<String> getCompetitivePoles() {
+    public List<String> getCompetitivePoles() {
         return competitivePoles;
     }
 
-    public void setCompetitivePoles(ArrayList<String> competitivePoles) {
+    public void setCompetitivePoles(List<String> competitivePoles) {
         this.competitivePoles = competitivePoles;
     }
 
@@ -314,11 +315,11 @@ public class Project {
         this.submittedProject = submittedProject;
     }
 
-    public ArrayList<String> getSuggestedExperts() {
+    public List<String> getSuggestedExperts() {
         return suggestedExperts;
     }
 
-    public void setSuggestedExperts(ArrayList<String> suggestedExperts) {
+    public void setSuggestedExperts(List<String> suggestedExperts) {
         this.suggestedExperts = suggestedExperts;
     }
 
