@@ -11,7 +11,10 @@ import java.util.Map;
  * 
  * @author bastien
  */
-public class MapCleaner {
+public final class MapCleaner {
+    
+    private MapCleaner(){
+    }
     
     /**
      * Removes a row from a given {@link Map}.

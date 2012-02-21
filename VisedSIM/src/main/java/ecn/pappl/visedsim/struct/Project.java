@@ -4,7 +4,6 @@
  */
 package ecn.pappl.visedsim.struct;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

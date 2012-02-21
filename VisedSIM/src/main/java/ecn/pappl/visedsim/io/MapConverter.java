@@ -17,7 +17,10 @@ import java.util.Map;
  * 
  * @author bastien
  */
-public class MapConverter {
+public final class MapConverter {
+    
+    private MapConverter(){
+    }
 
     /**
      * Converts a given {@link Map} into a {@link Project}
@@ -49,10 +52,10 @@ public class MapConverter {
 
             } else {
                 String value = map.get(colList.get(0));
-                if(value != null){
-                    methodeArgs[0] = map.get(colList.get(0));
-                } else {
+                if(value == null){
                     methodeArgs[0] = "";
+                } else {
+                    methodeArgs[0] = map.get(colList.get(0));
                 }
                
             }

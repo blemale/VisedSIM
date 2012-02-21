@@ -18,7 +18,10 @@ import org.apache.poi.ss.usermodel.*;
  * 
  * @author bastien
  */
-public class ExcelDatasExtractor {
+public final class ExcelDatasExtractor {
+    
+    private ExcelDatasExtractor(){        
+    }
 
     /**
      * Extracts the datas of an Excel {@link Sheet} and saves them into a {@link Map} 
