@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Abstract class representing a controller for a {@link ProjectList}
+ * Abstract class representing a controller for a {@link ProjectList}.
  * 
  * @author bastien
  */
