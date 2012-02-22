@@ -5,8 +5,11 @@
 package ecn.pappl.visedsim.controller;
 
 import ecn.pappl.visedsim.struct.ProjectList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
@@ -27,5 +30,5 @@ public interface ProjectListExcelLoader {
      * consider.
      * @return a {@link ProjectList}.
      */
-    ProjectList loadExcelProjectList(String fileName, Map<String, List<Integer>> columnsOrder, int firstCellRow, int firstCellColl);
+    ProjectList loadExcelProjectList(String fileName, Map<String, List<Integer>> columnsOrder, int firstCellRow, int firstCellColl) throws FileNotFoundException, IOException, InvalidFormatException;
 }
