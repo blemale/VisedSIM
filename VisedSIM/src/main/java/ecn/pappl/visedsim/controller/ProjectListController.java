@@ -23,7 +23,7 @@ public abstract class ProjectListController implements ProjectListLoader, Projec
     /**
      * The {@link ProjectList} to control.
      */
-    private ProjectList projectList = null;
+    protected ProjectList projectList = null;
 
     /**
      * The default constructor.
