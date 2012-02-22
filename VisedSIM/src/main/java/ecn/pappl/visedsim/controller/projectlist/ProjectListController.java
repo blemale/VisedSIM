@@ -33,8 +33,7 @@ public abstract class ProjectListController implements ProjectListLoader, Projec
     }
 
     public ProjectList loadProjectList(String fileName) throws FileNotFoundException, IOException {
-        ProjectList list = (ProjectList) XMLTools.decodeFromFile(fileName);
-        this.projectList = list;
+        this.projectList = (ProjectList) XMLTools.decodeFromFile(fileName);
         return this.projectList;
     }
 
