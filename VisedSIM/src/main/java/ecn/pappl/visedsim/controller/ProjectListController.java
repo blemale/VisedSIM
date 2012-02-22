@@ -14,13 +14,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * Class representing a controller for a {@link ProjectList}
+ * 
  * @author bastien
  */
 public abstract class ProjectListController implements ProjectListLoader, ProjectListSelector {
 
+    /**
+     * The {@link ProjectList} to control.
+     */
     private ProjectList projectList = null;
 
+    /**
+     * The default constructor.
+     */
     public ProjectListController() {
         super();
     }
