@@ -5,6 +5,8 @@
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public interface CriteriaPreselectionLoader {
      * @param fileName the path of the given file.
      * @return a {@link CriteriaPreselection}.
      */
-    CriteriaPreselection loadCriteriaPreselection(String fileName);
+    CriteriaPreselection loadCriteriaPreselection(String fileName) throws FileNotFoundException, IOException;
     /**
      * Gets the names of the loadable {@link CriteriaPreselection}.
      * 
