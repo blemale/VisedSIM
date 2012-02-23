@@ -36,11 +36,13 @@ public interface ProjectListSaver {
      * project with conflict.
      * @throws FileNotFoundException
      * @throws IOException
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
     void saveProjectListWithInterrestConflicts(String fileName,
             Map<String, Boolean> conflicts,
             CriteriaPreselection conflictCriteria) throws
             FileNotFoundException,
-            IOException;
+            IOException, IllegalArgumentException, IllegalAccessException;
 ;
 }
