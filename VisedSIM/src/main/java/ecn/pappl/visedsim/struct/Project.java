@@ -4,91 +4,93 @@
  */
 package ecn.pappl.visedsim.struct;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Java Bean representing an ANR project.
- * 
+ * <p/>
  * @author bastien
  */
 public class Project {
+
     /**
      * Field representing the acronym of the project.
      */
-    private String acronym;
+    private String acronym = "";
     /**
      * Field representing the title of the project.
      */
-    private String title;
+    private String title = "";
     /**
      * Field representing the thematic of the project.
      */
-    private String thematic;
+    private String thematic = "";
     /**
      * Field representing the thematic's subthemes of the project.
      */
-    private String thematicSubThemes;
-      /**
+    private String thematicSubThemes = "";
+    /**
      * Field representing the other themes of the thematic of the project.
      */
-    private String thematicOtherThemes;
+    private String thematicOtherThemes = "";
     /**
      * Field representing the AAP keywords of the project.
      */
-    private String appKeywords;
+    private String appKeywords = "";
     /**
      * Field representing the keywords of the project.
      */
-    private String projectKeywords;
+    private String projectKeywords = "";
     /**
      * Field representing the R&D class of the project.
      */
-    private String rdClass;
+    private String rdClass = "";
     /**
      * Field representing the summary of the project.
      */
-    private String summary;
+    private String summary = "";
     /**
      * Field representing the duration of the project.
      */
-    private String duration;
+    private String duration = "";
     /**
      * Field representing the main deiscipline of the project.
      */
-    private String mainDiscipline;
+    private String mainDiscipline = "";
     /**
-     * 
+     *
      */
-    private String partnershipProject;
-    private String submittedProject;
-    private String multidisciplinary;
-    private String secondaryCommittee;
-    private String secondaryCommitteeKeywords;
-    private String internationalCooperation;
-    private String transnationalProject;
-    private String admissibility;
-    private String eligibility;
-    private String filledPreviousEdition;
-    private String filingYear;
-    private String previousProjectAcronym;
-    private String followingProjectPreviouslyFunded;
-    private String previousFundedProjectAcronym;
-    private String involvementTime;
-    private String coordinatorMail;
-    private List<String> competitivePoles;
-    private String permanentCDD;
-    private String anrFundedNonPermanentCDD;
-    private String nonPermanentCDD;
-    private String fullCost;
-    private String requestedFunding;
-    private String requestedEffort;
-    private String unwantedExperts;
-    private List<String> suggestedExperts;
-    
-    public Project(){
+    private String partnershipProject = "";
+    private String submittedProject = "";
+    private String multidisciplinary = "";
+    private String secondaryCommittee = "";
+    private String secondaryCommitteeKeywords = "";
+    private String internationalCooperation = "";
+    private String transnationalProject = "";
+    private String admissibility = "";
+    private String eligibility = "";
+    private String filledPreviousEdition = "";
+    private String filingYear = "";
+    private String previousProjectAcronym = "";
+    private String followingProjectPreviouslyFunded = "";
+    private String previousFundedProjectAcronym = "";
+    private String involvementTime = "";
+    private String coordinatorMail = "";
+    private List<String> competitivePoles = new LinkedList<String>();
+    private String permanentCDD = "";
+    private String anrFundedNonPermanentCDD = "";
+    private String nonPermanentCDD = "";
+    private String fullCost = "";
+    private String requestedFunding = "";
+    private String requestedEffort = "";
+    private String unwantedExperts = "";
+    private List<String> suggestedExperts = new LinkedList<String>();
+
+    public Project() {
         super();
     }
-    
+
     public String getAcronym() {
         return acronym;
     }
@@ -173,7 +175,8 @@ public class Project {
         return followingProjectPreviouslyFunded;
     }
 
-    public void setFollowingProjectPreviouslyFunded(String followingProjectPreviouslyFunded) {
+    public void setFollowingProjectPreviouslyFunded(
+            String followingProjectPreviouslyFunded) {
         this.followingProjectPreviouslyFunded = followingProjectPreviouslyFunded;
     }
 
@@ -245,7 +248,8 @@ public class Project {
         return previousFundedProjectAcronym;
     }
 
-    public void setPreviousFundedProjectAcronym(String previousFundedProjectAcronym) {
+    public void setPreviousFundedProjectAcronym(
+            String previousFundedProjectAcronym) {
         this.previousFundedProjectAcronym = previousFundedProjectAcronym;
     }
 
@@ -280,7 +284,6 @@ public class Project {
     public void setRequestedEffort(String requestedEffort) {
         this.requestedEffort = requestedEffort;
     }
-    
 
     public String getRequestedFunding() {
         return requestedFunding;
@@ -377,9 +380,8 @@ public class Project {
     public void setUnwantedExperts(String unwantedExperts) {
         this.unwantedExperts = unwantedExperts;
     }
-    
-    public int compareTo(Project p){
+
+    public int compareTo(Project p) {
         return this.getAcronym().compareTo(p.getAcronym());
     }
-    
 }
