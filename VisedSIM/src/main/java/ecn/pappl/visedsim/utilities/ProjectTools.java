@@ -15,9 +15,9 @@ import java.util.Set;
  *
  * @author bastien
  */
-public class ProjectTools {
+public final class ProjectTools {
 
-    Project applyCriteriaPreselection(Project project,
+    public static Project applyCriteriaPreselection(Project project,
             CriteriaPreselection criteriaPreselection) throws
             IllegalArgumentException, IllegalAccessException {
         Project newProject = new Project();
