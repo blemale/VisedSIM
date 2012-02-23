@@ -7,7 +7,10 @@ package ecn.pappl.visedsim.controller.projectlist;
 import ecn.pappl.visedsim.io.ExcelDatasExtractor;
 import ecn.pappl.visedsim.io.MapCleaner;
 import ecn.pappl.visedsim.io.MapConverter;
+import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
+import ecn.pappl.visedsim.utilities.ProjectTools;
 import ecn.pappl.visedsim.utilities.XMLTools;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,8 +56,29 @@ public class ProjectListControllerAdmin extends ProjectListController implements
 
     public void saveProjectList(String fileName) throws FileNotFoundException,
             IOException {
-        if(this.projectList!=null){
+        if (this.projectList != null) {
             XMLTools.encodeToFile(this.projectList, fileName);
+        }
+    }
+
+    public void saveProjectListWithInterrestConflicts(String fileName,
+            Map<String, Boolean> conflicts,
+            CriteriaPreselection conflictCriteria) throws FileNotFoundException,
+            IOException, 
+            IllegalArgumentException, 
+            IllegalAccessException {
+        if (this.projectList != null) {
+            ProjectList newProjectList = new ProjectList();
+            List<Project> newProjects = newProjectList.getProjectList();
+            for (Project project : this.projectList.getProjectList()) {
+                if (conflicts.get(project.getAcronym()) == true) {
+                    Project buffer = ProjectTools.applyCriteriaPreselection(
+                            project, conflictCriteria);
+                    newProjects.add(buffer);
+                } else {
+                    newProjects.add(project);
+                }
+            }
         }
     }
 }
