@@ -79,6 +79,8 @@ public class ProjectListControllerAdmin extends ProjectListController implements
                     newProjects.add(project);
                 }
             }
+            XMLTools.encodeToFile(newProjectList, fileName);
         }
+        
     }
 }
