@@ -11,14 +11,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Denis
  */
-public class FileLoader extends JFrame {
+public final class FileLoader extends GUI {
     
     private JLabel listProjectLabel, newProjectListLabel;    
     private JComboBox projectListComboBox;
     private JButton loadSavedListButton,chooseNewListButton, loadNewListButton;
     private JTextField filePathField;
     private JFileChooser fileChooser;
-    private final int textColumnLenght = 10;    
+    private final int textColumnLenght = 10;
+    
+    //TODO Get the content of the projectListArray
     private String[] projectListArray;
     
     /**
@@ -29,32 +31,20 @@ public class FileLoader extends JFrame {
         build();
     }
     
-    /**
-     * Create the first frame of the program
-     */
-    private void build(){
-        setTitle("VisedSIM");
-	setLocationRelativeTo(null);
-	setResizable(false);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setContentPane(buildContentPane());
-	pack();
-
-	fileChooser = new JFileChooser();
+    @Override
+    protected void build(){
+        super.build();
+        setTitle(Labels.FILE_LOADER_TITLE);
+        
+        fileChooser = new JFileChooser();
 
 	FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", "xml");
 	fileChooser.setFileFilter(filter);
     }
     
-    /**
-     * Build the panel
-     * 
-     * @return the panel 
-     */
-    private JPanel buildContentPane(){
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setBackground(Color.white);
+    @Override
+    protected JPanel buildContentPane(){
+        super.buildContentPane();
         
         //1st line
         listProjectLabel = new JLabel(Labels.LIST_PROJECT); 
