@@ -33,13 +33,22 @@ public class ProjectListController implements ProjectListLoader,
     /**
      * The {@link ProjectList} to control.
      */
-    protected ProjectList projectList = null;
+    private ProjectList projectList = null;
+    private static ProjectListController instance;
 
     /**
      * The default constructor.
      */
-    public ProjectListController() {
+    private ProjectListController() {
         super();
+    }
+
+    public static ProjectListController getInstance() {
+        if (ProjectListController.instance == null) {
+            ProjectListController.instance = new ProjectListController();
+        }
+
+        return ProjectListController.instance;
     }
 
     public ProjectList loadProjectList(String fileName) throws
@@ -51,7 +60,7 @@ public class ProjectListController implements ProjectListLoader,
     public List<String> getLoadableProjectListsNames() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     public Project getProjectByAcronym(String acronym) {
         if (this.projectList == null) {
             return null;
