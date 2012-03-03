@@ -21,6 +21,21 @@ public class CriteriaPreselectionController implements CriteriaPreselectionFacto
      * Field representing the current {@link CriteriaPreselection}
      */
     private CriteriaPreselection criteriaPreselection = null;
+    
+    private static CriteriaPreselectionController instance = null;
+    
+    private CriteriaPreselectionController(){
+        super();
+    }
+    
+    public static CriteriaPreselectionController getInstance(){
+        if(CriteriaPreselectionController.instance == null){
+            CriteriaPreselectionController.instance = new CriteriaPreselectionController();
+            return CriteriaPreselectionController.instance;
+        } else {
+            return CriteriaPreselectionController.instance;
+        }
+    }
 
     public CriteriaPreselection createCriteriaPreselection() {
         this.criteriaPreselection = new CriteriaPreselection();
