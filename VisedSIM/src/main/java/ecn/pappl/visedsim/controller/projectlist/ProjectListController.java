@@ -34,6 +34,9 @@ public class ProjectListController implements ProjectListLoader,
      * The {@link ProjectList} to control.
      */
     private ProjectList projectList = null;
+    /**
+     * Unique instance of {@link ProjectListController}.
+     */
     private static ProjectListController instance;
 
     /**
@@ -43,6 +46,11 @@ public class ProjectListController implements ProjectListLoader,
         super();
     }
 
+    /**
+     * Get the unique instance of {@link ProjectListController}.
+     * 
+     * @return the unique instance of {@link ProjectListController}.
+     */
     public static ProjectListController getInstance() {
         if (ProjectListController.instance == null) {
             ProjectListController.instance = new ProjectListController();
