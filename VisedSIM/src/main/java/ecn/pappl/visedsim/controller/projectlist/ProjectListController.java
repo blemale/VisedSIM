@@ -48,6 +48,10 @@ public class ProjectListController implements ProjectListLoader,
         return this.projectList;
     }
 
+    public List<String> getLoadableProjectListsNames() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
     public Project getProjectByAcronym(String acronym) {
         if (this.projectList == null) {
             return null;
