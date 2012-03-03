@@ -16,21 +16,35 @@ import java.util.List;
  *
  * @author bastien
  */
-public class CriteriaPreselectionController implements CriteriaPreselectionFactory, CriteriaPreselectionLoader, CriteriaPreselectionSaver {
+public class CriteriaPreselectionController implements
+        CriteriaPreselectionFactory, CriteriaPreselectionLoader,
+        CriteriaPreselectionSaver {
+
     /**
      * Field representing the current {@link CriteriaPreselection}
      */
     private CriteriaPreselection criteriaPreselection = null;
-    
+    /**
+     * Unique instace of {@link CriteriaPreselectionController}.
+     */
     private static CriteriaPreselectionController instance = null;
-    
-    private CriteriaPreselectionController(){
+
+    /**
+     * Default constructor.
+     */
+    private CriteriaPreselectionController() {
         super();
     }
-    
-    public static CriteriaPreselectionController getInstance(){
-        if(CriteriaPreselectionController.instance == null){
-            CriteriaPreselectionController.instance = new CriteriaPreselectionController();
+
+    /**
+     * Get the unique instance of {@link CriteriaPreselectionController}.
+     * <p/>
+     * @return the unique instance of {@link CriteriaPreselectionController}
+     */
+    public static CriteriaPreselectionController getInstance() {
+        if (CriteriaPreselectionController.instance == null) {
+            CriteriaPreselectionController.instance =
+                    new CriteriaPreselectionController();
             return CriteriaPreselectionController.instance;
         } else {
             return CriteriaPreselectionController.instance;
@@ -46,15 +60,17 @@ public class CriteriaPreselectionController implements CriteriaPreselectionFacto
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public CriteriaPreselection loadCriteriaPreselection(String fileName) throws FileNotFoundException, IOException{
-        this.criteriaPreselection = (CriteriaPreselection) XMLTools.decodeFromFile(fileName);
+    public CriteriaPreselection loadCriteriaPreselection(String fileName) throws
+            FileNotFoundException, IOException {
+        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+                decodeFromFile(fileName);
         return this.criteriaPreselection;
     }
 
-    public void saveCriteriaPreselection(String fileName) throws FileNotFoundException, IOException {
-        if(this.criteriaPreselection!=null){
+    public void saveCriteriaPreselection(String fileName) throws
+            FileNotFoundException, IOException {
+        if (this.criteriaPreselection != null) {
             XMLTools.encodeToFile(this.criteriaPreselection, fileName);
         }
     }
-    
 }
