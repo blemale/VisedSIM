@@ -29,7 +29,7 @@ public class CriteriaPreselectionController implements
     /**
      * Unique instace of {@link CriteriaPreselectionController}.
      */
-    private static CriteriaPreselectionController instance = null;
+    private volatile static CriteriaPreselectionController instance = null;
 
     /**
      * Default constructor.
@@ -43,14 +43,15 @@ public class CriteriaPreselectionController implements
      * <p/>
      * @return the unique instance of {@link CriteriaPreselectionController}
      */
-    public static CriteriaPreselectionController getInstance() {
+    public final static CriteriaPreselectionController getInstance() {
         if (CriteriaPreselectionController.instance == null) {
-            CriteriaPreselectionController.instance =
-                    new CriteriaPreselectionController();
-            return CriteriaPreselectionController.instance;
-        } else {
-            return CriteriaPreselectionController.instance;
+            synchronized (CriteriaPreselectionController.class) {
+                CriteriaPreselectionController.instance =
+                        new CriteriaPreselectionController();
+            }
         }
+        return CriteriaPreselectionController.instance;
+
     }
 
     public CriteriaPreselection createCriteriaPreselection() {
@@ -59,7 +60,8 @@ public class CriteriaPreselectionController implements
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
-        return FileTools.getFilesNamesInDirectory(Configuration.CRITERIA_PRESELECTION_FOLDER);
+        return FileTools.getFilesNamesInDirectory(
+                Configuration.CRITERIA_PRESELECTION_FOLDER);
     }
 
     public CriteriaPreselection loadCriteriaPreselection(String fileName) throws
