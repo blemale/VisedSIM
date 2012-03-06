@@ -4,7 +4,9 @@
  */
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import ecn.pappl.visedsim.utilities.FileTools;
 import ecn.pappl.visedsim.utilities.XMLTools;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,7 +59,7 @@ public class CriteriaPreselectionController implements
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return FileTools.getFilesNamesInDirectory(Configuration.CRITERIA_PRESELECTION_FOLDER);
     }
 
     public CriteriaPreselection loadCriteriaPreselection(String fileName) throws
