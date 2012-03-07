@@ -13,7 +13,7 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
  */
 public interface CriteriaPreselectionFactory {
    /**
-    * Creates a new {@link CriteriaPreselection}.
+    * Creates a new {@link CriteriaPreselection} with all the criteria on true.
     * 
     * @return a new {@link CriteriaPreselection}. 
     */ 
