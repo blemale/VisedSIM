@@ -12,15 +12,29 @@ import ecn.pappl.visedsim.utilities.ProjectTools;
  *
  * @author bastien
  */
-public class SwingProjectViewerController {
+public class SwingProjectViewerController implements SwingProjectViewer {
 
+    /**
+     * The unique instance of {@link SwingProjectViewerController}.
+     */
     private volatile static SwingProjectViewerController uniqueInstance = null;
+    /**
+     * The current {@link Project}.
+     */
     private Project project = null;
 
+    /**
+     * The private defoult constructor.
+     */
     private SwingProjectViewerController() {
         super();
     }
 
+    /**
+     * Get the unique instance of {@link SwingProjectViewerController}.
+     * <p/>
+     * @return the unique instance of {@link SwingProjectViewerController}.
+     */
     public static SwingProjectViewerController getInstance() {
         if (SwingProjectViewerController.uniqueInstance == null) {
             synchronized (SwingProjectViewerController.class) {
@@ -52,7 +66,8 @@ public class SwingProjectViewerController {
         }
     }
 
-    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection) throws IllegalArgumentException, IllegalAccessException {
+    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection)
+            throws IllegalArgumentException, IllegalAccessException {
         if (this.project == null) {
             return new Object[0][0];
         } else {
@@ -65,6 +80,4 @@ public class SwingProjectViewerController {
             return criteriaArray;
         }
     }
-    
-    
 }
