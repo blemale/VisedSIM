@@ -69,16 +69,17 @@ public final class ProjectTools {
             if (map.containsKey(field.getName()) && ((Boolean) map.get(field.
                     getName()))) {
                 if (field.getType().equals(String.class)) {
-                    array[indexLine][1] = field.getName();
+                    array[indexLine][0] = field.getName();
                     field.setAccessible(true);
-                    array[indexLine][2] = (String) field.get(project);
+                    array[indexLine][1] = (String) field.get(project);
                     indexLine++;
                 } else if (field.getType().equals(List.class)) {
                     field.setAccessible(true);
                     List l = (List) field.get(project);
                     for (Object o : l) {
-                        array[indexLine][1] = field.getName();
-                        array[indexLine][2] = (String) o;
+                        array[indexLine][0] = field.getName();
+                        array[indexLine][1] = (String) o;
+                        indexLine++;
                     }
                 }
             }
