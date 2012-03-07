@@ -1,6 +1,7 @@
 package ecn.pappl.visedsim.view;
 
 
+//import java.awt.BorderLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -11,7 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Denis
  */
-public final class FileLoader extends GUI {
+public final class FileLoader extends JFrame {
     
     private JLabel listProjectLabel, newProjectListLabel;    
     private JComboBox projectListComboBox;
@@ -19,22 +20,26 @@ public final class FileLoader extends GUI {
     private JTextField filePathField;
     private JFileChooser fileChooser;
     private final int textColumnLenght = 10;
-    
-    //TODO Get the content of the projectListArray
-    private String[] projectListArray;
+//    private String[] projectListArray;
     
     /**
      * Constructor of FileLoader
      */
     public FileLoader(){
-        super();
+       super();
         build();
     }
     
-    @Override
+    //@Override
     protected void build(){
-        super.build();
+        //super.build();
+        
         setTitle(Labels.FILE_LOADER_TITLE);
+        setLocationRelativeTo(null);
+	setResizable(true);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setContentPane(buildContentPane());
+	pack();
         
         fileChooser = new JFileChooser();
 
@@ -42,20 +47,28 @@ public final class FileLoader extends GUI {
 	fileChooser.setFileFilter(filter);
     }
     
-    @Override
+    //@Override
     protected JPanel buildContentPane(){
-        super.buildContentPane();
+        JPanel panelCenter = new JPanel();
+        panelCenter.setLayout(new BorderLayout());
+	panelCenter.setBackground(Color.white);
+                
+        JPanel panel = new JPanel();
+        panel.setLayout(new SpringLayout());
+        panel.setBackground(Color.white);
         
         //1st line
+        /*
         listProjectLabel = new JLabel(Labels.LIST_PROJECT); 
-        panel.add(listProjectLabel);
+        panel.add(listProjectLabel);*/
         
         newProjectListLabel = new JLabel(Labels.NEW_PROJECT_LIST);
         panel.add(newProjectListLabel);
         
         //2nd line
+        /*
         projectListComboBox = new JComboBox(projectListArray);
-        panel.add(projectListComboBox);
+        panel.add(projectListComboBox);*/
         
         JPanel chooseFilePanel = new JPanel();
         chooseFilePanel.setLayout(new FlowLayout());
@@ -71,14 +84,17 @@ public final class FileLoader extends GUI {
         panel.add(chooseFilePanel);
         
         //3rd line
+        /*
         loadSavedListButton = new JButton(Labels.LOAD_SAVED_LIST_BUTTON);
-        panel.add(loadSavedListButton);
+        panel.add(loadSavedListButton);*/
         
         loadNewListButton = new JButton(Labels.LOAD_NEW_LIST_BUTTON);
         panel.add(loadNewListButton);
         
-        SpringUtilities.makeCompactGrid(panel, 3, 2, 5, 5, 0, 0);
-        return panel;
+        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+        
+        panelCenter.add(panel, BorderLayout.CENTER);
+        return panelCenter;
     }
     
     /**
