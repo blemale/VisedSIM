@@ -5,6 +5,8 @@
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Interface representing a factory for {@link CriteriaPreselection}.
@@ -17,5 +19,5 @@ public interface CriteriaPreselectionFactory {
     * 
     * @return a new {@link CriteriaPreselection}. 
     */ 
-   CriteriaPreselection createCriteriaPreselection(); 
+   CriteriaPreselection createCriteriaPreselection() throws FileNotFoundException, IOException; 
 }
