@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+ <object class="ecn.pappl.visedsim.struct.CriteriaPreselection"> 
+  <void property="map"> 
+   <void method="put"> 
+    <string>title</string> 
+    <boolean>true</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>acronym</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>competitivePoles</string> 
+    <boolean>true</boolean> 
+   </void> 
+  </void> 
+ </object> 
+</java> 
