@@ -33,18 +33,11 @@ public class ProjectToolsTest extends TestCase {
      */
     public void testApplyCriteriaPreselection() throws Exception {
         System.out.println("applyCriteriaPreselection");
-        String testProjectPath = getClass().getClassLoader().
-                getResource(
-                "testProject").getPath();
-        Project project = (Project) XMLTools.decodeFromFile(testProjectPath);
-        String testCriteriaPreselectionPath = getClass().getClassLoader().
-                getResource("testCriteriaPreselection").getPath();
-        CriteriaPreselection criteriaPreselection =
-                (CriteriaPreselection) XMLTools.decodeFromFile(
-                testCriteriaPreselectionPath);
+        Project project = loadTestProject();
+        CriteriaPreselection cp = loadTesCriteriaPreselection();
         Project result =
                 ProjectTools.applyCriteriaPreselection(project,
-                criteriaPreselection);
+                cp);
         project.setAcronym("");
         assertEquals(project.getTitle(), result.getTitle());
         assertEquals(project.getAcronym(), result.getAcronym());
@@ -56,15 +49,8 @@ public class ProjectToolsTest extends TestCase {
      */
     public void testGetNumberOfCriteriaLines() throws Exception {
         System.out.println("getNumberOfCriteriaLines");
-        String testProjectPath = getClass().getClassLoader().
-                getResource(
-                "testProject").getPath();
-        Project project = (Project) XMLTools.decodeFromFile(testProjectPath);
-        String testCriteriaPreselectionPath = getClass().getClassLoader().
-                getResource("testCriteriaPreselection").getPath();
-        CriteriaPreselection cp =
-                (CriteriaPreselection) XMLTools.decodeFromFile(
-                testCriteriaPreselectionPath);
+        Project project = loadTestProject();
+        CriteriaPreselection cp = loadTesCriteriaPreselection();
         int expResult = 3;
         int result = ProjectTools.getNumberOfCriteriaLines(project, cp);
         assertEquals(expResult, result);
@@ -75,19 +61,15 @@ public class ProjectToolsTest extends TestCase {
      */
     public void testFillArrayWithSelectedCriteria() throws Exception {
         System.out.println("fillArrayWithSelectedCriteria");
-        String testProjectPath = getClass().getClassLoader().
-                getResource(
-                "testProject").getPath();
-        Project project = (Project) XMLTools.decodeFromFile(testProjectPath);
-        String testCriteriaPreselectionPath = getClass().getClassLoader().
-                getResource("testCriteriaPreselection").getPath();
-        CriteriaPreselection cp =
-                (CriteriaPreselection) XMLTools.decodeFromFile(
-                testCriteriaPreselectionPath);
+        Project project = loadTestProject();
+        CriteriaPreselection cp = loadTesCriteriaPreselection();
         Object[][] expectedArray = new Object[3][2];
-        expectedArray[0][0]="competitivePoles";expectedArray[0][1]="competitivePoles1";
-        expectedArray[1][0]="competitivePoles";expectedArray[1][1]="competitivePoles2";
-        expectedArray[2][0]="title";expectedArray[2][1]="title";
+        expectedArray[0][0] = "competitivePoles";
+        expectedArray[0][1] = "competitivePoles1";
+        expectedArray[1][0] = "competitivePoles";
+        expectedArray[1][1] = "competitivePoles2";
+        expectedArray[2][0] = "title";
+        expectedArray[2][1] = "title";
         Object[][] array = new Object[3][2];
         ProjectTools.fillArrayWithSelectedCriteria(project, cp, array);
         assertEquals("competitivePoles", array[1][0]);
@@ -96,5 +78,19 @@ public class ProjectToolsTest extends TestCase {
         assertEquals("competitivePoles2", array[2][1]);
         assertEquals("title", array[0][0]);
         assertEquals("title", array[0][1]);
+    }
+
+    private Project loadTestProject() throws Exception {
+        String testProjectPath = getClass().getClassLoader().
+                getResource(
+                "testProject").getPath();
+        return (Project) XMLTools.decodeFromFile(testProjectPath);
+    }
+
+    private CriteriaPreselection loadTesCriteriaPreselection() throws Exception {
+        String testCriteriaPreselectionPath = getClass().getClassLoader().
+                getResource("testCriteriaPreselection").getPath();
+        return (CriteriaPreselection) XMLTools.decodeFromFile(
+                testCriteriaPreselectionPath);
     }
 }
