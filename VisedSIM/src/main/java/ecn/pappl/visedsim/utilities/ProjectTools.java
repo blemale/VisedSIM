@@ -75,8 +75,7 @@ public final class ProjectTools {
                     for(Object o : l){
                         array[indexLine][1] = field.getName();
                         array[indexLine][2] = (String) o;
-                    }
-                    
+                    }              
                 }
             }
         }
