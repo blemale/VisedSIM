@@ -7,6 +7,7 @@ package ecn.pappl.visedsim.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,15 +65,30 @@ public final class ChooseCriteria extends JFrame {
         topPanel.setBackground(Color.white);
         
         selectAllButton = new JButton(Labels.SELECT_ALL_BUTTON);
+        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectAllButtonActionPerformed(evt);
+            }
+        });
         topPanel.add(selectAllButton);
         
         resetButton = new JButton(Labels.RESET_BUTTON);
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
         topPanel.add(resetButton);
         
         preselectionComboBox = new JComboBox(preselectionArray);
         topPanel.add(preselectionComboBox);
         
         preselectionValidateButton = new JButton(Labels.PRESELECTION_VALIDATION_BUTTON);
+        preselectionValidateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preselectionValidateButtonActionPerformed(evt);
+            }
+        });
         topPanel.add(preselectionValidateButton);
         
         panel.add(topPanel);
@@ -119,5 +135,30 @@ public final class ChooseCriteria extends JFrame {
         panelCenter.add(panel, BorderLayout.CENTER);
         
         return panelCenter;
+    }
+    
+    private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        for(String criteria : criteriaList){
+            checkboxMap.get(criteria).setSelected(true);
+        }
+    }
+    
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        for(String criteria : criteriaList){
+            checkboxMap.get(criteria).setSelected(false);
+        }
+    }
+    
+     private void preselectionValidateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        //TODO récupérer la liste des critères choisis
+         List<String> listPreselectedCriteria = new ArrayList<String>();
+         for(String criteria : criteriaList){
+             if(listPreselectedCriteria.contains(criteria)){
+                checkboxMap.get(criteria).setSelected(true);
+             }
+             else {
+                 checkboxMap.get(criteria).setSelected(false);
+             }
+        }
     }
 }
