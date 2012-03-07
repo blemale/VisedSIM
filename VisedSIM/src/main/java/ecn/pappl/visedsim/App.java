@@ -6,6 +6,7 @@ import ecn.pappl.visedsim.io.MapConverter;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.view.FileLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-        long l1 = System.currentTimeMillis();
+        /*long l1 = System.currentTimeMillis();
         Map<Integer, Map<Integer, String>> datas = ExcelDatasExtractor.procFile(new File("Data-CE-v2.xls"));
         MapCleaner.removeRow(datas, 0);
         MapCleaner.removeRow(datas, 1);
@@ -35,6 +36,10 @@ public class App
         
         XMLTools.encodeToFile(projectList, "myProjectsList.xml");
         long l2 = System.currentTimeMillis();
-        System.out.println(l2-l1);
+        System.out.println(l2-l1);*/
+        
+        
+        FileLoader fileLoader = new FileLoader();
+        fileLoader.setVisible(true);
     }
 }
