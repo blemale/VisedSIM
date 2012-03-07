@@ -10,14 +10,16 @@ import java.io.IOException;
 
 /**
  * Interface representing a factory for {@link CriteriaPreselection}.
- * 
+ * <p/>
  * @author bastien
  */
 public interface CriteriaPreselectionFactory {
-   /**
-    * Creates a new {@link CriteriaPreselection} with all the criteria on true.
-    * 
-    * @return a new {@link CriteriaPreselection}. 
-    */ 
-   CriteriaPreselection createCriteriaPreselection() throws FileNotFoundException, IOException; 
+
+    /**
+     * Creates a new {@link CriteriaPreselection} with all the criteria on true.
+     * <p/>
+     * @return a new {@link CriteriaPreselection}.
+     */
+    CriteriaPreselection createCriteriaPreselection() throws
+            FileNotFoundException, IOException;
 }
