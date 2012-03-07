@@ -54,8 +54,10 @@ public class CriteriaPreselectionController implements
 
     }
 
-    public CriteriaPreselection createCriteriaPreselection() {
-        this.criteriaPreselection = new CriteriaPreselection();
+    public CriteriaPreselection createCriteriaPreselection() throws
+            FileNotFoundException, IOException {
+        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+                decodeFromFile(Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH);
         return this.criteriaPreselection;
     }
 
