@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 
+ *
  * @author bastien
  */
 public final class FileTools {
@@ -21,8 +21,13 @@ public final class FileTools {
         File directory = new File(directoryPath);
         File[] files = directory.listFiles();
 
-        for (int i = 0; i < files.length; i++) {
-            filesNames.add(files[i].getName());
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                if(!files[i].isHidden()){
+                    filesNames.add(files[i].getName());
+                }
+                
+            }
         }
 
         return filesNames;
