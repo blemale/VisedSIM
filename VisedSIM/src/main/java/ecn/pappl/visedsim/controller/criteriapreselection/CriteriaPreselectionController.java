@@ -69,9 +69,15 @@ public class CriteriaPreselectionController implements
         return (CriteriaPreselection) XMLTools.decodeFromFile(path);
     }
 
+    public void deleteCriteriaPreselection(String fileName) {
+        File file = new File(fileName);
+        file.delete();
+    }
+
     public List<String> getLoadableCriteriaPreselectionsNames() {
-        return FileTools.getFilesNamesInDirectory(
-                Configuration.CRITERIA_PRESELECTION_FOLDER);
+        String path = getClass().getClassLoader().getResource(
+                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        return FileTools.getFilesNamesInDirectory(path);
     }
 
     public CriteriaPreselection loadCriteriaPreselection(String fileName) throws
