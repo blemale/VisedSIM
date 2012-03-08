@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+ <object class="ecn.pappl.visedsim.struct.Project"> 
+  <void property="acronym"> 
+   <string>acronym</string> 
+  </void> 
+  <void property="competitivePoles"> 
+   <void method="add"> 
+    <string>competitivePoles1</string> 
+   </void> 
+   <void method="add"> 
+    <string>competitivePoles2</string> 
+   </void> 
+  </void> 
+  <void property="title"> 
+   <string>title</string> 
+  </void> 
+ </object> 
+</java> 

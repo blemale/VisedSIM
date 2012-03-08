@@ -4,7 +4,9 @@
  */
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import ecn.pappl.visedsim.utilities.FileTools;
 import ecn.pappl.visedsim.utilities.XMLTools;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +29,7 @@ public class CriteriaPreselectionController implements
     /**
      * Unique instace of {@link CriteriaPreselectionController}.
      */
-    private static CriteriaPreselectionController instance = null;
+    private volatile static CriteriaPreselectionController instance = null;
 
     /**
      * Default constructor.
@@ -41,23 +43,29 @@ public class CriteriaPreselectionController implements
      * <p/>
      * @return the unique instance of {@link CriteriaPreselectionController}
      */
-    public static CriteriaPreselectionController getInstance() {
+    public final static CriteriaPreselectionController getInstance() {
         if (CriteriaPreselectionController.instance == null) {
-            CriteriaPreselectionController.instance =
-                    new CriteriaPreselectionController();
-            return CriteriaPreselectionController.instance;
-        } else {
-            return CriteriaPreselectionController.instance;
+            synchronized (CriteriaPreselectionController.class) {
+                CriteriaPreselectionController.instance =
+                        new CriteriaPreselectionController();
+            }
         }
+        return CriteriaPreselectionController.instance;
+
     }
 
-    public CriteriaPreselection createCriteriaPreselection() {
-        this.criteriaPreselection = new CriteriaPreselection();
+    public CriteriaPreselection createCriteriaPreselection() throws
+            FileNotFoundException, IOException {
+        String path = getClass().getClassLoader().getResource(
+                Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH).getPath();
+        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+                decodeFromFile(path);
         return this.criteriaPreselection;
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return FileTools.getFilesNamesInDirectory(
+                Configuration.CRITERIA_PRESELECTION_FOLDER);
     }
 
     public CriteriaPreselection loadCriteriaPreselection(String fileName) throws

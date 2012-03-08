@@ -19,10 +19,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args ) throws Exception
@@ -94,6 +91,5 @@ public class App
         
         ConfidentialProjects conf = new ConfidentialProjects(projectList);
         conf.setVisible(true);
-        
-    }
+    }       
 }

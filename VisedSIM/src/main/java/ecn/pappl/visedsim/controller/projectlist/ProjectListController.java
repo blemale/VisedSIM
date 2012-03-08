@@ -37,7 +37,7 @@ public class ProjectListController implements ProjectListLoader,
     /**
      * Unique instance of {@link ProjectListController}.
      */
-    private static ProjectListController instance;
+    private volatile static ProjectListController instance = null;
 
     /**
      * The default constructor.
@@ -48,12 +48,14 @@ public class ProjectListController implements ProjectListLoader,
 
     /**
      * Get the unique instance of {@link ProjectListController}.
-     * 
+     * <p/>
      * @return the unique instance of {@link ProjectListController}.
      */
     public static ProjectListController getInstance() {
         if (ProjectListController.instance == null) {
-            ProjectListController.instance = new ProjectListController();
+            synchronized (ProjectListController.class) {
+                ProjectListController.instance = new ProjectListController();
+            }
         }
 
         return ProjectListController.instance;
