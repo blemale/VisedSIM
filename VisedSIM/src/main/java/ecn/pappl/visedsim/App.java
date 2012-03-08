@@ -1,23 +1,11 @@
 package ecn.pappl.visedsim;
 
-import ecn.pappl.visedsim.io.ExcelDatasExtractor;
-import ecn.pappl.visedsim.io.MapCleaner;
-import ecn.pappl.visedsim.io.MapConverter;
-import ecn.pappl.visedsim.struct.Project;
-import ecn.pappl.visedsim.struct.ProjectList;
-import ecn.pappl.visedsim.utilities.XMLTools;
 import ecn.pappl.visedsim.view.ChooseCriteria;
 import ecn.pappl.visedsim.view.ConfidentialProjects;
 import ecn.pappl.visedsim.view.FileLoader;
 import ecn.pappl.visedsim.view.NewJFrame;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 
 public class App 
