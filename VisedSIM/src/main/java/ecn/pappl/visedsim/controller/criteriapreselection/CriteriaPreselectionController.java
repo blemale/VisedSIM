@@ -34,7 +34,8 @@ public class CriteriaPreselectionController implements
     /**
      * Default constructor.
      */
-    private CriteriaPreselectionController() {
+    private CriteriaPreselectionController() throws FileNotFoundException,
+            IOException {
         super();
     }
 
@@ -43,7 +44,8 @@ public class CriteriaPreselectionController implements
      * <p/>
      * @return the unique instance of {@link CriteriaPreselectionController}
      */
-    public final static CriteriaPreselectionController getInstance() {
+    public final static CriteriaPreselectionController getInstance() throws
+            FileNotFoundException, IOException {
         if (CriteriaPreselectionController.instance == null) {
             synchronized (CriteriaPreselectionController.class) {
                 CriteriaPreselectionController.instance =
@@ -51,16 +53,22 @@ public class CriteriaPreselectionController implements
             }
         }
         return CriteriaPreselectionController.instance;
+    }
 
+    public CriteriaPreselection initCriteriaPreselection() throws
+            FileNotFoundException, IOException {
+        String path = getClass().getClassLoader().getResource(
+                Configuration.INIT_CRITERIA_PRESELECTION_PATH).getPath();
+        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+                decodeFromFile(path);
+        return this.criteriaPreselection;
     }
 
     public CriteriaPreselection createCriteriaPreselection() throws
             FileNotFoundException, IOException {
         String path = getClass().getClassLoader().getResource(
                 Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH).getPath();
-        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
-                decodeFromFile(path);
-        return this.criteriaPreselection;
+        return (CriteriaPreselection) XMLTools.decodeFromFile(path);
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
@@ -80,5 +88,14 @@ public class CriteriaPreselectionController implements
         if (this.criteriaPreselection != null) {
             XMLTools.encodeToFile(this.criteriaPreselection, fileName);
         }
+    }
+
+    public CriteriaPreselection getCriteriaPreselection() {
+        return criteriaPreselection;
+    }
+
+    public void setCriteriaPreselection(
+            CriteriaPreselection criteriaPreselection) {
+        this.criteriaPreselection = criteriaPreselection;
     }
 }
