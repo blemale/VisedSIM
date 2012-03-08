@@ -19,7 +19,7 @@ public final class Labels {
     public final static String CHOOSE_CRITERIA_TITLE = "Choix des critères";
     public final static String SELECT_ALL_BUTTON = "Sélectionner tout";
     public final static String RESET_BUTTON = "Reset";
-    public final static String PRESELECTION_VALIDATION_BUTTON = "Vadider";
+    public final static String PRESELECTION_VALIDATION_BUTTON = "Valider";
     public final static String VALIDATION_BUTTON = "Valider";
     public final static String CANCEL_BUTTON = "Annuler";
     
@@ -28,4 +28,23 @@ public final class Labels {
     public final static String CONFIDENTIAL_PROJECTS_LABEL = "Quels sont les projets en conflits ?";
     public final static String CONFIDENTIAL_PROJECTS_VALIDATION = "Valider";
     public final static String CONFIDENTIAL_PROJECTS_CANCEL = "Annuler";
+    
+    //MainFrameAdmin
+    public final static String MAIN_FRAME_TITLE = "Accueil";
+    public final static String MENU_PROJECT = "Projet";
+    public final static String MENU_CRITERIA = "Critères";
+    public final static String MENU_HELP = "Aide";
+    public final static String MENU_PROJECT_NEW_LIST = "Nouvelle liste";
+    public final static String MENU_PROJECT_PRINT = "Imprimer...";
+    public final static String MENU_PROJECT_PRINT_ALL = "Imprimer tout...";
+    public final static String MENU_PROJECT_GENERATE_XML = "Générer le XML...";
+    public final static String MENU_PROJECT_GENERATE_ALL_XML = "Générer tous les XML...";
+    public final static String MENU_CRITERIA_SAVE = "Sauvegarder la préselection";
+    public final static String MENU_CRITERIA_PRESELECTION_MANAGEMENT = "Gérer les présélections";
+    public final static String MENU_CRITERIA_CHOOSE = "Choisir les critères";
+    public final static String MAIN_FRAME_CHOOSE_CRITERIA_BUTTON = "Choisir les critères";
+    public final static String MAIN_FRAME_GENERATE_ALL_XML_BUTTON = "Générer tous les XML...";
+    public final static String MAIN_FRAME_PRINT_ALL_BUTTON = "Imprimer tout...";
+    public final static String MAIN_FRAME_VALIDATE_PROJECT_BUTTON = "Valider";
+    public final static String MAIN_FRAME_SEARCH_PROJECT_BUTTON = "Rechercher";
 }
