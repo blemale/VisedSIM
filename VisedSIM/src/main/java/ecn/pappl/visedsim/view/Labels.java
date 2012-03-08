@@ -29,6 +29,13 @@ public final class Labels {
     public final static String CONFIDENTIAL_PROJECTS_VALIDATION = "Valider";
     public final static String CONFIDENTIAL_PROJECTS_CANCEL = "Annuler";
     
+    //CriteriaMangement
+    public final static String CRITERIA_MANAGEMENT_TITLE = "Gestion des présélections";
+    public final static String CRITERIA_MANAGEMENT_LABEL= "Gestion des présélections de critères";
+    public final static String CRITERIA_MANAGEMENT_DELETE = "Supprimer";
+    public final static String CRITERIA_MANAGEMENT_BACK = "Retour";
+    public final static String CRITERIA_MANAGEMENT_DIALOG = "Voulez-vous vraiment supprimer ces présélections ?"; 
+    
     //MainFrameAdmin
     public final static String MAIN_FRAME_TITLE = "Accueil";
     public final static String MENU_PROJECT = "Projet";
