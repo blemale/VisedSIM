@@ -6,7 +6,10 @@ import ecn.pappl.visedsim.io.MapConverter;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.view.ChooseCriteria;
+import ecn.pappl.visedsim.view.ConfidentialProjects;
 import ecn.pappl.visedsim.view.FileLoader;
+import ecn.pappl.visedsim.view.NewJFrame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,8 +41,59 @@ public class App
         long l2 = System.currentTimeMillis();
         System.out.println(l2-l1);*/
         
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         
         FileLoader fileLoader = new FileLoader();
         fileLoader.setVisible(true);
+        
+        List<String> listCriteria = new ArrayList<String>();
+        listCriteria.add("Nom");
+        listCriteria.add("Exemple");
+        listCriteria.add("Exemple 2");
+        listCriteria.add("Test");
+        listCriteria.add("Dernier point");
+        listCriteria.add("Nom");
+        listCriteria.add("Exemple 2");
+        listCriteria.add("Test");
+        listCriteria.add("Nom");
+        
+        List<String> preselectionCriteria = new ArrayList<String>();
+        preselectionCriteria.add("Sélection");
+        preselectionCriteria.add("Aucun");
+        ChooseCriteria chooseCriteria = new ChooseCriteria(listCriteria, preselectionCriteria);
+        chooseCriteria.setVisible(true);
+        
+        List<String> projectList = new ArrayList<String>();
+        projectList.add("MPB4");
+        projectList.add("MPB2");
+        projectList.add("MPB3");
+        projectList.add("MPB5");
+        projectList.add("MPB2");
+        projectList.add("MPB90");
+        projectList.add("MPBYT7");
+        projectList.add("MPB");
+        projectList.add("MPB6");
+        projectList.add("MPB5");
+        projectList.add("MPB2");
+        
+        ConfidentialProjects conf = new ConfidentialProjects(projectList);
+        conf.setVisible(true);
+        
     }
 }
