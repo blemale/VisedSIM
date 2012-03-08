@@ -46,7 +46,6 @@ public class CriteriaPreselectionControllerTest extends TestCase {
         assertTrue(
                 result.getClass().equals(CriteriaPreselectionController.class));
     }
-    
 
     /**
      * Test of createCriteriaPreselection method, of class
@@ -60,7 +59,7 @@ public class CriteriaPreselectionControllerTest extends TestCase {
         assertNotNull(result);
         assertTrue(result.getClass().equals(CriteriaPreselection.class));
     }
-    
+
     /**
      * Test of initCriteriaPreselection method, of class
      * CriteriaPreselectionController.
@@ -80,8 +79,7 @@ public class CriteriaPreselectionControllerTest extends TestCase {
      */
     public void testLoadCriteriaPreselection() throws Exception {
         System.out.println("loadCriteriaPreselection");
-        String fileName = getClass().getClassLoader().getResource(
-                "testCriteriaPreselection").getPath();
+        String fileName = "testCriteriaPreselection";
         CriteriaPreselectionController instance =
                 CriteriaPreselectionController.getInstance();
         CriteriaPreselection result =
