@@ -43,7 +43,7 @@ public class CriteriaPreselectionController implements
      * <p/>
      * @return the unique instance of {@link CriteriaPreselectionController}
      */
-    public final static CriteriaPreselectionController getInstance() {
+    public static CriteriaPreselectionController getInstance() {
         if (CriteriaPreselectionController.instance == null) {
             synchronized (CriteriaPreselectionController.class) {
                 CriteriaPreselectionController.instance =
