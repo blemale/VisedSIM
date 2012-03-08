@@ -10,6 +10,7 @@ import ecn.pappl.visedsim.utilities.FileTools;
 import ecn.pappl.visedsim.utilities.XMLTools;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.List;
 
@@ -69,9 +70,19 @@ public class CriteriaPreselectionController implements
         return (CriteriaPreselection) XMLTools.decodeFromFile(path);
     }
 
-    public void deleteCriteriaPreselection(String fileName) {
-        File file = new File(fileName);
-        file.delete();
+    public void deleteCriteriaPreselection(final String fileName) {
+        String path = getClass().getClassLoader().getResource(
+                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        File directory = new File(path);
+        File[] fileToDelete = directory.listFiles(new FilenameFilter() {
+
+            public boolean accept(File file, String string) {
+                return string.equals(fileName);
+            }
+        });
+        if (fileToDelete.length == 1) {
+            fileToDelete[0].delete();
+        }
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
@@ -80,10 +91,22 @@ public class CriteriaPreselectionController implements
         return FileTools.getFilesNamesInDirectory(path);
     }
 
-    public CriteriaPreselection loadCriteriaPreselection(String fileName) throws
+    public CriteriaPreselection loadCriteriaPreselection(final String fileName) throws
             FileNotFoundException, IOException {
-        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
-                decodeFromFile(fileName);
+        String path = getClass().getClassLoader().getResource(
+                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        File directory = new File(path);
+        File[] file = directory.listFiles(new FilenameFilter() {
+
+            public boolean accept(File file, String string) {
+                return string.equals(fileName);
+            }
+        });
+        if (file.length == 1) {
+            this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+                    decodeFromFile(file[0].getPath());
+        }
+
         return this.criteriaPreselection;
     }
 
