@@ -34,8 +34,7 @@ public class CriteriaPreselectionController implements
     /**
      * Default constructor.
      */
-    private CriteriaPreselectionController() throws FileNotFoundException,
-            IOException {
+    private CriteriaPreselectionController() {
         super();
     }
 
@@ -44,8 +43,7 @@ public class CriteriaPreselectionController implements
      * <p/>
      * @return the unique instance of {@link CriteriaPreselectionController}
      */
-    public final static CriteriaPreselectionController getInstance() throws
-            FileNotFoundException, IOException {
+    public final static CriteriaPreselectionController getInstance() {
         if (CriteriaPreselectionController.instance == null) {
             synchronized (CriteriaPreselectionController.class) {
                 CriteriaPreselectionController.instance =
