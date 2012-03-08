@@ -1,9 +1,6 @@
 package ecn.pappl.visedsim;
 
-import ecn.pappl.visedsim.view.ChooseCriteria;
-import ecn.pappl.visedsim.view.ConfidentialProjects;
-import ecn.pappl.visedsim.view.FileLoader;
-import ecn.pappl.visedsim.view.NewJFrame;
+import ecn.pappl.visedsim.view.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +58,8 @@ public class App
         List<String> preselectionCriteria = new ArrayList<String>();
         preselectionCriteria.add("Sélection");
         preselectionCriteria.add("Aucun");
-        ChooseCriteria chooseCriteria = new ChooseCriteria(listCriteria, preselectionCriteria);
-        chooseCriteria.setVisible(true);
+        //ChooseCriteria chooseCriteria = new ChooseCriteria(listCriteria, preselectionCriteria);
+        //chooseCriteria.setVisible(true);
         
         List<String> projectList = new ArrayList<String>();
         projectList.add("MPB4");
@@ -79,5 +76,11 @@ public class App
         
         ConfidentialProjects conf = new ConfidentialProjects(projectList);
         conf.setVisible(true);
+        
+        MainFrameAdmin mfa = new MainFrameAdmin(projectList);
+        mfa.setVisible(true);
+        
+        MainFrameUser mfu = new MainFrameUser(projectList);
+        mfu.setVisible(true);
     }       
 }

@@ -4,9 +4,12 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.Configuration;
+import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +20,12 @@ import javax.swing.*;
  *
  * @author Denis
  */
-public final class ChooseCriteria extends JFrame {
+public final class ChooseCriteria extends JDialog {
     
     private JButton validationButton, selectAllButton, resetButton, preselectionValidateButton, cancelButton;
     private JComboBox preselectionComboBox;
     private Map<String, JCheckBox> checkboxMap;
-    final int numberOfColumns = 4;
+    private final int numberOfColumns = 4;
     
     private List<String> criteriaList;
     private Object[] preselectionArray;
@@ -41,7 +44,8 @@ public final class ChooseCriteria extends JFrame {
         setTitle(Labels.CHOOSE_CRITERIA_TITLE);
 	setLocationRelativeTo(null);
 	setResizable(false);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setModal(true);
 	setContentPane(buildContentPane());
 	pack();
     }
@@ -93,9 +97,12 @@ public final class ChooseCriteria extends JFrame {
         
         panel.add(topPanel);
         
+        GridLayout grid = new GridLayout(0, numberOfColumns);
+        
         //Middle panel with the checkbox
         JPanel middlePanel = new JPanel(new SpringLayout());
         middlePanel.setBackground(Color.white);
+        //middlePanel.setLayout(grid);
         
         checkboxMap = new HashMap<String, JCheckBox>();
         
@@ -108,8 +115,9 @@ public final class ChooseCriteria extends JFrame {
         int numberOfMissedCases = criteriaList.size()-numberRows*numberOfColumns;
         if(numberOfMissedCases != 0){
             numberRows = numberRows+1;
-            for (int i = 0; i < numberOfMissedCases; i++){
-                JLabel emptyLabel = new JLabel();
+            for (int i = 0; i < (numberOfColumns - numberOfMissedCases); i++){
+                JLabel emptyLabel = new JLabel(String.valueOf(i));
+                emptyLabel.setVisible(false);
                 middlePanel.add(emptyLabel);
             }
         }
@@ -126,6 +134,11 @@ public final class ChooseCriteria extends JFrame {
         bottomPanel.add(validationButton);
         
         cancelButton = new JButton(Labels.CANCEL_BUTTON);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         bottomPanel.add(cancelButton);
         
         panel.add(bottomPanel);
@@ -151,6 +164,8 @@ public final class ChooseCriteria extends JFrame {
     
      private void preselectionValidateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         //TODO récupérer la liste des critères choisis
+         CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
+         //String criteriaPath = Configuration.CRITERIA_PRESELECTION_FOLDER+"/"
          List<String> listPreselectedCriteria = new ArrayList<String>();
          for(String criteria : criteriaList){
              if(listPreselectedCriteria.contains(criteria)){
@@ -161,4 +176,12 @@ public final class ChooseCriteria extends JFrame {
              }
         }
     }
+     
+     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt){
+         this.dispose();
+     }
+     
+     private void validateButtonActionPerformed(java.awt.event.ActionEvent evt){
+         
+     }
 }
