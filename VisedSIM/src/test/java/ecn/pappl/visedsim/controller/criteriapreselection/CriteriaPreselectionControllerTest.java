@@ -32,7 +32,7 @@ public class CriteriaPreselectionControllerTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
         File testFile = new File("testSaveCriteriaPreselection");
-        testFile.delete(); 
+        testFile.delete();
     }
 
     /**
