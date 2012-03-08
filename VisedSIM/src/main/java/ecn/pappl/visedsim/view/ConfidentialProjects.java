@@ -4,52 +4,75 @@
  */
 package ecn.pappl.visedsim.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
  * @author Denis
  */
-public final class ConfidentialProjects extends GUI {
+public final class ConfidentialProjects extends JDialog{
     
     private JButton validateButton, cancelButton;
     private JLabel titleLabel;
     private Map<String, JCheckBox> checkboxMap;
-    //Get the content of the projectsList
+    private final int numberOfColumns = 5;
     private List<String> projectsList;
     
-    public ConfidentialProjects(){
+    public ConfidentialProjects(List<String> projectsList){
         super();
+        this.projectsList = projectsList;
         build();
     }
     
-    @Override
     protected void build(){
-        super.build();
         setTitle(Labels.CONFIDENTIAL_PROJECTS_TITLE);
+        setLocationRelativeTo(null);
+	setResizable(false);
+	setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setModal(true);
+	setContentPane(buildContentPane());
+	pack();
     }
     
-    @Override
     protected JPanel buildContentPane(){
-        panel = super.buildContentPane();
+        JPanel panelCenter = new JPanel();
+        panelCenter.setLayout(new BorderLayout());
+	panelCenter.setBackground(Color.white);
+                
+        JPanel panel = new JPanel();
+        panel.setLayout(new SpringLayout());
+        panel.setBackground(Color.white);
         
         titleLabel = new JLabel(Labels.CONFIDENTIAL_PROJECTS_LABEL);
         panel.add(titleLabel);
         
-        JPanel middlePanel = new JPanel(new FlowLayout());
+        JPanel middlePanel = new JPanel(new SpringLayout());
         middlePanel.setBackground(Color.white);
+        
+        checkboxMap = new HashMap<String, JCheckBox>();
         
         for(String project : projectsList){
             checkboxMap.put(project, new JCheckBox(project));
+            checkboxMap.get(project).setBackground(Color.white);
             middlePanel.add(checkboxMap.get(project));
         }
+        int numberOfRows = (int)((double)projectsList.size()/numberOfColumns);
+        int numberOfMissedCases = projectsList.size()-numberOfRows*numberOfColumns;
+        if(numberOfMissedCases != 0){
+            numberOfRows = numberOfRows+1;
+            for (int i = 0; i < (numberOfColumns - numberOfMissedCases); i++){
+                JLabel emptyLabel = new JLabel();
+                middlePanel.add(emptyLabel);
+            }
+        }
+        
+        SpringUtilities.makeCompactGrid(middlePanel, numberOfRows, numberOfColumns, 5,5,5,5);
         
         panel.add(middlePanel);
         
@@ -60,10 +83,23 @@ public final class ConfidentialProjects extends GUI {
         bottomPanel.add(validateButton);
         
         cancelButton = new JButton(Labels.CONFIDENTIAL_PROJECTS_CANCEL);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         bottomPanel.add(cancelButton);
         
         panel.add(bottomPanel);
         
-        return panel;
+        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 5, 5);
+        
+        panelCenter.add(panel, BorderLayout.CENTER);
+        
+        return panelCenter;
     }
+    
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt){
+         this.dispose();
+     }
 }
