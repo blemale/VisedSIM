@@ -19,7 +19,7 @@ public final class FileLoader extends JFrame {
     private JButton loadSavedListButton,chooseNewListButton, loadNewListButton;
     private JTextField filePathField;
     private JFileChooser fileChooser;
-    private final int textColumnLenght = 10;
+    private final int TEXT_COLUMN_LENGTH = 10;
 //    private String[] projectListArray;
     
     /**
@@ -75,7 +75,7 @@ public final class FileLoader extends JFrame {
         chooseFilePanel.setBackground(Color.white);
         
         filePathField = new JTextField();
-        filePathField.setColumns(textColumnLenght);
+        filePathField.setColumns(TEXT_COLUMN_LENGTH);
         chooseFilePanel.add(filePathField);
         
         chooseNewListButton = new JButton(new ChooseFileOption(this, Labels.CHOOSE_NEW_LIST_BUTTON));
