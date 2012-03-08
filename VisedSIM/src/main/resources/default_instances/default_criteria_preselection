@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+ <object class="ecn.pappl.visedsim.struct.CriteriaPreselection"> 
+  <void property="map"> 
+   <void method="put"> 
+    <string>summary</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>internationalCooperation</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>permanentCDD</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>secondaryCommitteeKeywords</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>followingProjectPreviouslyFunded</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>title</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>nonPermanentCDD</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>appKeywords</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>anrFundedNonPermanentCDD</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>partnershipProject</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>thematic</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>admissibility</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>previousProjectAcronym</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>unwantedExperts</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>submittedProject</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>mainDiscipline</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>secondaryCommittee</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>previousFundedProjectAcronym</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>requestedFunding</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>acronym</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>involvementTime</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>multidisciplinary</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>coordinatorMail</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>rdClass</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>filledPreviousEdition</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>projectKeywords</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>fullCost</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>thematicOtherThemes</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>thematicSubThemes</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>transnationalProject</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>suggestedExperts</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>duration</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>requestedEffort</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>competitivePoles</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>filingYear</string> 
+    <boolean>false</boolean> 
+   </void> 
+   <void method="put"> 
+    <string>eligibility</string> 
+    <boolean>false</boolean> 
+   </void> 
+  </void> 
+ </object> 
+</java> 
