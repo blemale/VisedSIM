@@ -113,7 +113,10 @@ public class CriteriaPreselectionController implements
     public void saveCriteriaPreselection(String fileName) throws
             FileNotFoundException, IOException {
         if (this.criteriaPreselection != null) {
-            XMLTools.encodeToFile(this.criteriaPreselection, fileName);
+            String path = getClass().getClassLoader().getResource(
+                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+            String filePath = path+File.pathSeparator+fileName;
+            XMLTools.encodeToFile(this.criteriaPreselection, filePath);
         }
     }
 
