@@ -5,12 +5,7 @@
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
-import ecn.pappl.visedsim.utilities.XMLTools;
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import junit.framework.TestCase;
 
 /**
