@@ -81,8 +81,9 @@ public class SwingProjectViewerController implements SwingProjectViewer {
             Object[][] criteriaArray = new Object[i][j];
             ProjectTools.fillArrayWithSelectedCriteria(project,
                     criteriaPreselection, criteriaArray);
-            String path = Configuration.I18N_FOLDER + File.pathSeparator
+            String path = Configuration.I18N_FOLDER + File.separator
                     + "Criteria";
+            System.out.println(path);
             ResourceBundle bundle = ResourceBundle.getBundle(path,
                     new Locale("FR", "fr"));
             for (int index = 0; index < criteriaArray.length; index++) {
