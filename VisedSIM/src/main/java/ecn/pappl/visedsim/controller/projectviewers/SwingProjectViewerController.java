@@ -4,9 +4,13 @@
  */
 package ecn.pappl.visedsim.controller.projectviewers;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.utilities.ProjectTools;
+import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -71,12 +75,20 @@ public class SwingProjectViewerController implements SwingProjectViewer {
         if (this.project == null) {
             return new Object[0][0];
         } else {
-            int i = 2;
-            int j = ProjectTools.getNumberOfCriteriaLines(project,
+            int j = 2;
+            int i = ProjectTools.getNumberOfCriteriaLines(project,
                     criteriaPreselection);
             Object[][] criteriaArray = new Object[i][j];
             ProjectTools.fillArrayWithSelectedCriteria(project,
                     criteriaPreselection, criteriaArray);
+            String path = Configuration.I18N_FOLDER + File.pathSeparator
+                    + "Criteria";
+            ResourceBundle bundle = ResourceBundle.getBundle(path,
+                    new Locale("FR", "fr"));
+            for (int index = 0; index < criteriaArray.length; index++) {
+                criteriaArray[index][0] =
+                        bundle.getString((String) criteriaArray[index][0]);
+            }
             return criteriaArray;
         }
     }
