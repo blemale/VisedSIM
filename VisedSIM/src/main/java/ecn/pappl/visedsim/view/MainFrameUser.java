@@ -4,19 +4,11 @@
  */
 package ecn.pappl.visedsim.view;
 
-import com.sun.j3d.exp.swing.JCanvas3D;
-import ecn.pappl.visedsim.Configuration;
-import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
