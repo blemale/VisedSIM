@@ -9,6 +9,7 @@ package ecn.pappl.visedsim;
  * @author bastien
  */
 public final class Configuration {
+    public final static Boolean IS_ADMIN = false;
     public final static String CRITERIA_PRESELECTION_FOLDER = "criteria_preselections";
     public final static String PROJECT_LIST_FOLDER = "";
     public final static String COLUMNS_ORDER_FILE_PATH = "default_instances/default_columns_order";
