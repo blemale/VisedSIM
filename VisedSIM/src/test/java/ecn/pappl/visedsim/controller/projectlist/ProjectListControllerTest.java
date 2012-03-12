@@ -16,6 +16,7 @@ import junit.framework.TestCase;
  * @author bastien
  */
 public class ProjectListControllerTest extends TestCase {
+    private static final String ACRONYM = "acronym";
 
     public ProjectListControllerTest(String testName) {
         super(testName);
@@ -65,7 +66,8 @@ public class ProjectListControllerTest extends TestCase {
                 "testProjectList").getPath();
         instance.loadProjectList(fileName);
         Project result = instance.getProjectByAcronym(acronym);
-        assertEquals("MBP1", result.getAcronym());
+        assertTrue(result.getCriteriaMap().containsKey(ACRONYM));
+        assertEquals("MBP1", result.getCriteriaMap().get(ACRONYM).get(0));
     }
 
     /**
