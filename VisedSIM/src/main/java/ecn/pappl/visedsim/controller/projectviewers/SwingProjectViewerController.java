@@ -99,7 +99,7 @@ public class SwingProjectViewerController implements SwingProjectViewer {
             String path = Configuration.I18N_FOLDER + File.separator
                     + "Criteria";
             ResourceBundle bundle = ResourceBundle.getBundle(path,
-                    new Locale("FR", "fr"));
+                    Locale.getDefault());
             for (int index = 0; index < criteriaArray.length; index++) {
                 criteriaArray[index][0] =
                         bundle.getString((String) criteriaArray[index][0]);
