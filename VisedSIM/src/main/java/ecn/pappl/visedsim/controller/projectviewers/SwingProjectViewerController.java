@@ -9,7 +9,9 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.utilities.ProjectTools;
 import java.io.File;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -18,6 +20,8 @@ import java.util.ResourceBundle;
  */
 public class SwingProjectViewerController implements SwingProjectViewer {
 
+    private static final String TITLE = "title";
+    private static final String ACRONYM = "acronym";
     /**
      * The unique instance of {@link SwingProjectViewerController}.
      */
@@ -58,7 +62,13 @@ public class SwingProjectViewerController implements SwingProjectViewer {
         if (this.project == null) {
             return "";
         } else {
-            return this.project.getTitle();
+            Map<String, List<String>> criteriaMap =
+                    this.project.getCriteriaMap();
+            if (criteriaMap.containsKey(TITLE)) {
+                return criteriaMap.get(TITLE).get(0);
+            } else {
+                return "";
+            }
         }
     }
 
@@ -66,12 +76,17 @@ public class SwingProjectViewerController implements SwingProjectViewer {
         if (this.project == null) {
             return "";
         } else {
-            return this.project.getAcronym();
+            Map<String, List<String>> criteriaMap =
+                    this.project.getCriteriaMap();
+            if (criteriaMap.containsKey(ACRONYM)) {
+                return criteriaMap.get(ACRONYM).get(0);
+            } else {
+                return "";
+            }
         }
     }
 
-    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection)
-            throws IllegalArgumentException, IllegalAccessException {
+    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection) {
         if (this.project == null) {
             return new Object[0][0];
         } else {
