@@ -9,76 +9,67 @@ import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.ReflectionTools;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Class processing the conversion of a given {@link Map} into a {@link ProjectList}.
- * 
+ * <p/>
  * @author bastien
  */
 public final class MapConverter {
-    
-    private MapConverter(){
+
+    private MapConverter() {
     }
 
     /**
      * Converts a given {@link Map} into a {@link Project}
-     * 
+     * <p/>
      * @param map A given {@link Map} to convert.
      * @param columnsOrder The order of the column in the given {@link Map}.
      * @return A {@link Project}.
      * @throws NoSuchMethodException
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
-     * @throws InvocationTargetException 
+     * @throws InvocationTargetException
      */
-    public static Project convertMapToProject(Map<Integer, String> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static Project convertMapToProject(Map<Integer, String> map,
+            Map<String, List<Integer>> columnsOrder) {
         Project project = new Project();
-        for (String column : columnsOrder.keySet()) {
-            List<Integer> colList = columnsOrder.get(column);
-            String methodeName = "set" + column;
-            Object[] methodeArgs = new Object[1];
-            if (colList.size() > 1) {
-                List<String> valuesOfColumn = new ArrayList<String>();
-                for (Integer columnIndex : columnsOrder.get(column)) {
-                    String value = map.get(columnIndex);
-                    if(value != null){
-                        valuesOfColumn.add(map.get(columnIndex));
-                    }
+        Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+        for (String criteria : columnsOrder.keySet()) {
+            List<Integer> colList = columnsOrder.get(criteria);
+            List<String> valueList = new LinkedList<String>();
+            for (int colIndex : colList) {
+                if (map.containsKey(colIndex)) {
+                    valueList.add(map.get(colIndex));
                 }
-                
-                methodeArgs[0] = valuesOfColumn;
-
-            } else {
-                String value = map.get(colList.get(0));
-                if(value == null){
-                    methodeArgs[0] = "";
-                } else {
-                    methodeArgs[0] = map.get(colList.get(0));
-                }
-               
             }
-            ReflectionTools.launchMethod(project, methodeArgs, methodeName);
+            criteriaMap.put(criteria, valueList);
         }
         return project;
     }
 
     /**
      * Converts a given {@link Map} into a {@link ProjectList}
+     * <p/>
      * @param map A given {@link Map} to convert.
      * @param columnsOrder The order of the column in the given {@link Map}.
      * @return A {@link ProjectList}.
      * @throws NoSuchMethodException
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
-     * @throws InvocationTargetException 
+     * @throws InvocationTargetException
      */
-    public static ProjectList convertMapToProjectList(Map<Integer, Map<Integer, String>> map, Map<String, List<Integer>> columnsOrder) throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static ProjectList convertMapToProjectList(
+            Map<Integer, Map<Integer, String>> map,
+            Map<String, List<Integer>> columnsOrder) {
         ProjectList projectList = new ProjectList();
         List<Project> projects = projectList.getProjectList();
         for (Integer rowNumber : map.keySet()) {
-            Project project = convertMapToProject(map.get(rowNumber), columnsOrder);
+            Project project = convertMapToProject(map.get(rowNumber),
+                    columnsOrder);
             projects.add(project);
         }
         return projectList;

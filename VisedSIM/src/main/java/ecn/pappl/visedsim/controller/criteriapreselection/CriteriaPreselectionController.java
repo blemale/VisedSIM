@@ -7,7 +7,7 @@ package ecn.pappl.visedsim.controller.criteriapreselection;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.utilities.FileTools;
-import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
@@ -58,7 +58,7 @@ public class CriteriaPreselectionController implements
             FileNotFoundException, IOException {
         String path = getClass().getClassLoader().getResource(
                 Configuration.INIT_CRITERIA_PRESELECTION_PATH).getPath();
-        this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+        this.criteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
                 decodeFromFile(path);
         return this.criteriaPreselection;
     }
@@ -67,7 +67,7 @@ public class CriteriaPreselectionController implements
             FileNotFoundException, IOException {
         String path = getClass().getClassLoader().getResource(
                 Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH).getPath();
-        return (CriteriaPreselection) XMLTools.decodeFromFile(path);
+        return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(path);
     }
 
     public void deleteCriteriaPreselection(final String fileName) {
@@ -103,7 +103,7 @@ public class CriteriaPreselectionController implements
             }
         });
         if (file.length == 1) {
-            this.criteriaPreselection = (CriteriaPreselection) XMLTools.
+            this.criteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
                     decodeFromFile(file[0].getPath());
         }
 
@@ -116,7 +116,7 @@ public class CriteriaPreselectionController implements
             String path = getClass().getClassLoader().getResource(
                 Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
             String filePath = path+File.pathSeparator+fileName;
-            XMLTools.encodeToFile(this.criteriaPreselection, filePath);
+            XMLPersistanceTools.encodeToFile(this.criteriaPreselection, filePath);
         }
     }
 

@@ -2,7 +2,7 @@
 <java version="1.6.0_26" class="java.beans.XMLDecoder"> 
  <object class="java.util.HashMap"> 
   <void method="put"> 
-   <string>Summary</string> 
+   <string>summary</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>8</int> 
@@ -10,7 +10,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>InternationalCooperation</string> 
+   <string>internationalCooperation</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>16</int> 
@@ -18,7 +18,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>PermanentCDD</string> 
+   <string>permanentCDD</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>34</int> 
@@ -26,7 +26,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>SecondaryCommitteeKeywords</string> 
+   <string>secondaryCommitteeKeywords</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>15</int> 
@@ -34,7 +34,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>FollowingProjectPreviouslyFunded</string> 
+   <string>followingProjectPreviouslyFunded</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>23</int> 
@@ -42,7 +42,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Title</string> 
+   <string>title</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>1</int> 
@@ -50,7 +50,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>NonPermanentCDD</string> 
+   <string>nonPermanentCDD</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>36</int> 
@@ -58,7 +58,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>AppKeywords</string> 
+   <string>appKeywords</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>5</int> 
@@ -66,7 +66,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>AnrFundedNonPermanentCDD</string> 
+   <string>anrFundedNonPermanentCDD</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>35</int> 
@@ -74,7 +74,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>PartnershipProject</string> 
+   <string>partnershipProject</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>11</int> 
@@ -82,7 +82,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Thematic</string> 
+   <string>thematic</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>2</int> 
@@ -90,7 +90,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Admissibility</string> 
+   <string>admissibility</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>18</int> 
@@ -98,7 +98,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>PreviousProjectAcronym</string> 
+   <string>previousProjectAcronym</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>22</int> 
@@ -106,7 +106,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>UnwantedExperts</string> 
+   <string>unwantedExperts</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>40</int> 
@@ -114,7 +114,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>SubmittedProject</string> 
+   <string>submittedProject</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>12</int> 
@@ -122,7 +122,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>MainDiscipline</string> 
+   <string>mainDiscipline</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>10</int> 
@@ -130,7 +130,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>SecondaryCommittee</string> 
+   <string>secondaryCommittee</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>14</int> 
@@ -138,7 +138,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>PreviousFundedProjectAcronym</string> 
+   <string>previousFundedProjectAcronym</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>24</int> 
@@ -146,7 +146,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>RequestedFunding</string> 
+   <string>requestedFunding</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>38</int> 
@@ -154,7 +154,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Acronym</string> 
+   <string>acronym</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>0</int> 
@@ -162,7 +162,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>InvolvementTime</string> 
+   <string>involvementTime</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>25</int> 
@@ -170,7 +170,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Multidisciplinary</string> 
+   <string>multidisciplinary</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>13</int> 
@@ -178,7 +178,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>CoordinatorMail</string> 
+   <string>coordinatorMail</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>26</int> 
@@ -186,7 +186,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>RdClass</string> 
+   <string>rdClass</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>7</int> 
@@ -194,7 +194,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>FilledPreviousEdition</string> 
+   <string>filledPreviousEdition</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>20</int> 
@@ -202,7 +202,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>ProjectKeywords</string> 
+   <string>projectKeywords</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>6</int> 
@@ -210,7 +210,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>FullCost</string> 
+   <string>fullCost</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>37</int> 
@@ -218,7 +218,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>ThematicOtherThemes</string> 
+   <string>thematicOtherThemes</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>4</int> 
@@ -226,7 +226,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>ThematicSubThemes</string> 
+   <string>thematicSubThemes</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>3</int> 
@@ -234,7 +234,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>TransnationalProject</string> 
+   <string>transnationalProject</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>17</int> 
@@ -242,7 +242,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>SuggestedExperts</string> 
+   <string>suggestedExperts</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>41</int> 
@@ -262,7 +262,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Duration</string> 
+   <string>duration</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>9</int> 
@@ -270,7 +270,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>CompetitivePoles</string> 
+   <string>competitivePoles</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>27</int> 
@@ -296,7 +296,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>FilingYear</string> 
+   <string>filingYear</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>21</int> 
@@ -304,7 +304,7 @@
    </object> 
   </void> 
   <void method="put"> 
-   <string>Eligibility</string> 
+   <string>eligibility</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>19</int> 
@@ -312,7 +312,7 @@
    </object> 
   </void> 
     <void method="put"> 
-   <string>RequestedEffort</string> 
+   <string>requestedEffort</string> 
    <object class="java.util.ArrayList"> 
     <void method="add"> 
      <int>39</int> 

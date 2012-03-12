@@ -11,7 +11,7 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.ProjectTools;
-import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,6 +30,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 public class ProjectListController implements ProjectListLoader,
         ProjectListSelector, ProjectListExcelLoader, ProjectListSaver {
 
+    private final static String ACRONYM = "acronym";
     /**
      * The {@link ProjectList} to control.
      */
@@ -63,7 +64,7 @@ public class ProjectListController implements ProjectListLoader,
 
     public ProjectList loadProjectList(String fileName) throws
             FileNotFoundException, IOException {
-        this.projectList = (ProjectList) XMLTools.decodeFromFile(fileName);
+        this.projectList = (ProjectList) XMLPersistanceTools.decodeFromFile(fileName);
         return this.projectList;
     }
 
@@ -76,7 +77,9 @@ public class ProjectListController implements ProjectListLoader,
             return null;
         } else {
             for (Project project : this.projectList.getProjectList()) {
-                if (project.getAcronym().equals(acronym)) {
+                Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+                if (criteriaMap.containsKey(ACRONYM) && criteriaMap.get(
+                        ACRONYM).get(0).equals(acronym)) {
                     return project;
                 }
             }
@@ -90,7 +93,10 @@ public class ProjectListController implements ProjectListLoader,
         } else {
             List<String> list = new LinkedList<String>();
             for (Project project : this.projectList.getProjectList()) {
-                list.add(project.getAcronym());
+                Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+                if (criteriaMap.containsKey(ACRONYM)) {
+                    list.add(criteriaMap.get(ACRONYM).get(0));
+                }
             }
             Collections.sort(list);
             return list;
@@ -103,8 +109,10 @@ public class ProjectListController implements ProjectListLoader,
         } else {
             List<String> list = new LinkedList<String>();
             for (Project project : this.projectList.getProjectList()) {
-                if (project.getAcronym().startsWith(firstLetters)) {
-                    list.add(project.getAcronym());
+                Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+                if (criteriaMap.containsKey(ACRONYM) && criteriaMap.get(
+                        ACRONYM).get(0).startsWith(firstLetters)) {
+                    list.add(criteriaMap.get(ACRONYM).get(0));
                 }
             }
             Collections.sort(list);
@@ -115,9 +123,7 @@ public class ProjectListController implements ProjectListLoader,
     public ProjectList loadExcelProjectList(String fileName,
             Map<String, List<Integer>> columnsOrder,
             int firstCellRow, int firstCellColl)
-            throws FileNotFoundException, IOException, InvalidFormatException,
-            NoSuchMethodException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException {
+            throws FileNotFoundException, IOException, InvalidFormatException {
         Map<Integer, Map<Integer, String>> map =
                 ExcelDatasExtractor.procFile(new File(fileName));
         for (int i = 0; i < firstCellRow; i++) {
@@ -134,21 +140,22 @@ public class ProjectListController implements ProjectListLoader,
     public void saveProjectList(String fileName) throws FileNotFoundException,
             IOException {
         if (this.projectList != null) {
-            XMLTools.encodeToFile(this.projectList, fileName);
+            XMLPersistanceTools.encodeToFile(this.projectList, fileName);
         }
     }
 
     public void saveProjectListWithInterrestConflicts(String fileName,
             Map<String, Boolean> conflicts,
             CriteriaPreselection conflictCriteria) throws FileNotFoundException,
-            IOException,
-            IllegalArgumentException,
-            IllegalAccessException {
+            IOException {
         if (this.projectList != null) {
             ProjectList newProjectList = new ProjectList();
             List<Project> newProjects = newProjectList.getProjectList();
             for (Project project : this.projectList.getProjectList()) {
-                if (conflicts.get(project.getAcronym()) == true) {
+                Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+                if (criteriaMap.containsKey(ACRONYM)
+                        && (conflicts.get(criteriaMap.get(ACRONYM).get(0))
+                        == true)) {
                     Project buffer = ProjectTools.applyCriteriaPreselection(
                             project, conflictCriteria);
                     newProjects.add(buffer);
@@ -156,7 +163,7 @@ public class ProjectListController implements ProjectListLoader,
                     newProjects.add(project);
                 }
             }
-            XMLTools.encodeToFile(newProjectList, fileName);
+            XMLPersistanceTools.encodeToFile(newProjectList, fileName);
         }
 
     }

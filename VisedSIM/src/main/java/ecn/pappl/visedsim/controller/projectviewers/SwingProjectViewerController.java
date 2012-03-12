@@ -4,9 +4,15 @@
  */
 package ecn.pappl.visedsim.controller.projectviewers;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.utilities.ProjectTools;
+import java.io.File;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -14,6 +20,8 @@ import ecn.pappl.visedsim.utilities.ProjectTools;
  */
 public class SwingProjectViewerController implements SwingProjectViewer {
 
+    private static final String TITLE = "title";
+    private static final String ACRONYM = "acronym";
     /**
      * The unique instance of {@link SwingProjectViewerController}.
      */
@@ -54,7 +62,13 @@ public class SwingProjectViewerController implements SwingProjectViewer {
         if (this.project == null) {
             return "";
         } else {
-            return this.project.getTitle();
+            Map<String, List<String>> criteriaMap =
+                    this.project.getCriteriaMap();
+            if (criteriaMap.containsKey(TITLE)) {
+                return criteriaMap.get(TITLE).get(0);
+            } else {
+                return "";
+            }
         }
     }
 
@@ -62,21 +76,34 @@ public class SwingProjectViewerController implements SwingProjectViewer {
         if (this.project == null) {
             return "";
         } else {
-            return this.project.getAcronym();
+            Map<String, List<String>> criteriaMap =
+                    this.project.getCriteriaMap();
+            if (criteriaMap.containsKey(ACRONYM)) {
+                return criteriaMap.get(ACRONYM).get(0);
+            } else {
+                return "";
+            }
         }
     }
 
-    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection)
-            throws IllegalArgumentException, IllegalAccessException {
+    public Object[][] getCriteria(CriteriaPreselection criteriaPreselection) {
         if (this.project == null) {
             return new Object[0][0];
         } else {
-            int i = 2;
-            int j = ProjectTools.getNumberOfCriteriaLines(project,
+            int j = 2;
+            int i = ProjectTools.getNumberOfCriteriaLines(project,
                     criteriaPreselection);
             Object[][] criteriaArray = new Object[i][j];
             ProjectTools.fillArrayWithSelectedCriteria(project,
                     criteriaPreselection, criteriaArray);
+            String path = Configuration.I18N_FOLDER + File.separator
+                    + "Criteria";
+            ResourceBundle bundle = ResourceBundle.getBundle(path,
+                    Locale.getDefault());
+            for (int index = 0; index < criteriaArray.length; index++) {
+                criteriaArray[index][0] =
+                        bundle.getString((String) criteriaArray[index][0]);
+            }
             return criteriaArray;
         }
     }

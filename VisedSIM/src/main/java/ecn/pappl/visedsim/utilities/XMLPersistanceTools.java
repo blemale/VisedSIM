@@ -16,9 +16,9 @@ import java.io.IOException;
  * 
  * @author bastien
  */
-public final class XMLTools {
+public final class XMLPersistanceTools {
 
-    private XMLTools() {}
+    private XMLPersistanceTools() {}
 	
     /**
      * XML Serialization of an object 
