@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,7 +31,8 @@ public class MainFrameUser extends AbstractMainFrame {
     
     public MainFrameUser(List<String> projectsList){
         super();
-        this.projectsArray = projectsList.toArray(new String[0]);
+        ProjectListController plc = ProjectListController.getInstance();
+        this.projectsArray = plc.getProjectsAcronyms().toArray(new String[0]);
         build();
     }
     
