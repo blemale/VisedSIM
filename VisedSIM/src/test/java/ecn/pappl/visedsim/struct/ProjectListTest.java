@@ -5,6 +5,8 @@
 package ecn.pappl.visedsim.struct;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -26,14 +28,18 @@ public class ProjectListTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        List<String> list = new LinkedList<String>();
         p1 = new Project();
-        p1.setAcronym("PPP1");
-        p1.setTitle("MonProjet1");
-        
+        list.add("PPP1");
+        p1.getCriteriaMap().put("acronym", list);
+        list.clear();list.add("MonProjet1");
+        p1.getCriteriaMap().put("title", list);
+        list.clear();
         p2 = new Project();
-        p2.setAcronym("PPP2");
-        p2.setTitle("MonProjet2");
-        
+        list.add("PPP2");
+        p2.getCriteriaMap().put("acronym", list);
+        list.clear();list.add("MonProjet2");
+        p2.getCriteriaMap().put("title", list);        
     }
 
     /**
