@@ -4,7 +4,6 @@
  */
 package ecn.pappl.visedsim.view;
 
-import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import java.awt.BorderLayout;
 import java.awt.Color;

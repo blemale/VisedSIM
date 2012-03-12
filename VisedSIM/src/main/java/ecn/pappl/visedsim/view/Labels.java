@@ -34,7 +34,12 @@ public final class Labels {
     public final static String CRITERIA_MANAGEMENT_LABEL= "Gestion des présélections de critères";
     public final static String CRITERIA_MANAGEMENT_DELETE = "Supprimer";
     public final static String CRITERIA_MANAGEMENT_BACK = "Retour";
-    public final static String CRITERIA_MANAGEMENT_DIALOG = "Voulez-vous vraiment supprimer ces présélections ?"; 
+    public final static String CRITERIA_MANAGEMENT_DIALOG = "Voulez-vous vraiment supprimer ces présélections ?";
+    
+    //PreselectionSaving
+    public final static String PRESELECTION_SAVING_TITLE = "Enregistrement de la présélection";
+    public final static String PRESELECTION_SAVING_LABEL = "Choisir un nom de fichier";
+    public final static String PRESELECTION_SAVING_BUTTON = "Enregistrer";
     
     //MainFrameAdmin
     public final static String MAIN_FRAME_TITLE = "Accueil";
