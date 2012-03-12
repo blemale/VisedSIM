@@ -1,10 +1,15 @@
 package ecn.pappl.visedsim.view;
 
-
 //import java.awt.BorderLayout;
+import ecn.pappl.visedsim.Configuration;
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -13,106 +18,131 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Denis
  */
 public final class FileLoader extends JFrame {
-    
-    private JLabel listProjectLabel, newProjectListLabel;    
-    private JComboBox projectListComboBox;
-    private JButton loadSavedListButton,chooseNewListButton, loadNewListButton;
+
+    private JLabel newProjectListLabel;
+    private JButton chooseNewListButton, loadNewListButton;
     private JTextField filePathField;
     private JFileChooser fileChooser;
     private final int TEXT_COLUMN_LENGTH = 10;
 //    private String[] projectListArray;
-    
+
     /**
      * Constructor of FileLoader
      */
-    public FileLoader(){
-       super();
+    public FileLoader() {
+        super();
         build();
     }
-    
+
     //@Override
-    protected void build(){
+    protected void build() {
         //super.build();
-        
+
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
-	setResizable(true);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setContentPane(buildContentPane());
-	pack();
-        
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(buildContentPane());
+        pack();
+
         fileChooser = new JFileChooser();
 
-	FileNameExtensionFilter filter = new FileNameExtensionFilter("XML File", "xml");
-	fileChooser.setFileFilter(filter);
+        if (!Configuration.IS_ADMIN) {
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "XML File", "xml");
+            fileChooser.setFileFilter(filter);
+        }
     }
-    
+
     //@Override
-    protected JPanel buildContentPane(){
+    protected JPanel buildContentPane() {
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
-	panelCenter.setBackground(Color.white);
-                
+        panelCenter.setBackground(Color.white);
+
         JPanel panel = new JPanel();
         panel.setLayout(new SpringLayout());
         panel.setBackground(Color.white);
-        
+
         //1st line
         /*
-        listProjectLabel = new JLabel(Labels.LIST_PROJECT); 
-        panel.add(listProjectLabel);*/
-        
+         * listProjectLabel = new JLabel(Labels.LIST_PROJECT);
+         * panel.add(listProjectLabel);
+         */
+
         newProjectListLabel = new JLabel(Labels.NEW_PROJECT_LIST);
         panel.add(newProjectListLabel);
-        
+
         //2nd line
         /*
-        projectListComboBox = new JComboBox(projectListArray);
-        panel.add(projectListComboBox);*/
-        
+         * projectListComboBox = new JComboBox(projectListArray);
+         * panel.add(projectListComboBox);
+         */
+
         JPanel chooseFilePanel = new JPanel();
         chooseFilePanel.setLayout(new FlowLayout());
         chooseFilePanel.setBackground(Color.white);
-        
+
         filePathField = new JTextField();
         filePathField.setColumns(TEXT_COLUMN_LENGTH);
         chooseFilePanel.add(filePathField);
-        
-        chooseNewListButton = new JButton(new ChooseFileOption(this, Labels.CHOOSE_NEW_LIST_BUTTON));
+
+        chooseNewListButton = new JButton(new ChooseFileOption(this,
+                Labels.CHOOSE_NEW_LIST_BUTTON));
         chooseFilePanel.add(chooseNewListButton);
-        
+
         panel.add(chooseFilePanel);
-        
+
         //3rd line
         /*
-        loadSavedListButton = new JButton(Labels.LOAD_SAVED_LIST_BUTTON);
-        panel.add(loadSavedListButton);*/
-        
+         * loadSavedListButton = new JButton(Labels.LOAD_SAVED_LIST_BUTTON);
+         * panel.add(loadSavedListButton);
+         */
+
         loadNewListButton = new JButton(Labels.LOAD_NEW_LIST_BUTTON);
         panel.add(loadNewListButton);
-        
+
         SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
-        
+
         panelCenter.add(panel, BorderLayout.CENTER);
         return panelCenter;
     }
-    
+
+    private void loadNewListButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!Configuration.IS_ADMIN) {
+            try {
+                this.setVisible(false);
+                ProjectListController projectListController =
+                        ProjectListController.getInstance();
+                projectListController.loadProjectList(filePathField.getText());
+                MainFrameUser mainFrameUser = new MainFrameUser();
+                this.dispose();
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, "Le fichier n'existe pas.");
+                this.setVisible(true);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Un problème est survenue au chargement du fichier.");
+                this.setVisible(true);
+            }
+        }
+    }
+
     /**
      * get fileChooser;
-     * 
-     * @return 
+     * <p/>
+     * @return
      */
-    public JFileChooser getFileChooser(){
+    public JFileChooser getFileChooser() {
         return fileChooser;
     }
-    
+
     /**
      * get filePathField
-     * 
-     * @return 
+     * <p/>
+     * @return
      */
-    public JTextField getFilePathField(){
+    public JTextField getFilePathField() {
         return filePathField;
     }
-    
 }
