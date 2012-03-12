@@ -33,9 +33,7 @@ public final class ProjectTools {
             if (criteriaPreselectionMap.containsKey(criteria)
                     && criteriaPreselectionMap.get(criteria)) {
                 newCriteriaMap.put(criteria, criteriaMap.get(criteria));
-            } else {
-                newCriteriaMap.put(criteria, new LinkedList<String>());
-            }
+            } 
         }
         return newProject;
     }
