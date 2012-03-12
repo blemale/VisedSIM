@@ -11,7 +11,7 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import ecn.pappl.visedsim.utilities.ProjectTools;
-import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class ProjectListController implements ProjectListLoader,
 
     public ProjectList loadProjectList(String fileName) throws
             FileNotFoundException, IOException {
-        this.projectList = (ProjectList) XMLTools.decodeFromFile(fileName);
+        this.projectList = (ProjectList) XMLPersistanceTools.decodeFromFile(fileName);
         return this.projectList;
     }
 
@@ -140,7 +140,7 @@ public class ProjectListController implements ProjectListLoader,
     public void saveProjectList(String fileName) throws FileNotFoundException,
             IOException {
         if (this.projectList != null) {
-            XMLTools.encodeToFile(this.projectList, fileName);
+            XMLPersistanceTools.encodeToFile(this.projectList, fileName);
         }
     }
 
@@ -163,7 +163,7 @@ public class ProjectListController implements ProjectListLoader,
                     newProjects.add(project);
                 }
             }
-            XMLTools.encodeToFile(newProjectList, fileName);
+            XMLPersistanceTools.encodeToFile(newProjectList, fileName);
         }
 
     }
