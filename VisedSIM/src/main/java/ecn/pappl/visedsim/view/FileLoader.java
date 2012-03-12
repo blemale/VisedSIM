@@ -3,6 +3,7 @@ package ecn.pappl.visedsim.view;
 //import java.awt.BorderLayout;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
+import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -100,6 +101,12 @@ public final class FileLoader extends JFrame {
          */
 
         loadNewListButton = new JButton(Labels.LOAD_NEW_LIST_BUTTON);
+        loadNewListButton.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadNewListButtonActionPerformed(evt);
+            }
+        });
         panel.add(loadNewListButton);
 
         SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
@@ -115,7 +122,12 @@ public final class FileLoader extends JFrame {
                 ProjectListController projectListController =
                         ProjectListController.getInstance();
                 projectListController.loadProjectList(filePathField.getText());
+                SwingProjectViewerController swingProjectViewerController =
+                        SwingProjectViewerController.getInstance();
+                swingProjectViewerController.loadProject(projectListController.
+                        getFirstProject());
                 MainFrameUser mainFrameUser = new MainFrameUser();
+                mainFrameUser.setVisible(true);
                 this.dispose();
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, "Le fichier n'existe pas.");
