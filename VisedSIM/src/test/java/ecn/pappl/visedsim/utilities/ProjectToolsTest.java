@@ -84,13 +84,13 @@ public class ProjectToolsTest extends TestCase {
         String testProjectPath = getClass().getClassLoader().
                 getResource(
                 "testProject").getPath();
-        return (Project) XMLTools.decodeFromFile(testProjectPath);
+        return (Project) XMLPersistanceTools.decodeFromFile(testProjectPath);
     }
 
     private CriteriaPreselection loadTesCriteriaPreselection() throws Exception {
         String testCriteriaPreselectionPath = getClass().getClassLoader().
                 getResource("testCriteriaPreselection").getPath();
-        return (CriteriaPreselection) XMLTools.decodeFromFile(
+        return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(
                 testCriteriaPreselectionPath);
     }
 }

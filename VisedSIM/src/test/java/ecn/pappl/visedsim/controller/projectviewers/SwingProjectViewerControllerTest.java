@@ -6,7 +6,7 @@ package ecn.pappl.visedsim.controller.projectviewers;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
-import ecn.pappl.visedsim.utilities.XMLTools;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import junit.framework.TestCase;
 
 /**
@@ -101,13 +101,13 @@ public class SwingProjectViewerControllerTest extends TestCase {
         String testProjectPath = getClass().getClassLoader().
                 getResource(
                 "testProject").getPath();
-        return (Project) XMLTools.decodeFromFile(testProjectPath);
+        return (Project) XMLPersistanceTools.decodeFromFile(testProjectPath);
     }
 
     private CriteriaPreselection loadTesCriteriaPreselection() throws Exception {
         String testCriteriaPreselectionPath = getClass().getClassLoader().
                 getResource("testCriteriaPreselection").getPath();
-        return (CriteriaPreselection) XMLTools.decodeFromFile(
+        return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(
                 testCriteriaPreselectionPath);
     }
 }
