@@ -8,6 +8,7 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,70 +20,62 @@ import java.util.Set;
 public final class ProjectTools {
 
     public static Project applyCriteriaPreselection(Project project,
-            CriteriaPreselection criteriaPreselection) throws
-            IllegalArgumentException, IllegalAccessException {
+            CriteriaPreselection criteriaPreselection) {
+        Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+
+        Map<String, Boolean> criteriaPreselectionMap = criteriaPreselection.
+                getMap();
+
         Project newProject = new Project();
-        Field[] fields = project.getClass().getDeclaredFields();
-        Map<String, Boolean> map = criteriaPreselection.getMap();
-        for (int i = 0; i < fields.length; i++) {
-            Field field = fields[i];
-            if (map.containsKey(field.getName()) && ((Boolean) map.get(field.
-                    getName()))) {
-                field.setAccessible(true);
-                Object o = field.get(project);
-                field.set(newProject, o);
+        Map<String, List<String>> newCriteriaMap = newProject.getCriteriaMap();
+
+        for (String criteria : criteriaMap.keySet()) {
+            if (criteriaPreselectionMap.containsKey(criteria)
+                    && criteriaPreselectionMap.get(criteria)) {
+                newCriteriaMap.put(criteria, criteriaMap.get(criteria));
+            } else {
+                newCriteriaMap.put(criteria, new LinkedList<String>());
             }
         }
         return newProject;
     }
 
     public static int getNumberOfCriteriaLines(Project project,
-            CriteriaPreselection cp) throws IllegalArgumentException,
-            IllegalAccessException {
+            CriteriaPreselection cp) {
         int count = 0;
-        Map<String, Boolean> map = cp.getMap();
-        Field[] fields = project.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            Field field = fields[i];
-            if (map.containsKey(field.getName()) && ((Boolean) map.get(field.
-                    getName()))) {
-                if (field.getType().equals(String.class)) {
-                    count++;
-                } else if (field.getType().equals(List.class)) {
-                    field.setAccessible(true);
-                    List l = (List) field.get(project);
-                    count += l.size();
-                }
+
+        Map<String, Boolean> criteriaPreselectionMap = cp.getMap();
+
+        Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+
+        for (String criteria : criteriaMap.keySet()) {
+            if (criteriaPreselectionMap.containsKey(criteria)
+                    && criteriaPreselectionMap.get(criteria)) {
+                count += criteriaMap.get(criteria).size();
             }
         }
         return count;
     }
 
     public static void fillArrayWithSelectedCriteria(Project project,
-            CriteriaPreselection cp, Object[][] array) throws
-            IllegalArgumentException, IllegalAccessException {
+            CriteriaPreselection cp, Object[][] array) {
         int indexLine = 0;
-        Map<String, Boolean> map = cp.getMap();
-        Field[] fields = project.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            Field field = fields[i];
-            if (map.containsKey(field.getName()) && ((Boolean) map.get(field.
-                    getName()))) {
-                if (field.getType().equals(String.class)) {
-                    array[indexLine][0] = field.getName();
-                    field.setAccessible(true);
-                    array[indexLine][1] = (String) field.get(project);
+
+        Map<String, List<String>> criteriaMap = project.getCriteriaMap();
+
+        Map<String, Boolean> criteriaPreselectionMap = cp.getMap();
+
+        for (String criteria : criteriaMap.keySet()) {
+            if (criteriaPreselectionMap.containsKey(criteria)
+                    && criteriaPreselectionMap.get(criteria)) {
+                List<String> criteriaValueList = criteriaMap.get(criteria);
+                for (String criteriaValue : criteriaValueList) {
+                    array[indexLine][0] = criteria;
+                    array[indexLine][1] = criteriaValue;
                     indexLine++;
-                } else if (field.getType().equals(List.class)) {
-                    field.setAccessible(true);
-                    List l = (List) field.get(project);
-                    for (Object o : l) {
-                        array[indexLine][0] = field.getName();
-                        array[indexLine][1] = (String) o;
-                        indexLine++;
-                    }
                 }
             }
+
         }
     }
 }
