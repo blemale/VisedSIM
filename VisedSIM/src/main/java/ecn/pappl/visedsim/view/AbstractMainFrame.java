@@ -92,7 +92,7 @@ public abstract class AbstractMainFrame extends JFrame {
     public void updateProjectView() {
         SwingProjectViewerController spvc = SwingProjectViewerController.
                 getInstance();
-        this.projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
+        this.projectTitle.setText(spvc.getAcronym() + " : " + spvc.getTitle());
         Object[][] tableContent =
                 spvc.getCriteria(CriteriaPreselectionController.getInstance().
                 getCriteriaPreselection());
