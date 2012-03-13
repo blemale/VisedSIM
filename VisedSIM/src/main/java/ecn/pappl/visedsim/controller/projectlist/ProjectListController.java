@@ -64,7 +64,8 @@ public class ProjectListController implements ProjectListLoader,
 
     public ProjectList loadProjectList(String fileName) throws
             FileNotFoundException, IOException {
-        this.projectList = (ProjectList) XMLPersistanceTools.decodeFromFile(fileName);
+        this.projectList = (ProjectList) XMLPersistanceTools.decodeFromFile(
+                fileName);
         return this.projectList;
     }
 
@@ -166,5 +167,14 @@ public class ProjectListController implements ProjectListLoader,
             XMLPersistanceTools.encodeToFile(newProjectList, fileName);
         }
 
+    }
+
+    public Project getFirstProject() {
+        if (this.projectList != null && this.projectList.getProjectList().size()
+                > 0) {
+            return this.projectList.getProjectList().get(0);
+        } else {
+            return null;
+        }
     }
 }
