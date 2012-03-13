@@ -132,11 +132,11 @@ public final class FileLoader extends JFrame {
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, "Le fichier n'existe pas.");
                 this.setVisible(true);
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this,
                         "Un problème est survenue au chargement du fichier.");
                 this.setVisible(true);
-            }
+            } 
         }
     }
 
