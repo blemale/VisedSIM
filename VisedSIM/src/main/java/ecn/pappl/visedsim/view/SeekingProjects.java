@@ -25,13 +25,15 @@ public class SeekingProjects extends JDialog {
     private JLabel titleLabel;
     private JButton validateButton;
     private List<String> projectsList;
+    private AbstractMainFrame mainFrame;
     
     /**
      * 
      * @param acronyme 
      */
-    public SeekingProjects(String acronyme){
+    public SeekingProjects(AbstractMainFrame mainFrame, String acronyme){
         super();
+        this.mainFrame = mainFrame;
         ProjectListController plc = ProjectListController.getInstance();
         projectsList = plc.getProjectsAcronymsByFirstLetters(acronyme);
         build();
@@ -93,15 +95,15 @@ public class SeekingProjects extends JDialog {
      private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         ProjectListController plc = ProjectListController.getInstance();
-        int test = 0;
+        boolean test = false;
         for(String project : buttonMap.keySet()){
             if(buttonMap.get(project).isSelected()){
                 spvc.loadProject(plc.getProjectByAcronym(project));
-                test = 1;
+                test = true;
             }
         }
-        if(test == 1){
-            //TODO Modification du tableau.
+        if(test){
+            this.mainFrame.updateTable();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
