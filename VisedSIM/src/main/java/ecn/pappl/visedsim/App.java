@@ -76,7 +76,7 @@ public class App
         MainFrameAdmin mfa = new MainFrameAdmin(projectList);
         mfa.setVisible(true);
         
-        MainFrameUser mfu = new MainFrameUser(projectList);
+        MainFrameUser mfu = new MainFrameUser();
         mfu.setVisible(true);
     }       
 }
