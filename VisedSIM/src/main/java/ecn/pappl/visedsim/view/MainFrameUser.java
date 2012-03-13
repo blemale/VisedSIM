@@ -114,6 +114,11 @@ public class MainFrameUser extends AbstractMainFrame {
         searchProjectPanel.add(searchProjectField);
         
         searchButton = new JButton(Labels.MAIN_FRAME_SEARCH_PROJECT_BUTTON);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionEvent(evt);
+            }
+        });
         searchProjectPanel.add(searchButton);
         
         buttonPanel.add(searchProjectPanel);
