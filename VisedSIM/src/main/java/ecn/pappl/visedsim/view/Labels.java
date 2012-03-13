@@ -45,7 +45,7 @@ public final class Labels {
     public final static String SEEKING_PROJECTS_TITLE = "Recherche";
     public final static String SEEKING_PROJECTS_LABEL = "Choisissez un projet";
     public final static String SEEKING_PROJECTS_BUTTON = "Charger";
-    public final static String SEEKING_PROJECTS_POPUP = "Pas de projet commençant par ces lettres";
+    public final static String SEEKING_PROJECTS_POPUP = "Pas d'acronyme commençant par ces lettres";
     public final static String SEEKING_PROJECTS_VALIDATION = "Veuillez choisir un projet";
     
     //MainFrameAdmin

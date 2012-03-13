@@ -58,6 +58,11 @@ public class MainFrameUser extends AbstractMainFrame {
         criteriaMenu = new JMenu(Labels.MENU_CRITERIA);
         
         preselectionSavedItem = new JMenuItem(Labels.MENU_CRITERIA_SAVE);
+        preselectionSavedItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preselectionSavedItemActionEvent(evt);
+            }
+        });
         criteriaMenu.add(preselectionSavedItem);
         
         preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
