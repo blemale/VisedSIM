@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -126,10 +127,16 @@ public class MainFrameAdmin extends AbstractMainFrame {
         //Representation of the project
         JPanel middlePanel = new JPanel(new FlowLayout());
         
-        SwingProjectViewerController projectInstance = SwingProjectViewerController.getInstance();
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         
-        projectTitle = new JLabel(projectInstance.getAcronym()+" : "+projectInstance.getTitle());
+        projectTitle = new JLabel(spvc.getAcronym()+" : "+spvc.getTitle());
         middlePanel.add(projectTitle);
+        
+        Object[][] tableContent = spvc.getCriteria(CriteriaPreselectionController.getInstance().getCriteriaPreselection());
+        Object[] columnsName = new Object[]{"Critère", "Valeur"};
+        
+        projectTable = new JTable(tableContent, columnsName);
+        middlePanel.add(projectTable);
         
         panel.add(middlePanel);
         

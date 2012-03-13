@@ -41,6 +41,11 @@ public final class Labels {
     public final static String PRESELECTION_SAVING_LABEL = "Choisir un nom de fichier";
     public final static String PRESELECTION_SAVING_BUTTON = "Enregistrer";
     
+    //Seeking Projects
+    public final static String SEEKING_PROJECTS_TITLE = "Recherche";
+    public final static String SEEKING_PROJECTS_LABEL = "Choisissez un projet";
+    public final static String SEEKING_PROJECTS_BUTTON = "Charger";
+    
     //MainFrameAdmin
     public final static String MAIN_FRAME_TITLE = "Accueil";
     public final static String MENU_PROJECT = "Projet";
