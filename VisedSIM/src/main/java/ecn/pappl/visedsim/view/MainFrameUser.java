@@ -135,6 +135,7 @@ public class MainFrameUser extends AbstractMainFrame {
         
         projectTable = new JTable(tableContent, columnsName);
         
+        middlePanel.add(projectTable);
         
         panel.add(middlePanel);
         
