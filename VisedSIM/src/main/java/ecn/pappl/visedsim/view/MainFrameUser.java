@@ -162,6 +162,7 @@ public class MainFrameUser extends AbstractMainFrame {
         }
         else {
             SeekingProjects sp = new SeekingProjects(searchProjectField.getText());
+            sp.setVisible(true);
         }
     }
     
