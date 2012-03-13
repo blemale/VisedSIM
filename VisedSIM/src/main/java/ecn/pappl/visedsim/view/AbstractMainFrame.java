@@ -6,7 +6,9 @@ package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
+import ecn.pappl.visedsim.struct.Project;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,6 +77,16 @@ public abstract class AbstractMainFrame extends JFrame {
             java.awt.event.ActionEvent evt) {
         PreselectionSaving ps = new PreselectionSaving();
         ps.setVisible(true);
+    }
+
+    protected void validateButtonActionEvent(java.awt.event.ActionEvent evt) {
+        String fileName = (String)this.projectsComboBox.getSelectedItem();
+        Project project = ProjectListController.getInstance().
+                getProjectByAcronym(fileName);
+        if (project != null) {
+            SwingProjectViewerController.getInstance().loadProject(project);
+            this.updateTable();
+        }
     }
 
     public void updateTable() {
