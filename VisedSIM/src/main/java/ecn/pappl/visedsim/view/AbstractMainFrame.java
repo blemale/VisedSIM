@@ -6,21 +6,25 @@ package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
+import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Denis
  */
 public abstract class AbstractMainFrame extends JFrame {
+
     protected JComboBox projectsComboBox;
     protected JLabel projectTitle;
     protected JTable projectTable;
+    protected DefaultTableModel tableModel;
 
     protected void build() {
         setTitle(Labels.MAIN_FRAME_TITLE);
@@ -63,14 +67,24 @@ public abstract class AbstractMainFrame extends JFrame {
      * @param evt
      */
     protected void chooseCriteriaActionEvent(java.awt.event.ActionEvent evt) {
-                ChooseCriteria chooseCriteria = new ChooseCriteria(this);
-                chooseCriteria.setVisible(true);
+        ChooseCriteria chooseCriteria = new ChooseCriteria(this);
+        chooseCriteria.setVisible(true);
     }
 
-    
-    protected void preselectionSavedItemActionEvent(java.awt.event.ActionEvent evt){
+    protected void preselectionSavedItemActionEvent(
+            java.awt.event.ActionEvent evt) {
         PreselectionSaving ps = new PreselectionSaving();
         ps.setVisible(true);
     }
 
+    public void updateTable() {
+        SwingProjectViewerController spvc = SwingProjectViewerController.
+                getInstance();
+        Object[][] tableContent =
+                spvc.getCriteria(CriteriaPreselectionController.getInstance().
+                getCriteriaPreselection());
+        Object[] columnsName = new Object[]{"Critère", "Valeur"};
+        this.tableModel.setDataVector(tableContent, columnsName);
+        this.tableModel.fireTableStructureChanged();
+    }
 }
