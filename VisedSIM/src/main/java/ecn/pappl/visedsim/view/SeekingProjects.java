@@ -62,15 +62,14 @@ public class SeekingProjects extends JDialog {
         
         buttonMap = new HashMap<String, JRadioButton>();
         buttonGroup = new ButtonGroup();
-        JPanel panelButton = new JPanel(new BorderLayout());
+        JPanel panelButton = new JPanel(new SpringLayout());
         panelButton.setBackground(Color.white);
         
         for(String project : projectsList){
             buttonMap.put(project, new JRadioButton(project));
             buttonGroup.add(buttonMap.get(project));
+            panelButton.add(buttonMap.get(project));
         }
-        
-        add(panelButton, buttonGroup);
         
         SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
         
@@ -102,9 +101,10 @@ public class SeekingProjects extends JDialog {
             }
         }
         if(test == 1){
-            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
-        } else {
+            //TODO Modification du tableau.
             this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
         }
     }
 }
