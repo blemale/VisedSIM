@@ -134,7 +134,7 @@ public class MainFrameUser extends AbstractMainFrame {
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         
         projectTable = new JTable(tableContent, columnsName);
-        
+        middlePanel.add(projectTable);
         
         panel.add(middlePanel);
         
@@ -143,6 +143,21 @@ public class MainFrameUser extends AbstractMainFrame {
         panelCenter.add(panel, BorderLayout.CENTER);
         
         return panelCenter;
+    }
+    
+    
+    protected void searchButtonActionEvent(java.awt.event.ActionEvent evt){
+        ProjectListController plc = ProjectListController.getInstance();
+        
+        if(plc.getProjectsAcronymsByFirstLetters(searchProjectField.getText()).isEmpty()){
+            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_POPUP);
+        }
+        else if (plc.getProjectsAcronymsByFirstLetters(searchProjectField.getText()).size() == 1){
+            //TODO Launch the new project
+        }
+        else {
+            SeekingProjects sp = new SeekingProjects(searchProjectField.getText());
+        }
     }
     
 }
