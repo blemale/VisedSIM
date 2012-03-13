@@ -5,6 +5,7 @@
 package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
+import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.HashMap;
@@ -76,6 +77,11 @@ public class SeekingProjects extends JDialog {
         panel.add(panelButton);
         
         validateButton = new JButton(Labels.SEEKING_PROJECTS_BUTTON);
+        validateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validateButtonActionPerformed(evt);
+            }
+        });
         panel.add(validateButton);
         
         SpringUtilities.makeCompactGrid(panel, 3, 1, 5,5,10,10);
@@ -83,5 +89,22 @@ public class SeekingProjects extends JDialog {
         panelCenter.add(panel);
         
         return panelCenter;
+    }
+    
+     private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
+        ProjectListController plc = ProjectListController.getInstance();
+        int test = 0;
+        for(String project : buttonMap.keySet()){
+            if(buttonMap.get(project).isSelected()){
+                spvc.loadProject(plc.getProjectByAcronym(project));
+                test = 1;
+            }
+        }
+        if(test == 1){
+            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
+        } else {
+            this.dispose();
+        }
     }
 }
