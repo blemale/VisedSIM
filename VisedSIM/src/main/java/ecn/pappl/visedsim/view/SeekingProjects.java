@@ -7,12 +7,14 @@ package ecn.pappl.visedsim.view;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.*;
 
 /**
- *
+ * Let the user seeking a project
+ * 
  * @author Denis
  */
 public class SeekingProjects extends JDialog {
@@ -23,6 +25,10 @@ public class SeekingProjects extends JDialog {
     private JButton validateButton;
     private List<String> projectsList;
     
+    /**
+     * 
+     * @param acronyme 
+     */
     public SeekingProjects(String acronyme){
         super();
         ProjectListController plc = ProjectListController.getInstance();
@@ -49,6 +55,32 @@ public class SeekingProjects extends JDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new SpringLayout());
         panel.setBackground(Color.white);
+        
+        titleLabel = new JLabel(Labels.SEEKING_PROJECTS_TITLE);
+        panel.add(titleLabel);
+        
+        buttonMap = new HashMap<String, JRadioButton>();
+        buttonGroup = new ButtonGroup();
+        JPanel panelButton = new JPanel(new BorderLayout());
+        panelButton.setBackground(Color.white);
+        
+        for(String project : projectsList){
+            buttonMap.put(project, new JRadioButton(project));
+            buttonGroup.add(buttonMap.get(project));
+        }
+        
+        add(panelButton, buttonGroup);
+        
+        SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
+        
+        panel.add(panelButton);
+        
+        validateButton = new JButton(Labels.SEEKING_PROJECTS_BUTTON);
+        panel.add(validateButton);
+        
+        SpringUtilities.makeCompactGrid(panel, 3, 1, 5,5,10,10);
+        
+        panelCenter.add(panel);
         
         return panelCenter;
     }
