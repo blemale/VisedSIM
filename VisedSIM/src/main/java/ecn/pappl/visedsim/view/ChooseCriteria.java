@@ -234,6 +234,7 @@ public final class ChooseCriteria extends JDialog {
                 criteriaMap.put(criteria, false);
             }
         }
+        //TODO Modifier le tableau avec les nouveaux critères.
         this.dispose();
     }
 }
