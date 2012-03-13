@@ -18,22 +18,16 @@ import javax.swing.*;
  * @author Denis
  */
 public class MainFrameUser extends AbstractMainFrame {
+    private final static int TEXT_FIELD_LENGTH = 10;
     
     private JMenuBar menuBar;
     private JMenu projectMenu, criteriaMenu, helpMenu;
     private JMenuItem newListProjectItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, validateButton, searchButton;
     private JTextField searchProjectField;
-    private final int TEXT_FIELD_LENGTH = 10;
-    private JComboBox projectsComboBox;
-    private JLabel projectTitle;
-    private JTable projectTable;
-    private String[] projectsArray;
     
     public MainFrameUser(){
         super();
-        ProjectListController plc = ProjectListController.getInstance();
-        this.projectsArray = plc.getProjectsAcronyms().toArray(new String[0]);
         build();
     }
     
@@ -103,7 +97,8 @@ public class MainFrameUser extends AbstractMainFrame {
         JPanel chooseProjectPanel = new JPanel(new FlowLayout());
         chooseProjectPanel.setBackground(Color.white);
         
-        projectsComboBox = new JComboBox(projectsArray);
+        ProjectListController plc = ProjectListController.getInstance();
+        projectsComboBox = new JComboBox( plc.getProjectsAcronyms().toArray(new String[0]));
         chooseProjectPanel.add(projectsComboBox);
         
         validateButton = new JButton(Labels.MAIN_FRAME_VALIDATE_PROJECT_BUTTON);
