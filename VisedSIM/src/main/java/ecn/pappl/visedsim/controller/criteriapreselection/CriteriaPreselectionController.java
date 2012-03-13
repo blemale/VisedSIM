@@ -102,12 +102,13 @@ public class CriteriaPreselectionController implements
                 return string.equals(fileName);
             }
         });
+        CriteriaPreselection loadedCriteriaPreselection = new CriteriaPreselection();
         if (file.length == 1) {
-            this.criteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
+            loadedCriteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
                     decodeFromFile(file[0].getPath());
         }
 
-        return this.criteriaPreselection;
+        return loadedCriteriaPreselection;
     }
 
     public void saveCriteriaPreselection(String fileName) throws
