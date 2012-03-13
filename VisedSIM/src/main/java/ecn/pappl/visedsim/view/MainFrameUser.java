@@ -29,7 +29,7 @@ public class MainFrameUser extends AbstractMainFrame {
     private JTable projectTable;
     private String[] projectsArray;
     
-    public MainFrameUser(List<String> projectsList){
+    public MainFrameUser(){
         super();
         ProjectListController plc = ProjectListController.getInstance();
         this.projectsArray = plc.getProjectsAcronyms().toArray(new String[0]);
