@@ -11,16 +11,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  *
  * @author Denis
  */
 public abstract class AbstractMainFrame extends JFrame {
+    protected JComboBox projectsComboBox;
+    protected JLabel projectTitle;
+    protected JTable projectTable;
 
     protected void build() {
         setTitle(Labels.MAIN_FRAME_TITLE);
@@ -33,20 +33,38 @@ public abstract class AbstractMainFrame extends JFrame {
 
     protected abstract JPanel buildContentPane();
 
+    public JTable getProjectTable() {
+        return projectTable;
+    }
+
+    public void setProjectTable(JTable projectTable) {
+        this.projectTable = projectTable;
+    }
+
+    public JLabel getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(JLabel projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
+    public JComboBox getProjectsComboBox() {
+        return projectsComboBox;
+    }
+
+    public void setProjectsComboBox(JComboBox projectsComboBox) {
+        this.projectsComboBox = projectsComboBox;
+    }
+
     /**
      * Allow the user to modify criteria
      * <p/>
      * @param evt
      */
     protected void chooseCriteriaActionEvent(java.awt.event.ActionEvent evt) {
-        SwingUtilities.invokeLater(new Runnable() {
-
-            public void run() {
-                ChooseCriteria chooseCriteria = new ChooseCriteria();
+                ChooseCriteria chooseCriteria = new ChooseCriteria(this);
                 chooseCriteria.setVisible(true);
-
-            }
-        });
     }
 
     
