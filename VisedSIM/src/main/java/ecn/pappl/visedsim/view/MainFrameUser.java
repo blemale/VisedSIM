@@ -36,7 +36,11 @@ public class MainFrameUser extends AbstractMainFrame {
                 spvc.getCriteria(CriteriaPreselectionController.getInstance().
                 getCriteriaPreselection());
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
-        tableModel = new DefaultTableModel(tableContent, columnsName);
+        tableModel = new DefaultTableModel(tableContent, columnsName) {
+            public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
+                return false;
+            }
+        };
         build();
     }
 
@@ -159,9 +163,11 @@ public class MainFrameUser extends AbstractMainFrame {
         middlePanel.add(projectTitle);
 
         projectTable = new JTable(tableModel);
+
+
         middlePanel.add(projectTable);
 
-        panel.add(middlePanel);
+        panel.add(new JScrollPane(middlePanel));
 
         SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
 
