@@ -116,7 +116,7 @@ public class CriteriaPreselectionController implements
         if (this.criteriaPreselection != null) {
             String path = getClass().getClassLoader().getResource(
                 Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
-            String filePath = path+File.pathSeparator+fileName;
+            String filePath = path+File.separator+fileName;
             XMLPersistanceTools.encodeToFile(this.criteriaPreselection, filePath);
         }
     }
