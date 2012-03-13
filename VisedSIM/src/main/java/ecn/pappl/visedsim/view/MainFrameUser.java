@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,9 +26,14 @@ public class MainFrameUser extends AbstractMainFrame {
     private JMenuItem newListProjectItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, validateButton, searchButton;
     private JTextField searchProjectField;
+
     
     public MainFrameUser(){
         super();
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
+        Object[][] tableContent = spvc.getCriteria(CriteriaPreselectionController.getInstance().getCriteriaPreselection());
+        Object[] columnsName = new Object[]{"Critère", "Valeur"};
+        tableModel = new DefaultTableModel(tableContent, columnsName);
         build();
     }
     
@@ -138,7 +144,7 @@ public class MainFrameUser extends AbstractMainFrame {
         Object[][] tableContent = spvc.getCriteria(CriteriaPreselectionController.getInstance().getCriteriaPreselection());
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         
-        projectTable = new JTable(tableContent, columnsName);
+        projectTable = new JTable(tableModel);
         middlePanel.add(projectTable);
         
         panel.add(middlePanel);
@@ -165,5 +171,5 @@ public class MainFrameUser extends AbstractMainFrame {
             sp.setVisible(true);
         }
     }
-    
+     
 }
