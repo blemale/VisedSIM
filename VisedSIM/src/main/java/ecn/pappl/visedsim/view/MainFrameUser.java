@@ -10,6 +10,7 @@ import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController
 import ecn.pappl.visedsim.struct.Project;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.*;
@@ -55,6 +56,7 @@ public class MainFrameUser extends AbstractMainFrame {
 
         //Menu
         menuBar = new JMenuBar();
+        menuBar.setMinimumSize(new Dimension(minWidth, minBarHeight));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
 
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
@@ -155,24 +157,19 @@ public class MainFrameUser extends AbstractMainFrame {
 
         //Representation of the project
         JPanel middlePanel = new JPanel(new SpringLayout());
-        JScrollPane scrollpane = new JScrollPane();
         
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         
         projectTitle = new JLabel(spvc.getAcronym()+" : "+spvc.getTitle());
-
         middlePanel.add(projectTitle);
 
         projectTable = new JTable(tableModel);
-
-
         middlePanel.add(projectTable);
         
         SpringUtilities.makeCompactGrid(middlePanel, 2, 1, 5,5,5,5);
         
-        //middlePanel.add(scrollpane);
-
-        panel.add(new JScrollPane(middlePanel));
+        scrollpane = new JScrollPane(middlePanel);
+        panel.add(scrollpane);
 
         SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
 

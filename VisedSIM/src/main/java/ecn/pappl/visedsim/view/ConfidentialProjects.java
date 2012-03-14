@@ -36,6 +36,7 @@ public final class ConfidentialProjects extends JDialog{
 	setResizable(false);
 	setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
+        setAlwaysOnTop(true);
 	setContentPane(buildContentPane());
 	pack();
     }

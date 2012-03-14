@@ -30,7 +30,7 @@ public final class ChooseCriteria extends JDialog {
     private JButton validationButton, selectAllButton, resetButton, preselectionValidateButton, cancelButton;
     private JComboBox preselectionComboBox;
     private Map<String, JCheckBox> checkboxMap;
-    private final int numberOfColumns = 4;
+    private final int numberOfColumns = 3;
     private CriteriaPreselectionController criteriaPreselectionController =
             CriteriaPreselectionController.getInstance();
     private SwingProjectViewerController swingProjectViewerController = SwingProjectViewerController.getInstance();
@@ -55,6 +55,7 @@ public final class ChooseCriteria extends JDialog {
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
+        setAlwaysOnTop(true);
         setContentPane(buildContentPane());
         pack();
     }
