@@ -133,7 +133,8 @@ public class MainFrameUser extends AbstractMainFrame {
         panel.add(buttonPanel);
         
         //Representation of the project
-        JPanel middlePanel = new JPanel(new FlowLayout());
+        JPanel middlePanel = new JPanel(new SpringLayout());
+        JScrollPane scrollpane = new JScrollPane();
         
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         
@@ -145,6 +146,10 @@ public class MainFrameUser extends AbstractMainFrame {
         
         projectTable = new JTable(tableContent, columnsName);
         middlePanel.add(projectTable);
+        
+        SpringUtilities.makeCompactGrid(middlePanel, 2, 1, 5,5,5,5);
+        
+        //middlePanel.add(scrollpane);
         
         panel.add(middlePanel);
         
