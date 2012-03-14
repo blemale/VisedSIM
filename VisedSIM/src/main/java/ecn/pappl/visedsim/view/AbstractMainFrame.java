@@ -96,7 +96,14 @@ public abstract class AbstractMainFrame extends JFrame {
     }
     
     protected void newListProjectItemActionButton(java.awt.event.ActionEvent evt){
-        
+        FileLoader fileLoader = new FileLoader();
+        fileLoader.setVisible(true);
+        this.dispose();
+    }
+    
+    protected void preselectionManagementItemActionButton(java.awt.event.ActionEvent evt){
+        PreselectionManagement preselectionManagement = new PreselectionManagement();
+        preselectionManagement.setVisible(true);
     }
 
     public void updateProjectView() {

@@ -46,6 +46,12 @@ public class MainFrameAdmin extends AbstractMainFrame {
         projectMenu = new JMenu(Labels.MENU_PROJECT);
         
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
+        newListProjectItem.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newListProjectItemActionButton(evt);
+            }
+        });
         projectMenu.add(newListProjectItem);
         
         printProjectItem = new JMenuItem(Labels.MENU_PROJECT_PRINT);
@@ -73,6 +79,12 @@ public class MainFrameAdmin extends AbstractMainFrame {
         criteriaMenu.add(preselectionSavedItem);
         
         preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
+        preselectionManagementItem.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preselectionManagementItemActionButton(evt);
+            }
+        });
         criteriaMenu.add(preselectionManagementItem);
         
         chooseCriteriaItem = new JMenuItem(Labels.MENU_CRITERIA_CHOOSE);
