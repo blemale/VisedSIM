@@ -237,7 +237,7 @@ public final class ChooseCriteria extends JDialog {
                 criteriaMap.put(criteria, false);
             }
         }
-        this.mainFrame.updateTable();
+        this.mainFrame.updateProjectView();
         this.dispose();
     }
 }
