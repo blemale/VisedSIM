@@ -8,6 +8,8 @@ import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +48,8 @@ public class SeekingProjects extends JDialog {
 	setResizable(false);
 	setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
+        setAlwaysOnTop(true);
+        setPreferredSize(new Dimension(150, 300));
 	setContentPane(buildContentPane());
 	pack();
     }
@@ -75,7 +79,7 @@ public class SeekingProjects extends JDialog {
         
         SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
         
-        panel.add(panelButton);
+        panel.add(new JScrollPane(panelButton));
         
         validateButton = new JButton(Labels.SEEKING_PROJECTS_BUTTON);
         validateButton.addActionListener(new java.awt.event.ActionListener() {

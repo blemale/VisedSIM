@@ -9,6 +9,7 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.Project;
+import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,11 +28,16 @@ public abstract class AbstractMainFrame extends JFrame {
     protected JLabel projectTitle;
     protected JTable projectTable;
     protected DefaultTableModel tableModel;
+    protected JScrollPane scrollpane;
+    protected final int minHeight = 300;
+    protected final int minWidth = 580;
+    protected final int minBarHeight = 30;
 
     protected void build() {
         setTitle(Labels.MAIN_FRAME_TITLE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
+        setMinimumSize(new Dimension(minWidth, minHeight));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         pack();
@@ -88,6 +94,10 @@ public abstract class AbstractMainFrame extends JFrame {
             this.updateProjectView();
         }
     }
+    
+    protected void newListProjectItemActionButton(java.awt.event.ActionEvent evt){
+        
+    }
 
     public void updateProjectView() {
         SwingProjectViewerController spvc = SwingProjectViewerController.
@@ -99,5 +109,7 @@ public abstract class AbstractMainFrame extends JFrame {
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         this.tableModel.setDataVector(tableContent, columnsName);
         this.tableModel.fireTableStructureChanged();
+        projectTable.validate();
     }
+    
 }

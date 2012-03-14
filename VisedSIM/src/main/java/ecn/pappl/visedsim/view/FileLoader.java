@@ -8,9 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -37,8 +34,6 @@ public final class FileLoader extends JFrame {
 
     //@Override
     protected void build() {
-        //super.build();
-
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
         setResizable(false);

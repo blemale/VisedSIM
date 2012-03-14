@@ -34,6 +34,7 @@ public class CriteriaManagement extends JDialog {
 	setLocationRelativeTo(null);
 	setResizable(false);
         setModal(true);
+        setAlwaysOnTop(true);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setContentPane(buildContentPane());
 	pack();
