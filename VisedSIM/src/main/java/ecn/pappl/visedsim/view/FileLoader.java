@@ -42,7 +42,7 @@ public final class FileLoader extends JFrame {
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(buildContentPane());
         pack();
 
