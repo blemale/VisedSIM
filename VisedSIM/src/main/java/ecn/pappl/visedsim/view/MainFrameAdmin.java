@@ -8,6 +8,7 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.*;
@@ -41,6 +42,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
         
         //Menu
         menuBar = new JMenuBar();
+        menuBar.setMinimumSize(new Dimension(minWidth, minBarHeight));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
         
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
