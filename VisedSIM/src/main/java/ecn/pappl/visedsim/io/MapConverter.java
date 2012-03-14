@@ -44,6 +44,8 @@ public final class MapConverter {
             for (int colIndex : colList) {
                 if (map.containsKey(colIndex)) {
                     valueList.add(map.get(colIndex));
+                } else {
+                    valueList.add("");
                 }
             }
             criteriaMap.put(criteria, valueList);
