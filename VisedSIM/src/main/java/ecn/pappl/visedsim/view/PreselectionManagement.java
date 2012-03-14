@@ -7,11 +7,7 @@ package ecn.pappl.visedsim.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Map;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
+import javax.swing.*;
 
 /**
  *

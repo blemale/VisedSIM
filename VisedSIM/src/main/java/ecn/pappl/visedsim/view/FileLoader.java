@@ -21,7 +21,7 @@ public final class FileLoader extends JFrame {
     private JButton chooseNewListButton, loadNewListButton;
     private JTextField filePathField;
     private JFileChooser fileChooser;
-    private final int TEXT_COLUMN_LENGTH = 10;
+    private static final int TEXT_COLUMN_LENGTH = 10;
 //    private String[] projectListArray;
 
     /**
@@ -99,7 +99,7 @@ public final class FileLoader extends JFrame {
         loadNewListButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadNewListButtonActionPerformed(evt);
+                loadNewListButtonActionPerformed();
             }
         });
         panel.add(loadNewListButton);
@@ -110,7 +110,7 @@ public final class FileLoader extends JFrame {
         return panelCenter;
     }
 
-    private void loadNewListButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void loadNewListButtonActionPerformed() {
         if (!Configuration.IS_ADMIN) {
             try {
                 this.setVisible(false);

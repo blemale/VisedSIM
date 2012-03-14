@@ -21,7 +21,7 @@ public final class ConfidentialProjects extends JDialog{
     private JButton validateButton, cancelButton;
     private JLabel titleLabel;
     private Map<String, JCheckBox> checkboxMap;
-    private final int numberOfColumns = 5;
+    private static final int NUMBER_OF_COLUMNS = 5;
     private List<String> projectsList;
     
     public ConfidentialProjects(List<String> projectsList){
@@ -63,17 +63,17 @@ public final class ConfidentialProjects extends JDialog{
             checkboxMap.get(project).setBackground(Color.white);
             middlePanel.add(checkboxMap.get(project));
         }
-        int numberOfRows = (int)((double)projectsList.size()/numberOfColumns);
-        int numberOfMissedCases = projectsList.size()-numberOfRows*numberOfColumns;
+        int numberOfRows = (int)((double)projectsList.size()/NUMBER_OF_COLUMNS);
+        int numberOfMissedCases = projectsList.size()-numberOfRows*NUMBER_OF_COLUMNS;
         if(numberOfMissedCases != 0){
             numberOfRows = numberOfRows+1;
-            for (int i = 0; i < (numberOfColumns - numberOfMissedCases); i++){
+            for (int i = 0; i < (NUMBER_OF_COLUMNS - numberOfMissedCases); i++){
                 JLabel emptyLabel = new JLabel();
                 middlePanel.add(emptyLabel);
             }
         }
         
-        SpringUtilities.makeCompactGrid(middlePanel, numberOfRows, numberOfColumns, 5,5,5,5);
+        SpringUtilities.makeCompactGrid(middlePanel, numberOfRows, NUMBER_OF_COLUMNS, 5,5,5,5);
         
         panel.add(middlePanel);
         

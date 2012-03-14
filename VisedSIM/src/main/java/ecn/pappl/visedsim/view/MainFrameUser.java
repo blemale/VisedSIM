@@ -12,32 +12,37 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ * The main frame of the program for a simple user
+ *
  * @author Denis
  */
 public class MainFrameUser extends AbstractMainFrame {
 
-    private final static int TEXT_FIELD_LENGTH = 10;
+    private static final int TEXT_FIELD_LENGTH = 10;
     private JMenuBar menuBar;
     private JMenu projectMenu, criteriaMenu, helpMenu;
     private JMenuItem newListProjectItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, validateButton, searchButton;
     private JTextField searchProjectField;
 
+    /**
+     * The constructor of the main frame
+     */
     public MainFrameUser() {
         super();
-        SwingProjectViewerController spvc = SwingProjectViewerController.
-                getInstance();
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         Object[][] tableContent =
                 spvc.getCriteria(CriteriaPreselectionController.getInstance().
                 getCriteriaPreselection());
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         tableModel = new DefaultTableModel(tableContent, columnsName) {
+
+            @Override
             public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
                 return false;
             }
@@ -56,7 +61,7 @@ public class MainFrameUser extends AbstractMainFrame {
 
         //Menu
         menuBar = new JMenuBar();
-        menuBar.setMinimumSize(new Dimension(minWidth, minBarHeight));
+        menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
 
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
@@ -167,18 +172,18 @@ public class MainFrameUser extends AbstractMainFrame {
         panel.add(buttonPanel);
 
         //Representation of the project
-        JPanel middlePanel = new JPanel(new SpringLayout());
-        
+        middlePanel = new JPanel(new SpringLayout());
+
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
-        
-        projectTitle = new JLabel(spvc.getAcronym()+" : "+spvc.getTitle());
+
+        projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
         middlePanel.add(projectTitle);
 
         projectTable = new JTable(tableModel);
         middlePanel.add(projectTable);
-        
-        SpringUtilities.makeCompactGrid(middlePanel, 2, 1, 5,5,5,5);
-        
+
+        SpringUtilities.makeCompactGrid(middlePanel, 2, 1, 5, 5, 5, 5);
+
         scrollpane = new JScrollPane(middlePanel);
         panel.add(scrollpane);
 

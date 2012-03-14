@@ -6,23 +6,23 @@ package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
-import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
-import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
- *
+ * Let the user to change the visible criteria
+ * 
  * @author Denis
  */
 public final class ChooseCriteria extends JDialog {
@@ -30,13 +30,17 @@ public final class ChooseCriteria extends JDialog {
     private JButton validationButton, selectAllButton, resetButton, preselectionValidateButton, cancelButton;
     private JComboBox preselectionComboBox;
     private Map<String, JCheckBox> checkboxMap;
-    private final int numberOfColumns = 3;
+    private static final int NUMBER_OF_COLUMNS = 3;
     private CriteriaPreselectionController criteriaPreselectionController =
             CriteriaPreselectionController.getInstance();
-    private SwingProjectViewerController swingProjectViewerController = SwingProjectViewerController.getInstance();
     private AbstractMainFrame mainFrame;
     private Map<String, Boolean> criteriaMap;
 
+    /**
+     * Constructor of the JDialog
+     * 
+     * @param mainFrame 
+     */
     public ChooseCriteria(AbstractMainFrame mainFrame) {
         super();
         this.criteriaMap = this.criteriaPreselectionController.
@@ -82,7 +86,7 @@ public final class ChooseCriteria extends JDialog {
         selectAllButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectAllButtonActionPerformed(evt);
+                selectAllButtonActionPerformed();
             }
         });
         topPanel.add(selectAllButton);
@@ -91,7 +95,7 @@ public final class ChooseCriteria extends JDialog {
         resetButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetButtonActionPerformed(evt);
+                resetButtonActionPerformed();
             }
         });
         topPanel.add(resetButton);
@@ -106,13 +110,11 @@ public final class ChooseCriteria extends JDialog {
         preselectionValidateButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                preselectionValidateButtonActionPerformed(evt);
+                preselectionValidateButtonActionPerformed();
             }
         });
         topPanel.add(preselectionValidateButton);
         panel.add(topPanel);
-
-        GridLayout grid = new GridLayout(0, numberOfColumns);
 
         //Middle panel with the checkbox
         JPanel middlePanel = new JPanel(new SpringLayout());
@@ -133,19 +135,19 @@ public final class ChooseCriteria extends JDialog {
             middlePanel.add(checkboxMap.get(criteria));
         }
         int numberRows = (int) ((double) criteriaMap.keySet().size()
-                / numberOfColumns);
+                / NUMBER_OF_COLUMNS);
         int numberOfMissedCases = criteriaMap.keySet().size() - numberRows
-                * numberOfColumns;
+                * NUMBER_OF_COLUMNS;
         if (numberOfMissedCases != 0) {
             numberRows = numberRows + 1;
-            for (int i = 0; i < (numberOfColumns - numberOfMissedCases); i++) {
+            for (int i = 0; i < (NUMBER_OF_COLUMNS - numberOfMissedCases); i++) {
                 JLabel emptyLabel = new JLabel(String.valueOf(i));
                 emptyLabel.setVisible(false);
                 middlePanel.add(emptyLabel);
             }
         }
 
-        SpringUtilities.makeCompactGrid(middlePanel, numberRows, numberOfColumns,
+        SpringUtilities.makeCompactGrid(middlePanel, numberRows, NUMBER_OF_COLUMNS,
                 5, 5, 5, 5);
 
         panel.add(middlePanel);
@@ -158,7 +160,7 @@ public final class ChooseCriteria extends JDialog {
         validationButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validateButtonActionPerformed(evt);
+                validateButtonActionPerformed();
             }
         });
         bottomPanel.add(validationButton);
@@ -167,7 +169,7 @@ public final class ChooseCriteria extends JDialog {
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                cancelButtonActionPerformed();
             }
         });
         bottomPanel.add(cancelButton);
@@ -181,20 +183,28 @@ public final class ChooseCriteria extends JDialog {
         return panelCenter;
     }
 
-    private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    /**
+     * Select all the checkboxes
+     */
+    private void selectAllButtonActionPerformed() {
         for (String criteria : criteriaMap.keySet()) {
             checkboxMap.get(criteria).setSelected(true);
         }
     }
 
-    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    /**
+     * Reset the selection for all checkboxes
+     */
+    private void resetButtonActionPerformed() {
         for (String criteria : criteriaMap.keySet()) {
             checkboxMap.get(criteria).setSelected(false);
         }
     }
 
-    private void preselectionValidateButtonActionPerformed(
-            java.awt.event.ActionEvent evt) {
+    /**
+     * Launch the preselection of criteria
+     */
+    private void preselectionValidateButtonActionPerformed() {
         String preselectionName = (String) this.preselectionComboBox.
                 getSelectedItem();
         if (!preselectionName.isEmpty()) {
@@ -225,11 +235,17 @@ public final class ChooseCriteria extends JDialog {
 
     }
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    /**
+     * Close the JDialog without saving
+     */
+    private void cancelButtonActionPerformed() {
         this.dispose();
     }
 
-    private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    /**
+     * Validate the new criteria selection
+     */
+    private void validateButtonActionPerformed() {
         for (String criteria : criteriaMap.keySet()) {
             if (checkboxMap.containsKey(criteria) && checkboxMap.get(criteria).
                     isSelected()) {

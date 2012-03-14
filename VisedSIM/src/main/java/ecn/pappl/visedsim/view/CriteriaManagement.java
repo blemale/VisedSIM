@@ -13,7 +13,8 @@ import java.util.Map;
 import javax.swing.*;
 
 /**
- *
+ * Let the user to delete some criteria preselections
+ * 
  * @author Denis
  */
 public class CriteriaManagement extends JDialog {
@@ -23,12 +24,20 @@ public class CriteriaManagement extends JDialog {
     private JLabel titleLabel;
     private List<String> preselectionList;
     
+    /**
+     * The constructor of the JDialog
+     * 
+     * @param preselectionList 
+     */
     public CriteriaManagement(List<String> preselectionList){
         super();
         this.preselectionList = preselectionList;
         build();
     }
     
+    /**
+     * Build the JDialog
+     */
     private void build(){
         setTitle(Labels.CRITERIA_MANAGEMENT_TITLE);
 	setLocationRelativeTo(null);
@@ -40,6 +49,11 @@ public class CriteriaManagement extends JDialog {
 	pack();
     }
     
+    /**
+     * Build the main panel
+     * 
+     * @return 
+     */
     private JPanel buildContentPane(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -72,7 +86,7 @@ public class CriteriaManagement extends JDialog {
         backButton = new JButton(Labels.CRITERIA_MANAGEMENT_BACK);
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionEvent(evt);
+                backActionEvent();
             }
         });
         buttonPanel.setBackground(Color.white);
@@ -80,7 +94,7 @@ public class CriteriaManagement extends JDialog {
         deleteButton = new JButton(Labels.CRITERIA_MANAGEMENT_DELETE);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionEvent(evt);
+                deleteActionEvent();
             }
         });
         buttonPanel.setBackground(Color.white);
@@ -92,7 +106,10 @@ public class CriteriaManagement extends JDialog {
         return panelCenter;
     }
     
-    private void deleteActionEvent(java.awt.event.ActionEvent evt){
+    /**
+     * Delete the selected checkboxes
+     */
+    private void deleteActionEvent(){
         int rs;
         rs = JOptionPane.showConfirmDialog(this, Labels.CRITERIA_MANAGEMENT_DIALOG, null, JOptionPane.YES_NO_OPTION);
         if(rs == JOptionPane.YES_OPTION){
@@ -105,7 +122,10 @@ public class CriteriaManagement extends JDialog {
         }
     }
     
-    private void backActionEvent(java.awt.event.ActionEvent evt){
+    /**
+     * Close the JDialog without saving
+     */
+    private void backActionEvent(){
         this.dispose();
     }
 }

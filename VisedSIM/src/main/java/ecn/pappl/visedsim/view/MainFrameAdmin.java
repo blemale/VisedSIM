@@ -14,7 +14,8 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- *
+ * The main frame of the program for the administrator
+ * 
  * @author Denis
  */
 public class MainFrameAdmin extends AbstractMainFrame {
@@ -25,6 +26,9 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private JButton chooseCriteriaButton, generateAllXMLButton, printAllButton, validateButton;
     private String[] projectsArray;
     
+    /**
+     * The constructor of the main frame
+     */
     public MainFrameAdmin(List<String> projectsList){
         super();
         this.projectsArray = projectsList.toArray(new String[0]);
@@ -42,7 +46,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
         
         //Menu
         menuBar = new JMenuBar();
-        menuBar.setMinimumSize(new Dimension(minWidth, minBarHeight));
+        menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
         
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);

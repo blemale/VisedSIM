@@ -9,11 +9,15 @@ package ecn.pappl.visedsim;
  * @author bastien
  */
 public final class Configuration {
-    public final static Boolean IS_ADMIN = false;
-    public final static String CRITERIA_PRESELECTION_FOLDER = "criteria_preselections";
-    public final static String PROJECT_LIST_FOLDER = "";
-    public final static String COLUMNS_ORDER_FILE_PATH = "default_instances/default_columns_order";
-    public final static String DEFAULT_CRITERIA_PRESELECTION_PATH = "default_instances/default_criteria_preselection";
-    public final static String INIT_CRITERIA_PRESELECTION_PATH = "default_instances/init_criteria_preselection";
-    public final static String I18N_FOLDER = "i18n";
+    
+    public static final Boolean IS_ADMIN = false;
+    public static final String CRITERIA_PRESELECTION_FOLDER = "criteria_preselections";
+    public static final String PROJECT_LIST_FOLDER = "";
+    public static final String COLUMNS_ORDER_FILE_PATH = "default_instances/default_columns_order";
+    public static final String DEFAULT_CRITERIA_PRESELECTION_PATH = "default_instances/default_criteria_preselection";
+    public static final String INIT_CRITERIA_PRESELECTION_PATH = "default_instances/init_criteria_preselection";
+    public static final String I18N_FOLDER = "i18n";
+    
+    private Configuration(){
+    }
 }

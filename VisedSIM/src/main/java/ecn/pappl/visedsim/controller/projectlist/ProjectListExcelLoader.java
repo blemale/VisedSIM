@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 
 /**
  * Interface representing a loader of {@link ProjectList} from a Excel file.

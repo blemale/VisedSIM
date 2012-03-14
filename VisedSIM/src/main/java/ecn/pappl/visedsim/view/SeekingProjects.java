@@ -9,7 +9,6 @@ import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +83,7 @@ public class SeekingProjects extends JDialog {
         validateButton = new JButton(Labels.SEEKING_PROJECTS_BUTTON);
         validateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validateButtonActionPerformed(evt);
+                validateButtonActionPerformed();
             }
         });
         panel.add(validateButton);
@@ -96,7 +95,7 @@ public class SeekingProjects extends JDialog {
         return panelCenter;
     }
     
-     private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+     private void validateButtonActionPerformed() {
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         ProjectListController plc = ProjectListController.getInstance();
         boolean test = false;

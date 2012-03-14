@@ -8,8 +8,6 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -23,7 +21,7 @@ public class PreselectionSaving extends JDialog {
     private JButton saveButton;
     private JLabel titleLabel;
     private JTextField preselectionNameField;
-    private final int columnLenght = 10;
+    private static final int COLUMN_LENGHT = 10;
     
     public PreselectionSaving(){
         super();
@@ -56,14 +54,14 @@ public class PreselectionSaving extends JDialog {
         namePanel.setBackground(Color.white);
         
         preselectionNameField = new JTextField();
-        preselectionNameField.setColumns(columnLenght);
+        preselectionNameField.setColumns(COLUMN_LENGHT);
         
         namePanel.add(preselectionNameField);
         
         saveButton = new JButton(Labels.PRESELECTION_SAVING_BUTTON);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                saveButtonActionPerformed();
             }
         });
         namePanel.add(saveButton);
@@ -77,7 +75,7 @@ public class PreselectionSaving extends JDialog {
         return panelCenter;
     }
     
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt){
+    private void saveButtonActionPerformed(){
         CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
         try {
             cpc.saveCriteriaPreselection(preselectionNameField.getText());

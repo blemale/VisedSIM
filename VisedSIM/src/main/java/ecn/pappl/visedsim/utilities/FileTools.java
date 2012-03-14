@@ -13,8 +13,11 @@ import java.util.List;
  * @author bastien
  */
 public final class FileTools {
+    
+    private FileTools(){
+    }
 
-    public final static List<String> getFilesNamesInDirectory(
+    public static List<String> getFilesNamesInDirectory(
             String directoryPath) {
         List<String> filesNames = new LinkedList<String>();
 
