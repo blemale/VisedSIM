@@ -22,9 +22,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private JMenu projectMenu, criteriaMenu, helpMenu;
     private JMenuItem newListProjectItem, printProjectItem, printAllProjectItem, generateXMLItem, generateAllXMLItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, generateAllXMLButton, printAllButton, validateButton;
-    private JComboBox projectsComboBox;
-    private JLabel projectTitle;
-    private JTable projectTable;
     private String[] projectsArray;
     
     public MainFrameAdmin(List<String> projectsList){

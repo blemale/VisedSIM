@@ -7,6 +7,7 @@ package ecn.pappl.visedsim.view;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
+import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,14 +33,16 @@ public final class ChooseCriteria extends JDialog {
     private final int numberOfColumns = 4;
     private CriteriaPreselectionController criteriaPreselectionController =
             CriteriaPreselectionController.getInstance();
-    private ProjectListController projectListController = ProjectListController.
-            getInstance();
+    private SwingProjectViewerController swingProjectViewerController = SwingProjectViewerController.getInstance();
+    private AbstractMainFrame mainFrame;
     private Map<String, Boolean> criteriaMap;
 
-    public ChooseCriteria() {
+    public ChooseCriteria(AbstractMainFrame mainFrame) {
         super();
-        criteriaMap = criteriaPreselectionController.getCriteriaPreselection().
+        this.criteriaMap = this.criteriaPreselectionController.
+                getCriteriaPreselection().
                 getMap();
+        this.mainFrame = mainFrame;
         build();
     }
 
@@ -234,7 +237,7 @@ public final class ChooseCriteria extends JDialog {
                 criteriaMap.put(criteria, false);
             }
         }
-        //TODO Modifier le tableau avec les nouveaux critères.
+        this.mainFrame.updateTable();
         this.dispose();
     }
 }

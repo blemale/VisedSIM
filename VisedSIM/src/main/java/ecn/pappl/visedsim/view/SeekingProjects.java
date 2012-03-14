@@ -25,13 +25,15 @@ public class SeekingProjects extends JDialog {
     private JLabel titleLabel;
     private JButton validateButton;
     private List<String> projectsList;
+    private AbstractMainFrame mainFrame;
     
     /**
      * 
      * @param acronyme 
      */
-    public SeekingProjects(String acronyme){
+    public SeekingProjects(AbstractMainFrame mainFrame, String acronyme){
         super();
+        this.mainFrame = mainFrame;
         ProjectListController plc = ProjectListController.getInstance();
         projectsList = plc.getProjectsAcronymsByFirstLetters(acronyme);
         build();
@@ -62,15 +64,14 @@ public class SeekingProjects extends JDialog {
         
         buttonMap = new HashMap<String, JRadioButton>();
         buttonGroup = new ButtonGroup();
-        JPanel panelButton = new JPanel(new BorderLayout());
+        JPanel panelButton = new JPanel(new SpringLayout());
         panelButton.setBackground(Color.white);
         
         for(String project : projectsList){
             buttonMap.put(project, new JRadioButton(project));
             buttonGroup.add(buttonMap.get(project));
+            panelButton.add(buttonMap.get(project));
         }
-        
-        add(panelButton, buttonGroup);
         
         SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
         
@@ -94,17 +95,18 @@ public class SeekingProjects extends JDialog {
      private void validateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         ProjectListController plc = ProjectListController.getInstance();
-        int test = 0;
+        boolean test = false;
         for(String project : buttonMap.keySet()){
             if(buttonMap.get(project).isSelected()){
                 spvc.loadProject(plc.getProjectByAcronym(project));
-                test = 1;
+                test = true;
             }
         }
-        if(test == 1){
-            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
-        } else {
+        if(test){
+            this.mainFrame.updateTable();
             this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
         }
     }
 }

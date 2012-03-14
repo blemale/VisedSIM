@@ -81,10 +81,7 @@ public class PreselectionSaving extends JDialog {
         CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
         try {
             cpc.saveCriteriaPreselection(preselectionNameField.getText());
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Un problème est survenu pendant l'enregistrement !");
-            Logger.getLogger(PreselectionSaving.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Un problème est survenu pendant l'enregistrement !");
             Logger.getLogger(PreselectionSaving.class.getName()).log(Level.SEVERE, null, ex);
         }
