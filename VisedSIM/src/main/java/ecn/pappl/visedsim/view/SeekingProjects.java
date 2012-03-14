@@ -103,7 +103,7 @@ public class SeekingProjects extends JDialog {
             }
         }
         if(test){
-            this.mainFrame.updateTable();
+            this.mainFrame.updateProjectView();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_VALIDATION);
