@@ -72,4 +72,8 @@ public final class Labels {
     public static final String MAIN_FRAME_PRINT_ALL_BUTTON = "Imprimer tout...";
     public static final String MAIN_FRAME_VALIDATE_PROJECT_BUTTON = "Valider";
     public static final String MAIN_FRAME_SEARCH_PROJECT_BUTTON = "Rechercher";
+    
+    //SummaryPopup
+    public static final String SUMMARY_POPUP_TITLE = "Résumé";
+    public static final String SUMMARY_POPUP_LABEL = "Résumé";
 }

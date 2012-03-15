@@ -105,7 +105,6 @@ public class MainFrameUser extends AbstractMainFrame {
 
         preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
         preselectionManagementItem.addActionListener(new java.awt.event.ActionListener() {
-
             /**
              * Launch the CriteriaManagement to let the user delete a
              * preselection

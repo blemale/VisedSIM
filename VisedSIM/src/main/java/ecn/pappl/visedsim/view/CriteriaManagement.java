@@ -34,9 +34,10 @@ public class CriteriaManagement extends JDialog {
      * 
      * @param preselectionList 
      */
-    public CriteriaManagement(List<String> preselectionList){
+    public CriteriaManagement(){
         super();
-        this.preselectionList = preselectionList;
+        CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
+        this.preselectionList = cpc.getLoadableCriteriaPreselectionsNames();
         build();
     }
     
@@ -49,7 +50,7 @@ public class CriteriaManagement extends JDialog {
 	setResizable(false);
         setModal(true);
         setAlwaysOnTop(true);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setContentPane(buildContentPane());
 	pack();
     }
@@ -83,7 +84,7 @@ public class CriteriaManagement extends JDialog {
         
         SpringUtilities.makeCompactGrid(middlePanel, preselectionList.size(),1, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
         
-        panel.add(panelCenter, BorderLayout.CENTER);
+        panel.add(middlePanel);
         
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
@@ -97,7 +98,7 @@ public class CriteriaManagement extends JDialog {
                 backActionEvent();
             }
         });
-        buttonPanel.setBackground(Color.white);
+        buttonPanel.add(backButton);
         
         deleteButton = new JButton(Labels.CRITERIA_MANAGEMENT_DELETE);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +109,7 @@ public class CriteriaManagement extends JDialog {
                 deleteActionEvent();
             }
         });
-        buttonPanel.setBackground(Color.white);
+        buttonPanel.add(deleteButton);
         
         SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
         
@@ -116,7 +117,7 @@ public class CriteriaManagement extends JDialog {
         
         SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
         
-        panelCenter.add(panel, BorderLayout.CENTER);
+        panelCenter.add(panel);
         
         return panelCenter;
     }
@@ -134,6 +135,7 @@ public class CriteriaManagement extends JDialog {
                     cpc.deleteCriteriaPreselection(preselection);
                 }
             }
+            this.dispose();
         }
     }
     

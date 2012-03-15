@@ -37,6 +37,7 @@ public abstract class AbstractMainFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        setMaximumSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         pack();
@@ -156,8 +157,7 @@ public abstract class AbstractMainFrame extends JFrame {
      * @param evt 
      */
     protected void preselectionManagementItemActionButton(java.awt.event.ActionEvent evt) {
-        //TODO : preselectionList
-        CriteriaManagement preselectionManagement = new CriteriaManagement(null);
+        CriteriaManagement preselectionManagement = new CriteriaManagement();
         preselectionManagement.setVisible(true);
     }
 
