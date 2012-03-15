@@ -156,7 +156,8 @@ public abstract class AbstractMainFrame extends JFrame {
      * @param evt 
      */
     protected void preselectionManagementItemActionButton(java.awt.event.ActionEvent evt) {
-        PreselectionManagement preselectionManagement = new PreselectionManagement();
+        //TODO : preselectionList
+        CriteriaManagement preselectionManagement = new CriteriaManagement(null);
         preselectionManagement.setVisible(true);
     }
 

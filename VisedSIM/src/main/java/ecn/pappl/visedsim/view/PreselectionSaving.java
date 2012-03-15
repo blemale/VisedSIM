@@ -24,6 +24,12 @@ public class PreselectionSaving extends JDialog {
     private JTextField preselectionNameField;
     private static final int COLUMN_LENGHT = 10;
     
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 2;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
+    
     /**
      * The constructor of the JDialog
      */
@@ -83,7 +89,7 @@ public class PreselectionSaving extends JDialog {
         
         panel.add(namePanel);
         
-        SpringUtilities.makeCompactGrid(panel, 2, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 10, 10);
         
         panelCenter.add(panel, BorderLayout.CENTER);
         

@@ -35,6 +35,12 @@ public final class ChooseCriteria extends JDialog {
             CriteriaPreselectionController.getInstance();
     private AbstractMainFrame mainFrame;
     private Map<String, Boolean> criteriaMap;
+    
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * Constructor of the JDialog
@@ -154,7 +160,7 @@ public final class ChooseCriteria extends JDialog {
         }
 
         SpringUtilities.makeCompactGrid(middlePanel, numberRows, NUMBER_OF_COLUMNS,
-                5, 5, 5, 5);
+                GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
         panel.add(middlePanel);
 
@@ -186,7 +192,7 @@ public final class ChooseCriteria extends JDialog {
 
         panel.add(bottomPanel);
 
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
 
         panelCenter.add(panel, BorderLayout.CENTER);
 

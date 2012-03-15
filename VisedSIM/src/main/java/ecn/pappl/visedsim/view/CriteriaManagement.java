@@ -23,6 +23,11 @@ public class CriteriaManagement extends JDialog {
     private JButton backButton, deleteButton;
     private JLabel titleLabel;
     private List<String> preselectionList;
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
     
     /**
      * The constructor of the JDialog
@@ -76,7 +81,7 @@ public class CriteriaManagement extends JDialog {
             middlePanel.add(preselectionMap.get(preselection));
         }
         
-        SpringUtilities.makeCompactGrid(middlePanel, preselectionList.size(),1, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(middlePanel, preselectionList.size(),1, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
         
         panel.add(panelCenter, BorderLayout.CENTER);
         
@@ -105,9 +110,13 @@ public class CriteriaManagement extends JDialog {
         });
         buttonPanel.setBackground(Color.white);
         
-        SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
         
         panel.add(buttonPanel);
+        
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
+        
+        panelCenter.add(panel, BorderLayout.CENTER);
         
         return panelCenter;
     }

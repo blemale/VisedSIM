@@ -47,12 +47,6 @@ public final class Labels {
     public static final String PRESELECTION_SAVING_LABEL = "Choisir un nom de fichier";
     public static final String PRESELECTION_SAVING_BUTTON = "Enregistrer";
     
-    //PreselectionManagement
-    public static final String PRESELECTION_MANAGEMENT_TITLE = "Gestion des présélections";
-    public static final String PRESELECTION_MANAGEMENT_LABEL = "Liste des présélections de critères";
-    public static final String PRESELECTION_MANAGEMENT_DELETE = "Supprimer";
-    public static final String PRESELECTION_MANAGEMENT_POPUP = "Voulez-vous vraiment supprimer les listes sélectionnées";
-    
     //Seeking Projects
     public static final String SEEKING_PROJECTS_TITLE = "Recherche";
     public static final String SEEKING_PROJECTS_LABEL = "Choisissez un projet";

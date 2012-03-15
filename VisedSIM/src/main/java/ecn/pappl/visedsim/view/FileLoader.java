@@ -23,7 +23,12 @@ public final class FileLoader extends JFrame {
     private JTextField filePathField;
     private JFileChooser fileChooser;
     private static final int TEXT_COLUMN_LENGTH = 10;
-//    private String[] projectListArray;
+    
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * Constructor of FileLoader
@@ -113,7 +118,7 @@ public final class FileLoader extends JFrame {
         });
         panel.add(loadNewListButton);
 
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
 
         panelCenter.add(panel, BorderLayout.CENTER);
         return panelCenter;

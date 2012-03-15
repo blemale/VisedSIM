@@ -27,6 +27,12 @@ public class SeekingProjects extends JDialog {
     private JButton validateButton;
     private List<String> projectsList;
     private AbstractMainFrame mainFrame;
+    
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * Let the user to choose a project which begin with the acronyme parameter
@@ -85,7 +91,7 @@ public class SeekingProjects extends JDialog {
             panelButton.add(buttonMap.get(project));
         }
 
-        SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
         panel.add(new JScrollPane(panelButton));
 
@@ -100,7 +106,7 @@ public class SeekingProjects extends JDialog {
         });
         panel.add(validateButton);
 
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
 
         panelCenter.add(panel);
 

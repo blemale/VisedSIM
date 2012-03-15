@@ -25,6 +25,16 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private JMenuItem newListProjectItem, printProjectItem, printAllProjectItem, generateXMLItem, generateAllXMLItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, generateAllXMLButton, printAllButton, validateButton;
     private String[] projectsArray;
+    
+    //Integers used in the compact grids
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int MIDDLEPANEL_NUMBER_OF_COLUMN = 1;
+    private static final int MIDDLEPANEL_NUMBER_OF_ROW = 2;
+    private static final int BUTTONPANEL_NUMBER_OF_COLUMN = 3;
+    private static final int BUTTONPANEL_NUMBER_OF_ROW = 1;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * The constructor of the main frame
@@ -168,7 +178,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
 
         buttonPanel.add(chooseProjectPanel);
 
-        SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(buttonPanel, BUTTONPANEL_NUMBER_OF_ROW, BUTTONPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
         panel.add(buttonPanel);
 
@@ -185,10 +195,13 @@ public class MainFrameAdmin extends AbstractMainFrame {
 
         projectTable = new JTable(tableContent, columnsName);
         middlePanel.add(projectTable);
+        
+        SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
 
-        panel.add(middlePanel);
+        scrollpane = new JScrollPane(middlePanel);
+        panel.add(scrollpane);
 
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW,PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
 
         panelCenter.add(panel, BorderLayout.CENTER);
 
