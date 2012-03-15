@@ -173,7 +173,7 @@ public abstract class AbstractMainFrame extends JFrame {
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         this.tableModel.setDataVector(tableContent, columnsName);
         this.tableModel.fireTableStructureChanged();
-        this.projectTable.invalidate();
+        this.projectTable.revalidate();
         this.scrollpane.repaint();
     }
 }
