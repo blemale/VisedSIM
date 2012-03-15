@@ -12,10 +12,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -141,13 +138,24 @@ public abstract class AbstractChooseCriteria extends JDialog {
                 + "Criteria";
         ResourceBundle bundle = ResourceBundle.getBundle(path,
                 Locale.getDefault());
+        List<String> criteriaNames = new LinkedList<String>();
         for (String criteria : criteriaMap.keySet()) {
+            criteriaNames.add(bundle.getString(criteria));
             checkboxMap.put(criteria, new JCheckBox(bundle.getString(criteria)));
             checkboxMap.get(criteria).setBackground(Color.white);
             if (criteriaMap.containsKey(criteria) && criteriaMap.get(criteria)) {
                 checkboxMap.get(criteria).setSelected(true);
             }
-            middlePanel.add(checkboxMap.get(criteria));
+//            middlePanel.add(checkboxMap.get(criteria));
+        }
+        Collections.sort(criteriaNames);
+        for(String names : criteriaNames){
+            for(String criteria : checkboxMap.keySet()){
+                if(bundle.getString(criteria).equals(names)){
+                    middlePanel.add(checkboxMap.get(criteria));
+                }
+            }
+            
         }
         int numberRows = (int) ((double) criteriaMap.keySet().size()
                 / NUMBER_OF_COLUMNS);

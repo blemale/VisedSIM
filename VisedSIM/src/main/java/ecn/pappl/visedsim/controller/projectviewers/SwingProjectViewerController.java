@@ -9,10 +9,7 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.utilities.ProjectTools;
 import java.io.File;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  *
@@ -93,16 +90,28 @@ public final class SwingProjectViewerController implements SwingProjectViewer {
             int j = 2;
             int i = ProjectTools.getNumberOfCriteriaLines(project,
                     criteriaPreselection);
+            int index = 0;
             Object[][] criteriaArray = new Object[i][j];
-            ProjectTools.fillArrayWithSelectedCriteria(project,
-                    criteriaPreselection, criteriaArray);
+            Map<String, List<String>> selectedCriteria = ProjectTools.
+                    getSelectedCriteria(project, criteriaPreselection);
             String path = Configuration.I18N_FOLDER + File.separator
                     + "Criteria";
             ResourceBundle bundle = ResourceBundle.getBundle(path,
                     Locale.getDefault());
-            for (int index = 0; index < criteriaArray.length; index++) {
-                criteriaArray[index][0] =
-                        bundle.getString((String) criteriaArray[index][0]);
+            Map<String, String> criteriaNamesMap = new HashMap<String, String>();
+            for (String criteria : selectedCriteria.keySet()) {
+                criteriaNamesMap.put(bundle.getString(criteria), criteria);
+            }
+            List<String> criteriaNames = new ArrayList<String>(criteriaNamesMap.
+                    keySet());
+            Collections.sort(criteriaNames);
+            for (String criteriaName : criteriaNames) {
+                String criteria = criteriaNamesMap.get(criteriaName);
+                for (String value : selectedCriteria.get(criteria)) {
+                    criteriaArray[index][0] = criteriaName;
+                    criteriaArray[index][1] = value;
+                    index++;
+                }
             }
             return criteriaArray;
         }
