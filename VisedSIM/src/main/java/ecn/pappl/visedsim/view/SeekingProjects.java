@@ -16,96 +16,111 @@ import javax.swing.*;
 
 /**
  * Let the user seeking a project
- * 
+ *
  * @author Denis
  */
 public class SeekingProjects extends JDialog {
-    
+
     private ButtonGroup buttonGroup;
     private Map<String, JRadioButton> buttonMap;
     private JLabel titleLabel;
     private JButton validateButton;
     private List<String> projectsList;
     private AbstractMainFrame mainFrame;
-    
+
     /**
+     * Let the user to choose a project which begin with the acronyme parameter
      * 
+     * @param mainFrame
      * @param acronyme 
      */
-    public SeekingProjects(AbstractMainFrame mainFrame, String acronyme){
+    public SeekingProjects(AbstractMainFrame mainFrame, String acronyme) {
         super();
         this.mainFrame = mainFrame;
         ProjectListController plc = ProjectListController.getInstance();
         projectsList = plc.getProjectsAcronymsByFirstLetters(acronyme);
         build();
     }
-    
-    
-    private void build(){
-         setTitle(Labels.SEEKING_PROJECTS_TITLE);
-	setLocationRelativeTo(null);
-	setResizable(false);
-	setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+    /**
+     * Build the JDialog
+     */
+    private void build() {
+        setTitle(Labels.SEEKING_PROJECTS_TITLE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setAlwaysOnTop(true);
         setPreferredSize(new Dimension(150, 300));
-	setContentPane(buildContentPane());
-	pack();
+        setContentPane(buildContentPane());
+        pack();
     }
-    
-    private JPanel buildContentPane(){
+
+    /**
+     * Build the panel
+     *
+     * @return the panel
+     */
+    private JPanel buildContentPane() {
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
-	panelCenter.setBackground(Color.white);
-                
+        panelCenter.setBackground(Color.white);
+
         JPanel panel = new JPanel();
         panel.setLayout(new SpringLayout());
         panel.setBackground(Color.white);
-        
+
         titleLabel = new JLabel(Labels.SEEKING_PROJECTS_TITLE);
         panel.add(titleLabel);
-        
+
         buttonMap = new HashMap<String, JRadioButton>();
         buttonGroup = new ButtonGroup();
         JPanel panelButton = new JPanel(new SpringLayout());
         panelButton.setBackground(Color.white);
-        
-        for(String project : projectsList){
+
+        for (String project : projectsList) {
             buttonMap.put(project, new JRadioButton(project));
             buttonGroup.add(buttonMap.get(project));
             panelButton.add(buttonMap.get(project));
         }
-        
+
         SpringUtilities.makeCompactGrid(panelButton, projectsList.size(), 1, 5, 5, 5, 5);
-        
+
         panel.add(new JScrollPane(panelButton));
-        
+
         validateButton = new JButton(Labels.SEEKING_PROJECTS_BUTTON);
         validateButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Launch the selected project
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validateButtonActionPerformed();
             }
         });
         panel.add(validateButton);
-        
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5,5,10,10);
-        
+
+        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 10, 10);
+
         panelCenter.add(panel);
-        
+
         return panelCenter;
     }
-    
-     private void validateButtonActionPerformed() {
+
+    /**
+     * Launch the selected project
+     */
+    private void validateButtonActionPerformed() {
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
         ProjectListController plc = ProjectListController.getInstance();
         boolean test = false;
-        for(String project : buttonMap.keySet()){
-            if(buttonMap.get(project).isSelected()){
+        for (String project : buttonMap.keySet()) {
+            if (buttonMap.get(project).isSelected()) {
                 spvc.loadProject(plc.getProjectByAcronym(project));
                 test = true;
             }
         }
-        if(test){
+        if (test) {
             this.mainFrame.updateProjectView();
             this.dispose();
         } else {

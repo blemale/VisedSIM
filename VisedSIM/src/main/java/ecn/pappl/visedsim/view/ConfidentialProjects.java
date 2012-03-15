@@ -85,8 +85,11 @@ public final class ConfidentialProjects extends JDialog{
         
         cancelButton = new JButton(Labels.CONFIDENTIAL_PROJECTS_CANCEL);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Close the JDialog without saving
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                cancelButtonActionPerformed();
             }
         });
         bottomPanel.add(cancelButton);
@@ -100,7 +103,12 @@ public final class ConfidentialProjects extends JDialog{
         return panelCenter;
     }
     
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt){
+    /**
+     * Dispose the JDialog without saving
+     * 
+     * @param evt 
+     */
+    private void cancelButtonActionPerformed(){
          this.dispose();
      }
 }

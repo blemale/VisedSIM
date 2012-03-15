@@ -67,6 +67,9 @@ public class MainFrameUser extends AbstractMainFrame {
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
         newListProjectItem.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Launch the FileLoader to let the user choosing a new XML file
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newListProjectItemActionButton(evt);
             }
@@ -80,6 +83,10 @@ public class MainFrameUser extends AbstractMainFrame {
         preselectionSavedItem = new JMenuItem(Labels.MENU_CRITERIA_SAVE);
         preselectionSavedItem.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Launch the PreselectionSaving to let the user saving the current
+             * preselection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 preselectionSavedItemActionEvent(evt);
             }
@@ -89,6 +96,10 @@ public class MainFrameUser extends AbstractMainFrame {
         preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
         preselectionManagementItem.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Launch the CriteriaManagement to let the user delete a
+             * preselection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 preselectionManagementItemActionButton(evt);
             }
@@ -98,6 +109,9 @@ public class MainFrameUser extends AbstractMainFrame {
         chooseCriteriaItem = new JMenuItem(Labels.MENU_CRITERIA_CHOOSE);
         chooseCriteriaItem.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Open the ChooseCriteria to choose the criteria selection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseCriteriaActionEvent(evt);
             }
@@ -122,6 +136,9 @@ public class MainFrameUser extends AbstractMainFrame {
                 Labels.MAIN_FRAME_CHOOSE_CRITERIA_BUTTON);
         chooseCriteriaButton.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Open the ChooseCriteria to choose the criteria selection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseCriteriaActionEvent(evt);
             }
@@ -141,6 +158,9 @@ public class MainFrameUser extends AbstractMainFrame {
         validateButton = new JButton(Labels.MAIN_FRAME_VALIDATE_PROJECT_BUTTON);
         validateButton.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Launch the selected project
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validateButtonActionEvent(evt);
             }
@@ -159,6 +179,10 @@ public class MainFrameUser extends AbstractMainFrame {
         searchButton = new JButton(Labels.MAIN_FRAME_SEARCH_PROJECT_BUTTON);
         searchButton.addActionListener(new java.awt.event.ActionListener() {
 
+            /**
+             * Launch the given project or the SeekingProject if there are
+             * several projects with the same first letters in their acronyme
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionEvent(evt);
             }
@@ -194,6 +218,12 @@ public class MainFrameUser extends AbstractMainFrame {
         return panelCenter;
     }
 
+    /**
+     * Launch the given project or the SeekingProject if there are several
+     * projects with the same first letters in their acronyme
+     *
+     * @param evt
+     */
     protected void searchButtonActionEvent(java.awt.event.ActionEvent evt) {
         ProjectListController plc = ProjectListController.getInstance();
         String fileName = searchProjectField.getText();

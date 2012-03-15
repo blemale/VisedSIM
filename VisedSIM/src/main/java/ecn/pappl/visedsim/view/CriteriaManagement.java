@@ -85,6 +85,9 @@ public class CriteriaManagement extends JDialog {
         
         backButton = new JButton(Labels.CRITERIA_MANAGEMENT_BACK);
         backButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Close the JDialog without saving
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionEvent();
             }
@@ -93,6 +96,9 @@ public class CriteriaManagement extends JDialog {
         
         deleteButton = new JButton(Labels.CRITERIA_MANAGEMENT_DELETE);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Delete the selected preselection and close the JDialog
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionEvent();
             }

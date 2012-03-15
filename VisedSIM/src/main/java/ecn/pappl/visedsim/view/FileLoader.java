@@ -12,7 +12,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
+ * First frame of the program
+ * 
  * @author Denis
  */
 public final class FileLoader extends JFrame {
@@ -32,7 +33,9 @@ public final class FileLoader extends JFrame {
         build();
     }
 
-    //@Override
+    /**
+     * Build the frame
+     */
     protected void build() {
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
@@ -50,7 +53,11 @@ public final class FileLoader extends JFrame {
         }
     }
 
-    //@Override
+    /**
+     * Build the panel
+     * 
+     * @return 
+     */
     protected JPanel buildContentPane() {
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -97,7 +104,9 @@ public final class FileLoader extends JFrame {
 
         loadNewListButton = new JButton(Labels.LOAD_NEW_LIST_BUTTON);
         loadNewListButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Load the XML or Excel file
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadNewListButtonActionPerformed();
             }
@@ -110,6 +119,9 @@ public final class FileLoader extends JFrame {
         return panelCenter;
     }
 
+    /**
+     * Load the XML or Excel file
+     */
     private void loadNewListButtonActionPerformed() {
         if (!Configuration.IS_ADMIN) {
             try {

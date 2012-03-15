@@ -84,7 +84,9 @@ public final class ChooseCriteria extends JDialog {
 
         selectAllButton = new JButton(Labels.SELECT_ALL_BUTTON);
         selectAllButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Select all the criteria
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectAllButtonActionPerformed();
             }
@@ -93,7 +95,9 @@ public final class ChooseCriteria extends JDialog {
 
         resetButton = new JButton(Labels.RESET_BUTTON);
         resetButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Reset all selection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetButtonActionPerformed();
             }
@@ -108,7 +112,9 @@ public final class ChooseCriteria extends JDialog {
         preselectionValidateButton = new JButton(
                 Labels.PRESELECTION_VALIDATION_BUTTON);
         preselectionValidateButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Launch the preselection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 preselectionValidateButtonActionPerformed();
             }
@@ -158,7 +164,9 @@ public final class ChooseCriteria extends JDialog {
 
         validationButton = new JButton(Labels.VALIDATION_BUTTON);
         validationButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Valiate the preselection and close the JDialog
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validateButtonActionPerformed();
             }
@@ -167,7 +175,9 @@ public final class ChooseCriteria extends JDialog {
 
         cancelButton = new JButton(Labels.CANCEL_BUTTON);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
-
+            /**
+             * Close the JDialog without saving
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed();
             }

@@ -13,7 +13,8 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
- *
+ * Let the user to save the current criteria preselection
+ * 
  * @author Denis
  */
 public class PreselectionSaving extends JDialog {
@@ -23,11 +24,17 @@ public class PreselectionSaving extends JDialog {
     private JTextField preselectionNameField;
     private static final int COLUMN_LENGHT = 10;
     
+    /**
+     * The constructor of the JDialog
+     */
     public PreselectionSaving(){
         super();
         build();
     }
     
+    /**
+     * Build the JDialog
+     */
     private void build(){
         setTitle(Labels.PRESELECTION_SAVING_TITLE);
 	setLocationRelativeTo(null);
@@ -38,6 +45,11 @@ public class PreselectionSaving extends JDialog {
 	pack();
     }
     
+    /**
+     * Build the panel
+     * 
+     * @return the panel 
+     */
     private JPanel buildContentPane(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -60,6 +72,9 @@ public class PreselectionSaving extends JDialog {
         
         saveButton = new JButton(Labels.PRESELECTION_SAVING_BUTTON);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Save the criteria preselection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed();
             }
@@ -75,6 +90,9 @@ public class PreselectionSaving extends JDialog {
         return panelCenter;
     }
     
+    /**
+     * Save the preselection with the name given by the user
+     */
     private void saveButtonActionPerformed(){
         CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
         try {
