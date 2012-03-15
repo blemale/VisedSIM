@@ -25,7 +25,7 @@ public abstract class AbstractMainFrame extends JFrame {
     protected DefaultTableModel tableModel;
     protected JScrollPane scrollpane;
     protected JPanel middlePanel;
-    protected static final int MIN_HEIGHT = 300;
+    private static final int MIN_HEIGHT = 300;
     protected static final int MIN_WIDTH = 580;
     protected static final int MIN_BAR_HEIGHT = 30;
 

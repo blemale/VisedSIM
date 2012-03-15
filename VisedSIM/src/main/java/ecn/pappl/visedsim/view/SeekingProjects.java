@@ -33,6 +33,8 @@ public class SeekingProjects extends JDialog {
     private static final int PANEL_NUMBER_OF_ROW = 3;
     private static final int GRID_INITIAL_X = 5;
     private static final int GRID_INITIAL_Y = 5;
+    private static final int DIMENSION_WIDTH = 150;
+    private static final int DIMENSION_HEIGHT = 300;
 
     /**
      * Let the user to choose a project which begin with the acronyme parameter
@@ -58,7 +60,7 @@ public class SeekingProjects extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setAlwaysOnTop(true);
-        setPreferredSize(new Dimension(150, 300));
+        setPreferredSize(new Dimension(DIMENSION_WIDTH, DIMENSION_HEIGHT));
         setContentPane(buildContentPane());
         pack();
     }
