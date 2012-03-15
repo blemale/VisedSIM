@@ -13,7 +13,8 @@ import java.util.Map;
 import javax.swing.*;
 
 /**
- *
+ * Let the user to delete some criteria preselections
+ * 
  * @author Denis
  */
 public class CriteriaManagement extends JDialog {
@@ -22,24 +23,43 @@ public class CriteriaManagement extends JDialog {
     private JButton backButton, deleteButton;
     private JLabel titleLabel;
     private List<String> preselectionList;
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
     
-    public CriteriaManagement(List<String> preselectionList){
+    /**
+     * The constructor of the JDialog
+     * 
+     * @param preselectionList 
+     */
+    public CriteriaManagement(){
         super();
-        this.preselectionList = preselectionList;
+        CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
+        this.preselectionList = cpc.getLoadableCriteriaPreselectionsNames();
         build();
     }
     
+    /**
+     * Build the JDialog
+     */
     private void build(){
         setTitle(Labels.CRITERIA_MANAGEMENT_TITLE);
 	setLocationRelativeTo(null);
 	setResizable(false);
         setModal(true);
         setAlwaysOnTop(true);
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setContentPane(buildContentPane());
 	pack();
     }
     
+    /**
+     * Build the main panel
+     * 
+     * @return 
+     */
     private JPanel buildContentPane(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -62,37 +82,50 @@ public class CriteriaManagement extends JDialog {
             middlePanel.add(preselectionMap.get(preselection));
         }
         
-        SpringUtilities.makeCompactGrid(middlePanel, preselectionList.size(),1, 5, 5, 5, 5);
+        SpringUtilities.makeCompactGrid(middlePanel, preselectionList.size(),1, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
         
-        panel.add(panelCenter, BorderLayout.CENTER);
+        panel.add(middlePanel);
         
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
         
         backButton = new JButton(Labels.CRITERIA_MANAGEMENT_BACK);
         backButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Close the JDialog without saving
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionEvent(evt);
+                backActionEvent();
             }
         });
-        buttonPanel.setBackground(Color.white);
+        buttonPanel.add(backButton);
         
         deleteButton = new JButton(Labels.CRITERIA_MANAGEMENT_DELETE);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Delete the selected preselection and close the JDialog
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionEvent(evt);
+                deleteActionEvent();
             }
         });
-        buttonPanel.setBackground(Color.white);
+        buttonPanel.add(deleteButton);
         
-        SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
         
         panel.add(buttonPanel);
+        
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
+        
+        panelCenter.add(panel);
         
         return panelCenter;
     }
     
-    private void deleteActionEvent(java.awt.event.ActionEvent evt){
+    /**
+     * Delete the selected checkboxes
+     */
+    private void deleteActionEvent(){
         int rs;
         rs = JOptionPane.showConfirmDialog(this, Labels.CRITERIA_MANAGEMENT_DIALOG, null, JOptionPane.YES_NO_OPTION);
         if(rs == JOptionPane.YES_OPTION){
@@ -102,10 +135,14 @@ public class CriteriaManagement extends JDialog {
                     cpc.deleteCriteriaPreselection(preselection);
                 }
             }
+            this.dispose();
         }
     }
     
-    private void backActionEvent(java.awt.event.ActionEvent evt){
+    /**
+     * Close the JDialog without saving
+     */
+    private void backActionEvent(){
         this.dispose();
     }
 }

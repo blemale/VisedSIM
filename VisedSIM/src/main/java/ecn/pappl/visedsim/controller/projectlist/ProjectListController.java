@@ -15,7 +15,6 @@ import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,10 +26,10 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * <p/>
  * @author bastien
  */
-public class ProjectListController implements ProjectListLoader,
+public final class ProjectListController implements ProjectListLoader,
         ProjectListSelector, ProjectListExcelLoader, ProjectListSaver {
 
-    private final static String ACRONYM = "acronym";
+    private static final String ACRONYM = "acronym";
     /**
      * The {@link ProjectList} to control.
      */
@@ -155,8 +154,7 @@ public class ProjectListController implements ProjectListLoader,
             for (Project project : this.projectList.getProjectList()) {
                 Map<String, List<String>> criteriaMap = project.getCriteriaMap();
                 if (criteriaMap.containsKey(ACRONYM)
-                        && (conflicts.get(criteriaMap.get(ACRONYM).get(0))
-                        == true)) {
+                        && (conflicts.get(criteriaMap.get(ACRONYM).get(0)))) {
                     Project buffer = ProjectTools.applyCriteriaPreselection(
                             project, conflictCriteria);
                     newProjects.add(buffer);

@@ -18,14 +18,14 @@ import java.util.ResourceBundle;
  *
  * @author bastien
  */
-public class SwingProjectViewerController implements SwingProjectViewer {
+public final class SwingProjectViewerController implements SwingProjectViewer {
 
     private static final String TITLE = "title";
     private static final String ACRONYM = "acronym";
     /**
      * The unique instance of {@link SwingProjectViewerController}.
      */
-    private volatile static SwingProjectViewerController uniqueInstance = null;
+    private static volatile SwingProjectViewerController uniqueInstance = null;
     /**
      * The current {@link Project}.
      */

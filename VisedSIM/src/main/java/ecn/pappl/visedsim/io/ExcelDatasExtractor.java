@@ -74,7 +74,6 @@ public final class ExcelDatasExtractor {
                     cellToString = FormulaError.forInt(errorValue).getString();
                     break;
                 default:
-                    System.err.println(String.format("Unexpected Cell Type [%d] skipped.", cellType));
                     break;
             }
         }

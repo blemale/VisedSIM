@@ -21,7 +21,13 @@ import org.jdom.Element;
  *
  * @author bastien
  */
-public class XMLConverter {
+public final class XMLConverter {
+    
+    /**
+     * Forbidden constructor
+     */
+    private XMLConverter(){
+    }
 
     public static Document convertProjectToXML(Project project) {
         Element xmlRoot = new Element("Project");

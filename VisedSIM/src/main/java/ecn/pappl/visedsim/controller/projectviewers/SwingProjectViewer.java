@@ -5,7 +5,6 @@
 package ecn.pappl.visedsim.controller.projectviewers;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
-import java.lang.reflect.Array;
 
 /**
  * Interface representing a {@link Project} viewer for Swing.

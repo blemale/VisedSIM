@@ -8,14 +8,13 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
- *
+ * Let the user to save the current criteria preselection
+ * 
  * @author Denis
  */
 public class PreselectionSaving extends JDialog {
@@ -23,13 +22,25 @@ public class PreselectionSaving extends JDialog {
     private JButton saveButton;
     private JLabel titleLabel;
     private JTextField preselectionNameField;
-    private final int columnLenght = 10;
+    private static final int COLUMN_LENGHT = 10;
     
+    //Integers used in the compact grid
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 2;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
+    
+    /**
+     * The constructor of the JDialog
+     */
     public PreselectionSaving(){
         super();
         build();
     }
     
+    /**
+     * Build the JDialog
+     */
     private void build(){
         setTitle(Labels.PRESELECTION_SAVING_TITLE);
 	setLocationRelativeTo(null);
@@ -40,6 +51,11 @@ public class PreselectionSaving extends JDialog {
 	pack();
     }
     
+    /**
+     * Build the panel
+     * 
+     * @return the panel 
+     */
     private JPanel buildContentPane(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -56,28 +72,34 @@ public class PreselectionSaving extends JDialog {
         namePanel.setBackground(Color.white);
         
         preselectionNameField = new JTextField();
-        preselectionNameField.setColumns(columnLenght);
+        preselectionNameField.setColumns(COLUMN_LENGHT);
         
         namePanel.add(preselectionNameField);
         
         saveButton = new JButton(Labels.PRESELECTION_SAVING_BUTTON);
         saveButton.addActionListener(new java.awt.event.ActionListener() {
+            /**
+             * Save the criteria preselection
+             */
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                saveButtonActionPerformed();
             }
         });
         namePanel.add(saveButton);
         
         panel.add(namePanel);
         
-        SpringUtilities.makeCompactGrid(panel, 2, 1, 5, 5, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 10, 10);
         
         panelCenter.add(panel, BorderLayout.CENTER);
         
         return panelCenter;
     }
     
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt){
+    /**
+     * Save the preselection with the name given by the user
+     */
+    private void saveButtonActionPerformed(){
         CriteriaPreselectionController cpc = CriteriaPreselectionController.getInstance();
         try {
             cpc.saveCriteriaPreselection(preselectionNameField.getText());

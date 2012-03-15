@@ -4,7 +4,6 @@
  */
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
-import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

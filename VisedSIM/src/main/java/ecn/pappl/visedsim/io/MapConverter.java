@@ -6,9 +6,6 @@ package ecn.pappl.visedsim.io;
 
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
-import ecn.pappl.visedsim.utilities.ReflectionTools;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

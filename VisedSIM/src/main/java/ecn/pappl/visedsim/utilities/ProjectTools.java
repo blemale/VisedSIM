@@ -6,18 +6,17 @@ package ecn.pappl.visedsim.utilities;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
  * @author bastien
  */
 public final class ProjectTools {
+    
+    private ProjectTools(){        
+    }
 
     public static Project applyCriteriaPreselection(Project project,
             CriteriaPreselection criteriaPreselection) {

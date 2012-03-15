@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author bastien
  */
-public class CriteriaPreselectionController implements
+public final class CriteriaPreselectionController implements
         CriteriaPreselectionFactory, CriteriaPreselectionLoader,
         CriteriaPreselectionSaver {
 
@@ -30,7 +30,7 @@ public class CriteriaPreselectionController implements
     /**
      * Unique instace of {@link CriteriaPreselectionController}.
      */
-    private volatile static CriteriaPreselectionController instance = null;
+    private static volatile CriteriaPreselectionController instance = null;
 
     /**
      * Default constructor.
