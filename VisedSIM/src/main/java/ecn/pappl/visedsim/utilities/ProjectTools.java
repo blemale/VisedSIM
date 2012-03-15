@@ -6,6 +6,7 @@ package ecn.pappl.visedsim.utilities;
 
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,8 @@ import java.util.Map;
  * @author bastien
  */
 public final class ProjectTools {
-    
-    private ProjectTools(){        
+
+    private ProjectTools() {
     }
 
     public static Project applyCriteriaPreselection(Project project,
@@ -32,7 +33,7 @@ public final class ProjectTools {
             if (criteriaPreselectionMap.containsKey(criteria)
                     && criteriaPreselectionMap.get(criteria)) {
                 newCriteriaMap.put(criteria, criteriaMap.get(criteria));
-            } 
+            }
         }
         return newProject;
     }
@@ -54,25 +55,22 @@ public final class ProjectTools {
         return count;
     }
 
-    public static void fillArrayWithSelectedCriteria(Project project,
-            CriteriaPreselection cp, Object[][] array) {
+    public static Map<String, List<String>> getSelectedCriteria(Project project,
+            CriteriaPreselection cp) {
         int indexLine = 0;
-
         Map<String, List<String>> criteriaMap = project.getCriteriaMap();
-
         Map<String, Boolean> criteriaPreselectionMap = cp.getMap();
 
-        for (String criteria : criteriaMap.keySet()) {
+        Map<String, List<String>> selectedCriteriaMap =
+                new HashMap<String, List<String>>();
+
+        for (String criteria :
+                criteriaMap.keySet()) {
             if (criteriaPreselectionMap.containsKey(criteria)
                     && criteriaPreselectionMap.get(criteria)) {
-                List<String> criteriaValueList = criteriaMap.get(criteria);
-                for (String criteriaValue : criteriaValueList) {
-                    array[indexLine][0] = criteria;
-                    array[indexLine][1] = criteriaValue;
-                    indexLine++;
-                }
+                selectedCriteriaMap.put(criteria, criteriaMap.get(criteria));
             }
-
         }
+        return selectedCriteriaMap;
     }
 }
