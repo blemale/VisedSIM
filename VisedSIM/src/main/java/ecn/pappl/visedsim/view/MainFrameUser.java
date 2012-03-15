@@ -12,6 +12,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -213,6 +215,39 @@ public class MainFrameUser extends AbstractMainFrame {
         middlePanel.add(projectTitle);
 
         projectTable = new JTable(tableModel);
+
+        projectTable.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+
+                if (arg0.getClickCount() == 2) {
+                    int rowNumb = projectTable.rowAtPoint(arg0.getPoint());
+                    int colNumb = projectTable.columnAtPoint(arg0.getPoint());
+                    if (rowNumb != -1 && colNumb > 0) {
+                        String criteria = projectTable.getValueAt(rowNumb, 0).
+                                toString();
+                        String value = projectTable.getValueAt(rowNumb, colNumb).
+                                toString();
+                        JOptionPane.showMessageDialog(null, value, criteria,
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+
+            public void mousePressed(MouseEvent me) {
+            }
+
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+        
         middlePanel.add(projectTable);
 
         SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
