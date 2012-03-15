@@ -229,15 +229,15 @@ public class MainFrameUser extends AbstractMainFrame {
                                 toString();
                         String value = projectTable.getValueAt(rowNumb, colNumb).
                                 toString();
-                        JOptionPane.showMessageDialog(null, value, criteria,
-                                JOptionPane.INFORMATION_MESSAGE);
+                        SummaryPopup popup = new SummaryPopup(criteria, value);
+                        popup.setVisible(true);
                     }
                 }
             }
 
             public void mousePressed(MouseEvent me) {
             }
-
+            
             public void mouseReleased(MouseEvent me) {
             }
 
