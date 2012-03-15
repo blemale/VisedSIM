@@ -23,6 +23,7 @@ public final class Labels {
     
     //ChooseCriteria
     public static final String CHOOSE_CRITERIA_TITLE = "Choix des critères";
+    public static final String CHOOSE_CRITERIA_CONFLICT_LABEL = "Choix des critères pour les projets en conflits";
     public static final String SELECT_ALL_BUTTON = "Sélectionner tout";
     public static final String RESET_BUTTON = "Reset";
     public static final String PRESELECTION_VALIDATION_BUTTON = "Valider";

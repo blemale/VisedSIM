@@ -77,10 +77,19 @@ public class MainFrameAdmin extends AbstractMainFrame {
         printAllProjectItem = new JMenuItem(Labels.MENU_PROJECT_PRINT_ALL);
         projectMenu.add(printAllProjectItem);
 
-        generateXMLItem = new JMenuItem(Labels.MENU_PROJECT_GENERATE_XML);
-        projectMenu.add(generateXMLItem);
+        //generateXMLItem = new JMenuItem(Labels.MENU_PROJECT_GENERATE_XML);
+        //projectMenu.add(generateXMLItem);
 
         generateAllXMLItem = new JMenuItem(Labels.MENU_PROJECT_GENERATE_ALL_XML);
+        generateAllXMLButton.addActionListener(new java.awt.event.ActionListener() {
+
+            /**
+             * Open the ChooseCriteria to choose the criteria selection
+             */
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateAllXMLActionEvent();
+            }
+        });
         projectMenu.add(generateAllXMLItem);
 
         menuBar.add(projectMenu);
@@ -89,7 +98,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
 
         preselectionSavedItem = new JMenuItem(Labels.MENU_CRITERIA_SAVE);
         preselectionSavedItem.addActionListener(new java.awt.event.ActionListener() {
-
             /**
              * Launch the PreselectionSaving to let the user saving the current
              * preselection
@@ -102,7 +110,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
 
         preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
         preselectionManagementItem.addActionListener(new java.awt.event.ActionListener() {
-
             /**
              * Launch the CriteriaManagement to let the user delete a
              * preselection
@@ -115,7 +122,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
 
         chooseCriteriaItem = new JMenuItem(Labels.MENU_CRITERIA_CHOOSE);
         chooseCriteriaItem.addActionListener(new java.awt.event.ActionListener() {
-
             /**
              * Open the ChooseCriteria to choose the criteria selection
              */
@@ -152,6 +158,15 @@ public class MainFrameAdmin extends AbstractMainFrame {
         criteriaPanel.add(chooseCriteriaButton);
 
         generateAllXMLButton = new JButton(Labels.MAIN_FRAME_GENERATE_ALL_XML_BUTTON);
+        generateAllXMLButton.addActionListener(new java.awt.event.ActionListener() {
+
+            /**
+             * Open the ChooseCriteria to choose the criteria selection
+             */
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateAllXMLActionEvent();
+            }
+        });
         criteriaPanel.add(generateAllXMLButton);
 
         printAllButton = new JButton(Labels.MAIN_FRAME_PRINT_ALL_BUTTON);
@@ -206,5 +221,10 @@ public class MainFrameAdmin extends AbstractMainFrame {
         panelCenter.add(panel, BorderLayout.CENTER);
 
         return panelCenter;
+    }
+    
+    private void generateAllXMLActionEvent(){
+        ConfidentialProjects confidentialProjects = new ConfidentialProjects();
+        confidentialProjects.setVisible(true);
     }
 }

@@ -110,7 +110,7 @@ public abstract class AbstractMainFrame extends JFrame {
      * @param evt
      */
     protected void chooseCriteriaActionEvent(java.awt.event.ActionEvent evt) {
-        ChooseCriteria chooseCriteria = new ChooseCriteria(this);
+        AbstractChooseCriteria chooseCriteria = new AbstractChooseCriteria(this);
         chooseCriteria.setVisible(true);
     }
 
