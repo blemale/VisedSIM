@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -13,7 +14,8 @@ import java.util.Map;
 import javax.swing.*;
 
 /**
- *
+ * Let the administrator to define the projects in conflict
+ * 
  * @author Denis
  */
 public final class ConfidentialProjects extends JDialog{
@@ -30,12 +32,21 @@ public final class ConfidentialProjects extends JDialog{
     private static final int GRID_INITIAL_X = 5;
     private static final int GRID_INITIAL_Y = 5;
     
-    public ConfidentialProjects(List<String> projectsList){
+    /**
+     * Constructor of the JDialog
+     * 
+     * @param projectsList 
+     */
+    public ConfidentialProjects(){
         super();
-        this.projectsList = projectsList;
+        ProjectListController plc = ProjectListController.getInstance();
+        this.projectsList = plc.getLoadableProjectListsNames();
         build();
     }
     
+    /**
+     * Build the JDialog
+     */
     protected void build(){
         setTitle(Labels.CONFIDENTIAL_PROJECTS_TITLE);
         setLocationRelativeTo(null);
@@ -47,6 +58,9 @@ public final class ConfidentialProjects extends JDialog{
 	pack();
     }
     
+    /**
+     * Build the panel
+     */
     protected JPanel buildContentPane(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BorderLayout());
@@ -131,5 +145,6 @@ public final class ConfidentialProjects extends JDialog{
      */
     private void validateButtonActionPerformed(){
         //TODO : action when the admin validate
+        
     }
 }

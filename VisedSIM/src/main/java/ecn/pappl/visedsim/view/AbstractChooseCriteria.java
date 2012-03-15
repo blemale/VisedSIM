@@ -22,37 +22,34 @@ import javax.swing.*;
 
 /**
  * Let the user to change the visible criteria
- * 
+ *
  * @author Denis
  */
-public final class ChooseCriteria extends JDialog {
+public abstract class AbstractChooseCriteria extends JDialog {
 
     private JButton validationButton, selectAllButton, resetButton, preselectionValidateButton, cancelButton;
     private JComboBox preselectionComboBox;
+    private JLabel titleLabel;
     private Map<String, JCheckBox> checkboxMap;
     private static final int NUMBER_OF_COLUMNS = 3;
     private CriteriaPreselectionController criteriaPreselectionController =
             CriteriaPreselectionController.getInstance();
-    private AbstractMainFrame mainFrame;
     private Map<String, Boolean> criteriaMap;
-    
     //Integers used in the compact grid
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
-    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int PANEL_NUMBER_OF_ROW = 4;
     private static final int GRID_INITIAL_X = 5;
     private static final int GRID_INITIAL_Y = 5;
 
     /**
      * Constructor of the JDialog
-     * 
-     * @param mainFrame 
+     *
+     * @param mainFrame
      */
-    public ChooseCriteria(AbstractMainFrame mainFrame) {
+    public AbstractChooseCriteria() {
         super();
-        this.criteriaMap = this.criteriaPreselectionController.
-                getCriteriaPreselection().
+        this.criteriaMap = this.criteriaPreselectionController.getCriteriaPreselection().
                 getMap();
-        this.mainFrame = mainFrame;
         build();
     }
 
@@ -90,6 +87,7 @@ public final class ChooseCriteria extends JDialog {
 
         selectAllButton = new JButton(Labels.SELECT_ALL_BUTTON);
         selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Select all the criteria
              */
@@ -101,6 +99,7 @@ public final class ChooseCriteria extends JDialog {
 
         resetButton = new JButton(Labels.RESET_BUTTON);
         resetButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Reset all selection
              */
@@ -110,14 +109,14 @@ public final class ChooseCriteria extends JDialog {
         });
         topPanel.add(resetButton);
 
-        Object[] preselectionArray = criteriaPreselectionController.
-                getLoadableCriteriaPreselectionsNames().toArray();
+        Object[] preselectionArray = criteriaPreselectionController.getLoadableCriteriaPreselectionsNames().toArray();
         preselectionComboBox = new JComboBox(preselectionArray);
         topPanel.add(preselectionComboBox);
 
         preselectionValidateButton = new JButton(
                 Labels.PRESELECTION_VALIDATION_BUTTON);
         preselectionValidateButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Launch the preselection
              */
@@ -127,6 +126,10 @@ public final class ChooseCriteria extends JDialog {
         });
         topPanel.add(preselectionValidateButton);
         panel.add(topPanel);
+
+        //2nd line with a label
+        titleLabel = new JLabel(Labels.CHOOSE_CRITERIA_CONFLICT_LABEL);
+        panel.add(titleLabel);
 
         //Middle panel with the checkbox
         JPanel middlePanel = new JPanel(new SpringLayout());
@@ -170,6 +173,7 @@ public final class ChooseCriteria extends JDialog {
 
         validationButton = new JButton(Labels.VALIDATION_BUTTON);
         validationButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Valiate the preselection and close the JDialog
              */
@@ -181,6 +185,7 @@ public final class ChooseCriteria extends JDialog {
 
         cancelButton = new JButton(Labels.CANCEL_BUTTON);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Close the JDialog without saving
              */
@@ -221,8 +226,7 @@ public final class ChooseCriteria extends JDialog {
      * Launch the preselection of criteria
      */
     private void preselectionValidateButtonActionPerformed() {
-        String preselectionName = (String) this.preselectionComboBox.
-                getSelectedItem();
+        String preselectionName = (String) this.preselectionComboBox.getSelectedItem();
         if (!preselectionName.isEmpty()) {
             try {
                 CriteriaPreselection loadedCriteriaPreselection =
@@ -232,17 +236,16 @@ public final class ChooseCriteria extends JDialog {
                         loadedCriteriaPreselection.getMap();
                 for (String criteria : checkboxMap.keySet()) {
                     if (loadedCriteriaMap.containsKey(criteria)) {
-                        checkboxMap.get(criteria).setSelected(loadedCriteriaMap.
-                                get(criteria));
+                        checkboxMap.get(criteria).setSelected(loadedCriteriaMap.get(criteria));
                     }
                 }
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(ChooseCriteria.class.getName()).
+                Logger.getLogger(AbstractChooseCriteria.class.getName()).
                         log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this,
                         "La préselection est introuvable.");
             } catch (Exception ex) {
-                Logger.getLogger(ChooseCriteria.class.getName()).
+                Logger.getLogger(AbstractChooseCriteria.class.getName()).
                         log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this,
                         "Une erreur est survenue lors du chargement de la préselection.");
@@ -261,7 +264,7 @@ public final class ChooseCriteria extends JDialog {
     /**
      * Validate the new criteria selection
      */
-    private void validateButtonActionPerformed() {
+    protected void validateButtonActionPerformed() {
         for (String criteria : criteriaMap.keySet()) {
             if (checkboxMap.containsKey(criteria) && checkboxMap.get(criteria).
                     isSelected()) {
