@@ -47,7 +47,6 @@ public abstract class AbstractChooseCriteria extends JDialog {
         super();
         this.criteriaMap = this.criteriaPreselectionController.getCriteriaPreselection().
                 getMap();
-        build();
     }
 
     /**
@@ -149,13 +148,12 @@ public abstract class AbstractChooseCriteria extends JDialog {
 //            middlePanel.add(checkboxMap.get(criteria));
         }
         Collections.sort(criteriaNames);
-        for(String names : criteriaNames){
-            for(String criteria : checkboxMap.keySet()){
-                if(bundle.getString(criteria).equals(names)){
+        for (String names : criteriaNames) {
+            for (String criteria : checkboxMap.keySet()) {
+                if (bundle.getString(criteria).equals(names)) {
                     middlePanel.add(checkboxMap.get(criteria));
                 }
             }
-            
         }
         int numberRows = (int) ((double) criteriaMap.keySet().size()
                 / NUMBER_OF_COLUMNS);
@@ -281,7 +279,5 @@ public abstract class AbstractChooseCriteria extends JDialog {
                 criteriaMap.put(criteria, false);
             }
         }
-        this.mainFrame.updateProjectView();
-        this.dispose();
     }
 }

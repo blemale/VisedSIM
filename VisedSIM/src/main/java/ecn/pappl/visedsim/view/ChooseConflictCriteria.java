@@ -20,4 +20,10 @@ public final class ChooseConflictCriteria extends AbstractChooseCriteria {
         build();
     }
     
+    @Override
+    protected void validateButtonActionPerformed(){
+        super.validateButtonActionPerformed();
+        this.dispose();
+    }
+    
 }

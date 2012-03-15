@@ -23,4 +23,11 @@ public final class ChooseProjectCriteria extends AbstractChooseCriteria {
         build();
     }
     
+    @Override
+    protected void validateButtonActionPerformed(){
+        super.validateButtonActionPerformed();
+        this.mainFrame.updateProjectView();
+        this.dispose();
+    }
+    
 }
