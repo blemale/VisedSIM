@@ -45,11 +45,11 @@ public class LaunchApp {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LaunchApp.class.getName()).log(Level.SEVERE, null,
                     ex);
-            JOptionPane.showMessageDialog(null, "Une erreur s'est produite au lancement du programme.");
-        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Une erreur s'est produite au lancement du programme.\n"+ex.toString());
+        } catch (Exception ex) {
             Logger.getLogger(LaunchApp.class.getName()).log(Level.SEVERE, null,
                     ex);
-            JOptionPane.showMessageDialog(null, "Une erreur s'est produite au lancement du programme.");
+            JOptionPane.showMessageDialog(null, "Une erreur s'est produite au lancement du programme.\n"+ex.toString());
         }
     }
 }
