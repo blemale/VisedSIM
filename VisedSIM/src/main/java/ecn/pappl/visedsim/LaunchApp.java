@@ -6,6 +6,7 @@ package ecn.pappl.visedsim;
 
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.view.FileLoader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -37,8 +38,7 @@ public class LaunchApp {
          
         
         try {
-            CriteriaPreselectionController criteriaPreselectionController = CriteriaPreselectionController.getInstance();
-            criteriaPreselectionController.initCriteriaPreselection();
+            LaunchApp.initApp();
             
             FileLoader fileLoader = new FileLoader();
             fileLoader.setVisible(true);
@@ -51,5 +51,14 @@ public class LaunchApp {
                     ex);
             JOptionPane.showMessageDialog(null, "Une erreur s'est produite au lancement du programme.\n"+ex.toString());
         }
+    }
+    
+    public static void initApp() throws FileNotFoundException, IOException{
+            CriteriaPreselectionController.getInstance().initCriteriaPreselection();
+            File visedSIMFolder = new File(Configuration.VISEDSIM_FOLDER);
+            if(visedSIMFolder.exists() && visedSIMFolder.isDirectory()){
+                visedSIMFolder.mkdir();
+                File preselectionFolder = new File(Configuration.CRITERIA_PRESELECTION_FOLDER);
+            }       
     }
 }
