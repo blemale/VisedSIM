@@ -23,11 +23,4 @@ public interface ProjectListLoader {
      * @return a {@link ProjectList}.
      */
     ProjectList loadProjectList(String fileName) throws FileNotFoundException, IOException;
-    
-        /**
-     * Gets the names of the loadable {@link ProjectList}.
-     * 
-     * @return the {@link List} of loadable {@link ProjectList}s names.
-     */
-    List<String> getLoadableProjectListsNames();
 }
