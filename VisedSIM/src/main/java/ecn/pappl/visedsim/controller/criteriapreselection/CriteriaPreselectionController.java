@@ -68,8 +68,7 @@ public final class CriteriaPreselectionController implements
     }
 
     public void deleteCriteriaPreselection(final String fileName) {
-        String path = getClass().getClassLoader().getResource(
-                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         File directory = new File(path);
         File[] fileToDelete = directory.listFiles(new FilenameFilter() {
 
@@ -83,15 +82,13 @@ public final class CriteriaPreselectionController implements
     }
 
     public List<String> getLoadableCriteriaPreselectionsNames() {
-        String path = getClass().getClassLoader().getResource(
-                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         return FileTools.getFilesNamesInDirectory(path);
     }
 
     public CriteriaPreselection loadCriteriaPreselection(final String fileName) throws
             FileNotFoundException, IOException {
-        String path = getClass().getClassLoader().getResource(
-                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+        String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         File directory = new File(path);
         File[] file = directory.listFiles(new FilenameFilter() {
 
@@ -111,8 +108,7 @@ public final class CriteriaPreselectionController implements
     public void saveCriteriaPreselection(String fileName) throws
             FileNotFoundException, IOException {
         if (this.criteriaPreselection != null) {
-            String path = getClass().getClassLoader().getResource(
-                Configuration.CRITERIA_PRESELECTION_FOLDER).getPath();
+            String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
             String filePath = path+File.separator+fileName;
             XMLPersistanceTools.encodeToFile(this.criteriaPreselection, filePath);
         }
