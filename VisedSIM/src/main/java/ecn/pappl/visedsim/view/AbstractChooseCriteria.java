@@ -133,8 +133,7 @@ public abstract class AbstractChooseCriteria extends JDialog {
         //middlePanel.setLayout(grid);
 
         checkboxMap = new HashMap<String, JCheckBox>();
-        String path = Configuration.I18N_FOLDER + File.separator
-                + "Criteria";
+        String path = Configuration.I18N_FOLDER + "/Criteria";
         ResourceBundle bundle = ResourceBundle.getBundle(path,
                 Locale.getDefault());
         List<String> criteriaNames = new LinkedList<String>();

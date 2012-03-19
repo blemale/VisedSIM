@@ -94,8 +94,7 @@ public final class SwingProjectViewerController implements SwingProjectViewer {
             Object[][] criteriaArray = new Object[i][j];
             Map<String, List<String>> selectedCriteria = ProjectTools.
                     getSelectedCriteria(project, criteriaPreselection);
-            String path = Configuration.I18N_FOLDER + File.separator
-                    + "Criteria";
+            String path = Configuration.I18N_FOLDER + "/Criteria";
             ResourceBundle bundle = ResourceBundle.getBundle(path,
                     Locale.getDefault());
             Map<String, String> criteriaNamesMap = new HashMap<String, String>();
