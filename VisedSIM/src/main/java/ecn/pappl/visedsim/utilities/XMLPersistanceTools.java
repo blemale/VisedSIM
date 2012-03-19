@@ -14,19 +14,22 @@ import java.io.InputStream;
 
 /**
  * Class processing the XML (de)serialization of an {@link Object}.
- * 
+ * <p/>
  * @author bastien
  */
 public final class XMLPersistanceTools {
 
-    private XMLPersistanceTools() {}
-	
+    private XMLPersistanceTools() {
+    }
+
     /**
-     * XML Serialization of an object 
+     * XML Serialization of an object
+     * <p/>
      * @param object object to serialize
      * @param filename path of the file
      */
-    public static void encodeToFile(Object object, String fileName) throws FileNotFoundException, IOException {
+    public static void encodeToFile(Object object, String fileName) throws
+            FileNotFoundException, IOException {
         XMLEncoder encoder = new XMLEncoder(new FileOutputStream(fileName));
         try {
             encoder.writeObject(object);
@@ -35,12 +38,14 @@ public final class XMLPersistanceTools {
             encoder.close();
         }
     }
-    
+
     /**
-    * XML Deserialization of an object from a file 
-    * @param filename path of the file
-    */
-    public static Object decodeFromFile(String fileName) throws FileNotFoundException, IOException {
+     * XML Deserialization of an object from a file
+     * <p/>
+     * @param filename path of the file
+     */
+    public static Object decodeFromFile(String fileName) throws
+            FileNotFoundException, IOException {
         Object object = null;
         // ouverture de decodeur
         XMLDecoder decoder = new XMLDecoder(new FileInputStream(fileName));
@@ -53,12 +58,14 @@ public final class XMLPersistanceTools {
         }
         return object;
     }
-    
-        /**
-    * XML Deserialization of an object from a file 
-    * @param inputStream the input stream
-    */
-    public static Object decodeFromFile(InputStream inputStream) throws FileNotFoundException, IOException {
+
+    /**
+     * XML Deserialization of an object from a file
+     * <p/>
+     * @param inputStream the input stream
+     */
+    public static Object decodeFromFile(InputStream inputStream) throws
+            FileNotFoundException, IOException {
         Object object = null;
         // ouverture de decodeur
         XMLDecoder decoder = new XMLDecoder(inputStream);
@@ -71,5 +78,4 @@ public final class XMLPersistanceTools {
         }
         return object;
     }
-
 }

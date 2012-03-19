@@ -50,11 +50,20 @@ public final class SwingProjectViewerController implements SwingProjectViewer {
         return SwingProjectViewerController.uniqueInstance;
     }
 
+    /**
+     * Load a {@link Project} in the viewer.
+     * <p/>
+     * @param project the {@link Project} to load.
+     * @return the current {@link Project} in the viewer.
+     */
     public Project loadProject(Project project) {
         this.project = project;
         return this.project;
     }
 
+    /**
+     * @inheritDoc
+     */
     public String getTitle() {
         if (this.project == null) {
             return "";
@@ -69,6 +78,9 @@ public final class SwingProjectViewerController implements SwingProjectViewer {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public String getAcronym() {
         if (this.project == null) {
             return "";
@@ -83,6 +95,9 @@ public final class SwingProjectViewerController implements SwingProjectViewer {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public Object[][] getCriteria(CriteriaPreselection criteriaPreselection) {
         if (this.project == null) {
             return new Object[0][0];

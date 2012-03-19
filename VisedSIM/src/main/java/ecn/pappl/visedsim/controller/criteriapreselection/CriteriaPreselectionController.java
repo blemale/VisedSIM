@@ -18,7 +18,8 @@ import java.util.List;
  */
 public final class CriteriaPreselectionController implements
         CriteriaPreselectionFactory, CriteriaPreselectionLoader,
-        CriteriaPreselectionSaver {
+        CriteriaPreselectionSaver, CriteriaPreselectionErasor,
+        CriteriaPreselectionInitializer {
 
     /**
      * Field representing the current {@link CriteriaPreselection}
@@ -51,6 +52,9 @@ public final class CriteriaPreselectionController implements
         return CriteriaPreselectionController.instance;
     }
 
+    /**
+     * @inheritDoc
+     */
     public CriteriaPreselection initCriteriaPreselection() throws
             FileNotFoundException, IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(
@@ -60,6 +64,9 @@ public final class CriteriaPreselectionController implements
         return this.criteriaPreselection;
     }
 
+    /**
+     * @inheritDoc
+     */
     public CriteriaPreselection createCriteriaPreselection() throws
             FileNotFoundException, IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(
@@ -67,6 +74,9 @@ public final class CriteriaPreselectionController implements
         return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(is);
     }
 
+    /**
+     * @inheritDoc
+     */
     public void deleteCriteriaPreselection(final String fileName) {
         String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         File directory = new File(path);
@@ -81,12 +91,19 @@ public final class CriteriaPreselectionController implements
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public List<String> getLoadableCriteriaPreselectionsNames() {
         String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         return FileTools.getFilesNamesInDirectory(path);
     }
 
-    public CriteriaPreselection loadCriteriaPreselection(final String fileName) throws
+    /**
+     * @inheritDoc
+     */
+    public CriteriaPreselection loadCriteriaPreselection(final String fileName)
+            throws
             FileNotFoundException, IOException {
         String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
         File directory = new File(path);
@@ -96,28 +113,43 @@ public final class CriteriaPreselectionController implements
                 return string.equals(fileName);
             }
         });
-        CriteriaPreselection loadedCriteriaPreselection = new CriteriaPreselection();
+        CriteriaPreselection loadedCriteriaPreselection =
+                new CriteriaPreselection();
         if (file.length == 1) {
-            loadedCriteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
-                    decodeFromFile(file[0].getPath());
+            loadedCriteriaPreselection =
+                    (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(file[0].
+                    getPath());
         }
 
         return loadedCriteriaPreselection;
     }
 
+    /**
+     * @inheritDoc
+     */
     public void saveCriteriaPreselection(String fileName) throws
             FileNotFoundException, IOException {
         if (this.criteriaPreselection != null) {
             String path = Configuration.CRITERIA_PRESELECTION_FOLDER;
-            String filePath = path+File.separator+fileName;
+            String filePath = path + File.separator + fileName;
             XMLPersistanceTools.encodeToFile(this.criteriaPreselection, filePath);
         }
     }
 
+    /**
+     * Get the current {@link CriteriaPreselection}.
+     * <p/>
+     * @return the {@link CriteriaPreselection}.
+     */
     public CriteriaPreselection getCriteriaPreselection() {
         return criteriaPreselection;
     }
 
+    /**
+     * Set the current {@link CriteriaPreselection}.
+     * <p/>
+     * @param criteriaPreselection the {@link CriteriaPreselection}.
+     */
     public void setCriteriaPreselection(
             CriteriaPreselection criteriaPreselection) {
         this.criteriaPreselection = criteriaPreselection;
