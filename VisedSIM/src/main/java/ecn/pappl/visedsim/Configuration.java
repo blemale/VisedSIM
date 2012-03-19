@@ -12,7 +12,7 @@ import java.io.File;
  */
 public final class Configuration {
 
-    public static final Boolean IS_ADMIN = false;
+    public static final Boolean IS_ADMIN = true;
     public static final String USER_HOME_FOLDER =
             System.getProperty("user.home");
     public static final String VISEDSIM_FOLDER = USER_HOME_FOLDER

@@ -5,6 +5,7 @@
 package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * The main frame of the program for the administrator
@@ -26,7 +28,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private JMenu projectMenu, criteriaMenu, helpMenu;
     private JMenuItem newListProjectItem, printProjectItem, printAllProjectItem, generateXMLItem, generateAllXMLItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, generateAllXMLButton, printAllButton, validateButton;
-    private String[] projectsArray;
     private JFileChooser fileChooser;
     
     //Integers used in the compact grids
@@ -34,7 +35,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private static final int PANEL_NUMBER_OF_ROW = 3;
     private static final int MIDDLEPANEL_NUMBER_OF_COLUMN = 1;
     private static final int MIDDLEPANEL_NUMBER_OF_ROW = 2;
-    private static final int BUTTONPANEL_NUMBER_OF_COLUMN = 3;
+    private static final int BUTTONPANEL_NUMBER_OF_COLUMN = 2;
     private static final int BUTTONPANEL_NUMBER_OF_ROW = 1;
     private static final int GRID_INITIAL_X = 5;
     private static final int GRID_INITIAL_Y = 5;
@@ -42,9 +43,20 @@ public class MainFrameAdmin extends AbstractMainFrame {
     /**
      * The constructor of the main frame
      */
-    public MainFrameAdmin(List<String> projectsList) {
+    public MainFrameAdmin() {
         super();
-        this.projectsArray = projectsList.toArray(new String[0]);
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
+        Object[][] tableContent =
+                spvc.getCriteria(CriteriaPreselectionController.getInstance().
+                getCriteriaPreselection());
+        Object[] columnsName = new Object[]{"Critère", "Valeur"};
+        tableModel = new DefaultTableModel(tableContent, columnsName) {
+
+            @Override
+            public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
+                return false;
+            }
+        };
         build();
     }
 
@@ -84,7 +96,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
         //projectMenu.add(generateXMLItem);
 
         generateAllXMLItem = new JMenuItem(Labels.MENU_PROJECT_GENERATE_ALL_XML);
-        generateAllXMLButton.addActionListener(new java.awt.event.ActionListener() {
+        generateAllXMLItem.addActionListener(new java.awt.event.ActionListener() {
 
             /**
              * Open the ChooseCriteria to choose the criteria selection
@@ -180,7 +192,9 @@ public class MainFrameAdmin extends AbstractMainFrame {
         JPanel chooseProjectPanel = new JPanel(new FlowLayout());
         chooseProjectPanel.setBackground(Color.white);
 
-        projectsComboBox = new JComboBox(projectsArray);
+        ProjectListController plc = ProjectListController.getInstance();
+        projectsComboBox = new JComboBox(plc.getProjectsAcronyms().toArray(
+                new String[0]));
         chooseProjectPanel.add(projectsComboBox);
 
         validateButton = new JButton(Labels.MAIN_FRAME_VALIDATE_PROJECT_BUTTON);
@@ -243,21 +257,4 @@ public class MainFrameAdmin extends AbstractMainFrame {
         confidentialProjects.setVisible(true);
     }
     
-    /**
-     * Action realized when the user has choosen a directory
-     * 
-     * @param e 
-     */
-    public String actionPerformed(ActionEvent e) {
-        
-        this.fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int returnVal = this.getFileChooser().showOpenDialog(this);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = this.fileChooser.getSelectedFile();
-            return file.getAbsolutePath();
-        } else {
-            return null;
-        }
-    }
 }

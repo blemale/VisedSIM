@@ -87,7 +87,6 @@ public class MainFrameUser extends AbstractMainFrame {
             }
         });
         projectMenu.add(newListProjectItem);
-
         menuBar.add(projectMenu);
 
         criteriaMenu = new JMenu(Labels.MENU_CRITERIA);
