@@ -18,7 +18,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 
 /**
- *
+ * 
  * @author bastien
  */
 public final class XMLConverter {

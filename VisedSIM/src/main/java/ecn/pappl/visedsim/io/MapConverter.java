@@ -26,10 +26,6 @@ public final class MapConverter {
      * @param map A given {@link Map} to convert.
      * @param columnsOrder The order of the column in the given {@link Map}.
      * @return A {@link Project}.
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
      */
     public static Project convertMapToProject(Map<Integer, String> map,
             Map<String, List<Integer>> columnsOrder) {
@@ -56,10 +52,6 @@ public final class MapConverter {
      * @param map A given {@link Map} to convert.
      * @param columnsOrder The order of the column in the given {@link Map}.
      * @return A {@link ProjectList}.
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
      */
     public static ProjectList convertMapToProjectList(
             Map<Integer, Map<Integer, String>> map,
