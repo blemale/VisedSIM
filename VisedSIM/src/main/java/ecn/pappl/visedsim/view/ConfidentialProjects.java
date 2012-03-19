@@ -189,6 +189,8 @@ public final class ConfidentialProjects extends JDialog {
             this.dispose();
         } else {
             //TODO
+            SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
+            saveFileOption.actionPerformed(null);
         }
     }
 }

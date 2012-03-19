@@ -4,10 +4,14 @@ package ecn.pappl.visedsim.view;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -53,11 +57,11 @@ public final class FileLoader extends JFrame {
 
         if (!Configuration.IS_ADMIN) {
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "XML File", "xml");
+                    "Fichiers XML", "xml");
             fileChooser.setFileFilter(filter);
         } else {
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "XML File", new String[]{"xls, xlsx"});
+                    "Fichiers Excel", new String[]{"xls", "xlsx"});
             fileChooser.setFileFilter(filter);
         }
     }
@@ -153,6 +157,20 @@ public final class FileLoader extends JFrame {
                         "Un problème est survenue au chargement du fichier.");
                 this.setVisible(true);
             } 
+        }
+        else {
+            try{
+                ProjectListController plc = ProjectListController.getInstance();
+            InputStream is = getClass().getClassLoader().getResourceAsStream(Configuration.COLUMNS_ORDER_FILE_PATH);
+            Map<String, List<Integer>> columsOrder = (Map<String, List<Integer>>)XMLPersistanceTools.decodeFromFile(is);
+            plc.loadExcelProjectList(filePathField.getText(), columsOrder, 1, 4);
+            MainFrameAdmin mainFrameAdmin = new MainFrameAdmin();
+            mainFrameAdmin.setVisible(true);
+            this.dispose();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+            
         }
     }
 

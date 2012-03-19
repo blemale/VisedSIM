@@ -15,7 +15,7 @@ public final class Configuration {
     /**
      * Is the admin or user application.
      */
-    public static final Boolean IS_ADMIN = false;
+    public static final Boolean IS_ADMIN = true;
     /**
      * Path of the user's home folder.
      */
