@@ -56,7 +56,7 @@ public class LaunchApp {
     public static void initApp() throws FileNotFoundException, IOException{
             CriteriaPreselectionController.getInstance().initCriteriaPreselection();
             File visedSIMFolder = new File(Configuration.VISEDSIM_FOLDER);
-            if(visedSIMFolder.exists() && visedSIMFolder.isDirectory()){
+            if(!(visedSIMFolder.exists() && visedSIMFolder.isDirectory())){
                 visedSIMFolder.mkdir();
                 File preselectionFolder = new File(Configuration.CRITERIA_PRESELECTION_FOLDER);
             }       
