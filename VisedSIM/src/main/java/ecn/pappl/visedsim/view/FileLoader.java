@@ -55,6 +55,10 @@ public final class FileLoader extends JFrame {
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "XML File", "xml");
             fileChooser.setFileFilter(filter);
+        } else {
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "XML File", new String[]{"xls, xlsx"});
+            fileChooser.setFileFilter(filter);
         }
     }
 
