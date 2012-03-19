@@ -59,6 +59,7 @@ public class LaunchApp {
             if(!(visedSIMFolder.exists() && visedSIMFolder.isDirectory())){
                 visedSIMFolder.mkdir();
                 File preselectionFolder = new File(Configuration.CRITERIA_PRESELECTION_FOLDER);
+                preselectionFolder.mkdir();
             }       
     }
 }
