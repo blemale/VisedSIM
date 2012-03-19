@@ -42,7 +42,7 @@ public final class ConfidentialProjects extends JDialog {
     public ConfidentialProjects() {
         super();
         ProjectListController plc = ProjectListController.getInstance();
-        this.projectsList = plc.getLoadableProjectListsNames();
+        this.projectsList = plc.getProjectsAcronyms();
         build();
     }
 

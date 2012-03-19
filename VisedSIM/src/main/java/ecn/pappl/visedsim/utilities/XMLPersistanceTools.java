@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Class processing the XML (de)serialization of an {@link Object}.
@@ -43,6 +44,24 @@ public final class XMLPersistanceTools {
         Object object = null;
         // ouverture de decodeur
         XMLDecoder decoder = new XMLDecoder(new FileInputStream(fileName));
+        try {
+            // deserialisation de l'objet
+            object = decoder.readObject();
+        } finally {
+            // fermeture du decodeur
+            decoder.close();
+        }
+        return object;
+    }
+    
+        /**
+    * XML Deserialization of an object from a file 
+    * @param inputStream the input stream
+    */
+    public static Object decodeFromFile(InputStream inputStream) throws FileNotFoundException, IOException {
+        Object object = null;
+        // ouverture de decodeur
+        XMLDecoder decoder = new XMLDecoder(inputStream);
         try {
             // deserialisation de l'objet
             object = decoder.readObject();
