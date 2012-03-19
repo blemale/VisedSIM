@@ -61,6 +61,9 @@ public final class ProjectListController implements ProjectListLoader,
         return ProjectListController.instance;
     }
 
+    /**
+     * @inheritDoc
+     */
     public ProjectList loadProjectList(String fileName) throws
             FileNotFoundException, IOException {
         this.projectList = (ProjectList) XMLPersistanceTools.decodeFromFile(
@@ -68,6 +71,9 @@ public final class ProjectListController implements ProjectListLoader,
         return this.projectList;
     }
 
+    /**
+     * @inheritDoc
+     */
     public Project getProjectByAcronym(String acronym) {
         if (this.projectList == null) {
             return null;
@@ -83,6 +89,9 @@ public final class ProjectListController implements ProjectListLoader,
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public List<String> getProjectsAcronyms() {
         if (this.projectList == null) {
             return new LinkedList<String>();
@@ -99,6 +108,9 @@ public final class ProjectListController implements ProjectListLoader,
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public List<String> getProjectsAcronymsByFirstLetters(String firstLetters) {
         if (this.projectList == null) {
             return new LinkedList<String>();
@@ -116,6 +128,9 @@ public final class ProjectListController implements ProjectListLoader,
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public ProjectList loadExcelProjectList(String fileName,
             Map<String, List<Integer>> columnsOrder,
             int firstCellRow, int firstCellColl)
@@ -133,6 +148,9 @@ public final class ProjectListController implements ProjectListLoader,
         return this.projectList;
     }
 
+    /**
+     * @inheritDoc
+     */
     public void saveProjectList(String fileName) throws FileNotFoundException,
             IOException {
         if (this.projectList != null) {
@@ -140,6 +158,9 @@ public final class ProjectListController implements ProjectListLoader,
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public void saveProjectListWithInterrestConflicts(String fileName,
             Map<String, Boolean> conflicts,
             CriteriaPreselection conflictCriteria) throws FileNotFoundException,
@@ -163,6 +184,11 @@ public final class ProjectListController implements ProjectListLoader,
 
     }
 
+    /**
+     * Get the first {@link Project} of the current {@link ProjectList}.
+     * 
+     * @return the first {@link Project}. 
+     */
     public Project getFirstProject() {
         if (this.projectList != null && this.projectList.getProjectList().size()
                 > 0) {
