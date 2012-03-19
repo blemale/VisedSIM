@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.List;
 import javax.swing.*;
 
@@ -25,6 +27,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
     private JMenuItem newListProjectItem, printProjectItem, printAllProjectItem, generateXMLItem, generateAllXMLItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
     private JButton chooseCriteriaButton, generateAllXMLButton, printAllButton, validateButton;
     private String[] projectsArray;
+    private JFileChooser fileChooser;
     
     //Integers used in the compact grids
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
@@ -223,8 +226,38 @@ public class MainFrameAdmin extends AbstractMainFrame {
         return panelCenter;
     }
     
+    /**
+     * Get the fileChooser
+     * 
+     * @return the fileChooser 
+     */
+    public JFileChooser getFileChooser(){
+        return fileChooser;
+    }
+    
+    /**
+     * Let the user select the projects with conflicts
+     */
     private void generateAllXMLActionEvent(){
         ConfidentialProjects confidentialProjects = new ConfidentialProjects();
         confidentialProjects.setVisible(true);
+    }
+    
+    /**
+     * Action realized when the user has choosen a directory
+     * 
+     * @param e 
+     */
+    public String actionPerformed(ActionEvent e) {
+        
+        this.fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = this.getFileChooser().showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = this.fileChooser.getSelectedFile();
+            return file.getAbsolutePath();
+        } else {
+            return null;
+        }
     }
 }
