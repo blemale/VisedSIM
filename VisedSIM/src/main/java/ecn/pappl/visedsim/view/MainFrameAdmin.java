@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.List;
 import javax.swing.*;
@@ -215,20 +217,50 @@ public class MainFrameAdmin extends AbstractMainFrame {
         panel.add(buttonPanel);
 
         //Representation of the project
-        middlePanel = new JPanel(new FlowLayout());
+        middlePanel = new JPanel(new BorderLayout());
 
         SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
 
         projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
-        middlePanel.add(projectTitle);
+        middlePanel.add(projectTitle, BorderLayout.PAGE_START);
 
-        Object[][] tableContent = spvc.getCriteria(CriteriaPreselectionController.getInstance().getCriteriaPreselection());
-        Object[] columnsName = new Object[]{"Critère", "Valeur"};
+        projectTable = new JTable(tableModel);
 
-        projectTable = new JTable(tableContent, columnsName);
-        middlePanel.add(projectTable);
+        projectTable.addMouseListener(new MouseListener() {
         
-        SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+
+                if (arg0.getClickCount() == 2) {
+                    int rowNumb = projectTable.rowAtPoint(arg0.getPoint());
+                    int colNumb = projectTable.columnAtPoint(arg0.getPoint());
+                    if (rowNumb != -1 && colNumb > 0) {
+                        String criteria = projectTable.getValueAt(rowNumb, 0).
+                                toString();
+                        String value = projectTable.getValueAt(rowNumb, colNumb).
+                                toString();
+                        SummaryPopup popup = new SummaryPopup(criteria, value);
+                        popup.setVisible(true);
+                    }
+                }
+            }
+
+            public void mousePressed(MouseEvent me) {
+            }
+            
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+        
+        middlePanel.add(projectTable, BorderLayout.CENTER);
+
+        //SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
 
         scrollpane = new JScrollPane(middlePanel);
         panel.add(scrollpane);
