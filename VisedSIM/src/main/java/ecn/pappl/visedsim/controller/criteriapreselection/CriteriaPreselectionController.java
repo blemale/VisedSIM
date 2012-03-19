@@ -8,10 +8,7 @@ import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.utilities.FileTools;
 import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -56,18 +53,18 @@ public final class CriteriaPreselectionController implements
 
     public CriteriaPreselection initCriteriaPreselection() throws
             FileNotFoundException, IOException {
-        String path = getClass().getClassLoader().getResource(
-                Configuration.INIT_CRITERIA_PRESELECTION_PATH).getPath();
+        InputStream is = getClass().getClassLoader().getResourceAsStream(
+                Configuration.INIT_CRITERIA_PRESELECTION_PATH);
         this.criteriaPreselection = (CriteriaPreselection) XMLPersistanceTools.
-                decodeFromFile(path);
+                decodeFromFile(is);
         return this.criteriaPreselection;
     }
 
     public CriteriaPreselection createCriteriaPreselection() throws
             FileNotFoundException, IOException {
-        String path = getClass().getClassLoader().getResource(
-                Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH).getPath();
-        return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(path);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(
+                Configuration.DEFAULT_CRITERIA_PRESELECTION_PATH);
+        return (CriteriaPreselection) XMLPersistanceTools.decodeFromFile(is);
     }
 
     public void deleteCriteriaPreselection(final String fileName) {
