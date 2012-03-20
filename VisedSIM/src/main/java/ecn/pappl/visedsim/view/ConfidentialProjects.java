@@ -184,12 +184,17 @@ public final class ConfidentialProjects extends JDialog {
             }
         }
         if (conflict) {
-            ChooseConflictCriteria ccc = new ChooseConflictCriteria();
+            ChooseConflictCriteria ccc = new ChooseConflictCriteria(this);
             ccc.setVisible(true);
         } else {
             //TODO
-            SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
-            saveFileOption.actionPerformed(null);
+            saveXML();
+            
         }
+    }
+    
+    public void saveXML(){
+        SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
+            saveFileOption.actionPerformed(null);
     }
 }

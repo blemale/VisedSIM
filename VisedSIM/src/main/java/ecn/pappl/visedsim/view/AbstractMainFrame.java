@@ -38,6 +38,7 @@ public abstract class AbstractMainFrame extends JFrame {
         setResizable(true);
         setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setMaximumSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+        setPreferredSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         pack();
