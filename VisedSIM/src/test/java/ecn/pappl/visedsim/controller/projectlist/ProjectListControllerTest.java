@@ -4,9 +4,15 @@
  */
 package ecn.pappl.visedsim.controller.projectlist;
 
+import ecn.pappl.visedsim.Configuration;
+import ecn.pappl.visedsim.LaunchApp;
+import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
+import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
@@ -16,20 +22,39 @@ import junit.framework.TestCase;
  * @author bastien
  */
 public class ProjectListControllerTest extends TestCase {
+
+    private static final String TEST_FILE_PATH = "testProjectList";
     private static final String ACRONYM = "acronym";
+    private static final String ACRONYM_VALUE = "MBP1";
+    private static final int NUMBER_OF_PROJECT = 2;
+    private static final int NUMBER_OF_MATCHING_PROJECT = 1;
+    private static final String TEST_EXCEL_FILE_PATH = "testData.xls";
+    private static final int FIRST_ROW = 3;
+    private static final int FIRST_COL = 0;
+    private static final int NUMBER_OF_PROJECT_IN_EXCEL = 2;
+    private static final String TEST_SAVE_FILE_PATH = "testProjectList";
+    private static final Map<String, Boolean> CONFLICT_MAP =
+            new HashMap<String, Boolean>();
+    private static final String ACRONYM1 = "MBP1";
+    private static final String ACRONYM2 = "MBP2";
 
     public ProjectListControllerTest(String testName) {
         super(testName);
+        CONFLICT_MAP.put(ACRONYM1, Boolean.TRUE);
+        CONFLICT_MAP.put(ACRONYM2, Boolean.FALSE);
     }
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        LaunchApp.initApp();
     }
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+        File testFile = new File(TEST_SAVE_FILE_PATH);
+        testFile.delete();
     }
 
     /**
@@ -48,7 +73,7 @@ public class ProjectListControllerTest extends TestCase {
         System.out.println("loadProjectList");
         String fileName = getClass().getClassLoader().
                 getResource(
-                "testProjectList").getPath();
+                TEST_FILE_PATH).getPath();
         ProjectListController instance = ProjectListController.getInstance();
         ProjectList result = instance.loadProjectList(fileName);
         assertNotNull(result);
@@ -59,15 +84,14 @@ public class ProjectListControllerTest extends TestCase {
      */
     public void testGetProjectByAcronym() throws Exception {
         System.out.println("getProjectByAcronym");
-        String acronym = "MBP1";
         ProjectListController instance = ProjectListController.getInstance();
         String fileName = getClass().getClassLoader().
                 getResource(
-                "testProjectList").getPath();
+                TEST_FILE_PATH).getPath();
         instance.loadProjectList(fileName);
-        Project result = instance.getProjectByAcronym(acronym);
+        Project result = instance.getProjectByAcronym(ACRONYM_VALUE);
         assertTrue(result.getCriteriaMap().containsKey(ACRONYM));
-        assertEquals("MBP1", result.getCriteriaMap().get(ACRONYM).get(0));
+        assertEquals(ACRONYM_VALUE, result.getCriteriaMap().get(ACRONYM).get(0));
     }
 
     /**
@@ -78,26 +102,25 @@ public class ProjectListControllerTest extends TestCase {
         ProjectListController instance = ProjectListController.getInstance();
         String fileName = getClass().getClassLoader().
                 getResource(
-                "testProjectList").getPath();
+                TEST_FILE_PATH).getPath();
         instance.loadProjectList(fileName);
         List result = instance.getProjectsAcronyms();
-        assertEquals(87, result.size());
+        assertEquals(NUMBER_OF_PROJECT, result.size());
     }
 
     /**
      * Test of getProjectsAcronymsByFirstLetters method, of class
      * ProjectListController.
      */
-    public void testGetProjectsAcronymsByFirstLetters() throws Exception{
+    public void testGetProjectsAcronymsByFirstLetters() throws Exception {
         System.out.println("getProjectsAcronymsByFirstLetters");
-        String firstLetters = "MBP1";
         ProjectListController instance = ProjectListController.getInstance();
         String fileName = getClass().getClassLoader().
                 getResource(
-                "testProjectList").getPath();
+                TEST_FILE_PATH).getPath();
         instance.loadProjectList(fileName);
-        List result = instance.getProjectsAcronymsByFirstLetters(firstLetters);
-        assertEquals(11, result.size());
+        List result = instance.getProjectsAcronymsByFirstLetters(ACRONYM_VALUE);
+        assertEquals(NUMBER_OF_MATCHING_PROJECT, result.size());
     }
 
     /**
@@ -105,30 +128,35 @@ public class ProjectListControllerTest extends TestCase {
      */
     public void testLoadExcelProjectList() throws Exception {
         System.out.println("loadExcelProjectList");
-        String fileName = "";
-        Map<String, List<Integer>> columnsOrder = null;
-        int firstCellRow = 0;
-        int firstCellColl = 0;
-        ProjectListController instance = null;
-        ProjectList expResult = null;
+        String fileName = getClass().getClassLoader().
+                getResource(
+                TEST_EXCEL_FILE_PATH).getPath();
+        String columnsOrderPath = getClass().getClassLoader().
+                getResource(Configuration.COLUMNS_ORDER_FILE_PATH).getPath();
+        Map<String, List<Integer>> columnsOrder =
+                (Map<String, List<Integer>>) XMLPersistanceTools.decodeFromFile(
+                columnsOrderPath);
+        int firstCellRow = FIRST_ROW;
+        int firstCellColl = FIRST_COL;
+        ProjectListController instance = ProjectListController.getInstance();
         ProjectList result =
                 instance.loadExcelProjectList(fileName, columnsOrder,
                 firstCellRow, firstCellColl);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result.getProjectList().size() == NUMBER_OF_PROJECT_IN_EXCEL);
     }
 
     /**
      * Test of saveProjectList method, of class ProjectListController.
      */
-    public void testSaveProjectList() throws Exception {
+    public void testLoadAndSaveProjectList() throws Exception {
         System.out.println("saveProjectList");
-        String fileName = "";
-        ProjectListController instance = null;
+        String fileName = TEST_SAVE_FILE_PATH;
+        ProjectListController instance = ProjectListController.getInstance();
+        String projectListPath = getClass().getClassLoader().
+                getResource(TEST_FILE_PATH).getPath();
+        instance.loadProjectList(projectListPath);
         instance.saveProjectList(fileName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(new File(TEST_SAVE_FILE_PATH).exists());
     }
 
     /**
@@ -137,13 +165,16 @@ public class ProjectListControllerTest extends TestCase {
      */
     public void testSaveProjectListWithInterrestConflicts() throws Exception {
         System.out.println("saveProjectListWithInterrestConflicts");
-        String fileName = "";
-        Map<String, Boolean> conflicts = null;
-        CriteriaPreselection conflictCriteria = null;
-        ProjectListController instance = null;
+        String fileName = TEST_SAVE_FILE_PATH;
+        ProjectListController instance = ProjectListController.getInstance();
+        String projectListPath = getClass().getClassLoader().
+                getResource(TEST_FILE_PATH).getPath();
+        instance.loadProjectList(projectListPath);
+        Map<String, Boolean> conflicts = CONFLICT_MAP;
+        CriteriaPreselection conflictCriteria = CriteriaPreselectionController.
+                getInstance().getCriteriaPreselection();
         instance.saveProjectListWithInterrestConflicts(fileName, conflicts,
                 conflictCriteria);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(new File(TEST_SAVE_FILE_PATH).exists());
     }
 }
