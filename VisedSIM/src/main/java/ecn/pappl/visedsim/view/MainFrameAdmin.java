@@ -222,10 +222,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
         projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
         middlePanel.add(projectTitle);
 
-        Object[][] tableContent = spvc.getCriteria(CriteriaPreselectionController.getInstance().getCriteriaPreselection());
-        Object[] columnsName = new Object[]{"Critère", "Valeur"};
-
-        projectTable = new JTable(tableContent, columnsName);
+        projectTable = new JTable(tableModel);
         middlePanel.add(projectTable);
         
         SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);

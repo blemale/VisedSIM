@@ -163,7 +163,7 @@ public final class FileLoader extends JFrame {
                 ProjectListController plc = ProjectListController.getInstance();
             InputStream is = getClass().getClassLoader().getResourceAsStream(Configuration.COLUMNS_ORDER_FILE_PATH);
             Map<String, List<Integer>> columsOrder = (Map<String, List<Integer>>)XMLPersistanceTools.decodeFromFile(is);
-            plc.loadExcelProjectList(filePathField.getText(), columsOrder, 1, 4);
+            plc.loadExcelProjectList(filePathField.getText(), columsOrder, 0, 3);
             MainFrameAdmin mainFrameAdmin = new MainFrameAdmin();
             mainFrameAdmin.setVisible(true);
             this.dispose();
