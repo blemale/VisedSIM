@@ -4,8 +4,6 @@
  */
 package ecn.pappl.visedsim.view;
 
-import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
-
 /**
  *
  * @author Denis
@@ -28,6 +26,7 @@ public final class ChooseConflictCriteria extends AbstractChooseCriteria {
     @Override
     protected void validateButtonActionPerformed(){
         super.validateButtonActionPerformed();
+        this.setVisible(false);
         confidentialProjects.saveXML();
         this.dispose();
     }
