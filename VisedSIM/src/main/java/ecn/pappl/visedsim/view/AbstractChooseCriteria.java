@@ -10,7 +10,6 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.logging.Level;

@@ -187,12 +187,13 @@ public final class ConfidentialProjects extends JDialog {
             ChooseConflictCriteria ccc = new ChooseConflictCriteria(this);
             ccc.setVisible(true);
         } else {
-            //TODO
             saveXML();
-            
         }
     }
     
+    /**
+     * Generate the XML to the given path
+     */
     public void saveXML(){
         SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
             saveFileOption.actionPerformed(null);
