@@ -4,13 +4,19 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
+import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -25,9 +31,9 @@ public final class ConfidentialProjects extends JDialog {
     private JLabel titleLabel;
     private Map<String, JCheckBox> checkboxMap;
     private static final int NUMBER_OF_COLUMNS = 5;
-    private List<String> projectsList;
     private JFileChooser fileChooser;
     private JTextField filePathField; //not visible
+    private Map<String, Boolean> conflictMap = new HashMap<String, Boolean>();
     //Integers used in the compact grid
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
     private static final int PANEL_NUMBER_OF_ROW = 3;
@@ -41,8 +47,6 @@ public final class ConfidentialProjects extends JDialog {
      */
     public ConfidentialProjects() {
         super();
-        ProjectListController plc = ProjectListController.getInstance();
-        this.projectsList = plc.getProjectsAcronyms();
         build();
     }
 
@@ -66,7 +70,7 @@ public final class ConfidentialProjects extends JDialog {
         fileChooser.setFileFilter(filter);
 
         filePathField = new JTextField();
-        
+
         pack();
     }
 
@@ -90,13 +94,18 @@ public final class ConfidentialProjects extends JDialog {
 
         checkboxMap = new HashMap<String, JCheckBox>();
 
+        List<String> projectsList = ProjectListController.getInstance().
+                getProjectsAcronyms();
+
         for (String project : projectsList) {
             checkboxMap.put(project, new JCheckBox(project));
             checkboxMap.get(project).setBackground(Color.white);
             middlePanel.add(checkboxMap.get(project));
         }
-        int numberOfRows = (int) ((double) projectsList.size() / NUMBER_OF_COLUMNS);
-        int numberOfMissedCases = projectsList.size() - numberOfRows * NUMBER_OF_COLUMNS;
+        int numberOfRows = (int) ((double) projectsList.size()
+                / NUMBER_OF_COLUMNS);
+        int numberOfMissedCases = projectsList.size() - numberOfRows
+                * NUMBER_OF_COLUMNS;
         if (numberOfMissedCases != 0) {
             numberOfRows = numberOfRows + 1;
             for (int i = 0; i < (NUMBER_OF_COLUMNS - numberOfMissedCases); i++) {
@@ -105,7 +114,8 @@ public final class ConfidentialProjects extends JDialog {
             }
         }
 
-        SpringUtilities.makeCompactGrid(middlePanel, numberOfRows, NUMBER_OF_COLUMNS, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
+        SpringUtilities.makeCompactGrid(middlePanel, numberOfRows,
+                NUMBER_OF_COLUMNS, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
         panel.add(middlePanel);
 
@@ -138,7 +148,8 @@ public final class ConfidentialProjects extends JDialog {
 
         panel.add(bottomPanel);
 
-        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW,
+                PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
         panelCenter.add(panel, BorderLayout.CENTER);
 
@@ -153,13 +164,13 @@ public final class ConfidentialProjects extends JDialog {
     public JFileChooser getFileChooser() {
         return fileChooser;
     }
-    
+
     /**
      * Get the filePathField
-     * 
-     * @return 
+     * <p/>
+     * @return
      */
-    public JTextField getFilePathField(){
+    public JTextField getFilePathField() {
         return filePathField;
     }
 
@@ -178,9 +189,12 @@ public final class ConfidentialProjects extends JDialog {
     private void validateButtonActionPerformed() {
         //TODO : mettre à jour la liste des conflits
         boolean conflict = false;
-        for (String project : projectsList) {
+        for (String project : checkboxMap.keySet()) {
             if (checkboxMap.get(project).isSelected()) {
                 conflict = true;
+                conflictMap.put(project, true);
+            } else {
+                conflictMap.put(project, false);
             }
         }
         if (conflict) {
@@ -189,12 +203,26 @@ public final class ConfidentialProjects extends JDialog {
         } else {
             //TODO
             saveXML();
-            
+
         }
     }
-    
-    public void saveXML(){
-        SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
-            saveFileOption.actionPerformed(null);
+
+    public void saveXML() {
+        SaveFileOption saveFileOption = new SaveFileOption(this,
+                Labels.CHOOSE_NEW_LIST_BUTTON);
+        saveFileOption.actionPerformed(null);
+        String filePath = filePathField.getText();
+        CriteriaPreselection criteriaPreselection =
+                CriteriaPreselectionController.getInstance().
+                getCriteriaPreselection();
+        try {
+            ProjectListController.getInstance().saveProjectListWithInterrestConflicts(filePath, conflictMap,
+                    criteriaPreselection);
+        } catch (Exception ex) {
+            Logger.getLogger(ConfidentialProjects.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Une erreur s'est produite pendant la sauvegarde.");
+        }
+        this.dispose();
     }
 }
