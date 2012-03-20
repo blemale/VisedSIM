@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * First frame of the program
- * 
+ * <p/>
  * @author Denis
  */
 public final class FileLoader extends JFrame {
@@ -27,7 +27,6 @@ public final class FileLoader extends JFrame {
     private JTextField filePathField;
     private JFileChooser fileChooser;
     private static final int TEXT_COLUMN_LENGTH = 10;
-    
     //Integers used in the compact grid
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
     private static final int PANEL_NUMBER_OF_ROW = 3;
@@ -68,8 +67,8 @@ public final class FileLoader extends JFrame {
 
     /**
      * Build the panel
-     * 
-     * @return 
+     * <p/>
+     * @return
      */
     protected JPanel buildContentPane() {
         JPanel panelCenter = new JPanel();
@@ -117,6 +116,7 @@ public final class FileLoader extends JFrame {
 
         loadNewListButton = new JButton(Labels.LOAD_NEW_LIST_BUTTON);
         loadNewListButton.addActionListener(new java.awt.event.ActionListener() {
+
             /**
              * Load the XML or Excel file
              */
@@ -126,7 +126,8 @@ public final class FileLoader extends JFrame {
         });
         panel.add(loadNewListButton);
 
-        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW,
+                PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
 
         panelCenter.add(panel, BorderLayout.CENTER);
         return panelCenter;
@@ -156,21 +157,28 @@ public final class FileLoader extends JFrame {
                 JOptionPane.showMessageDialog(this,
                         "Un problème est survenue au chargement du fichier.");
                 this.setVisible(true);
-            } 
-        }
-        else {
-            try{
+            }
+        } else {
+            try {
                 ProjectListController plc = ProjectListController.getInstance();
-            InputStream is = getClass().getClassLoader().getResourceAsStream(Configuration.COLUMNS_ORDER_FILE_PATH);
-            Map<String, List<Integer>> columsOrder = (Map<String, List<Integer>>)XMLPersistanceTools.decodeFromFile(is);
-            plc.loadExcelProjectList(filePathField.getText(), columsOrder, 0, 3);
-            MainFrameAdmin mainFrameAdmin = new MainFrameAdmin();
-            mainFrameAdmin.setVisible(true);
-            this.dispose();
-            } catch (Exception ex){
+                InputStream is = getClass().getClassLoader().getResourceAsStream(
+                        Configuration.COLUMNS_ORDER_FILE_PATH);
+                Map<String, List<Integer>> columsOrder =
+                        (Map<String, List<Integer>>) XMLPersistanceTools.
+                        decodeFromFile(is);
+                plc.loadExcelProjectList(filePathField.getText(), columsOrder, 3,
+                        0);
+                SwingProjectViewerController swingProjectViewerController =
+                        SwingProjectViewerController.getInstance();
+                swingProjectViewerController.loadProject(plc.
+                        getFirstProject());
+                MainFrameAdmin mainFrameAdmin = new MainFrameAdmin();
+                mainFrameAdmin.setVisible(true);
+                this.dispose();
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            
+
         }
     }
 
