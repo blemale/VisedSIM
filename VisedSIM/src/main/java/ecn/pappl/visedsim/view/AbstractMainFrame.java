@@ -8,7 +8,11 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.Project;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +32,12 @@ public abstract class AbstractMainFrame extends JFrame {
     private static final int MIN_HEIGHT = 300;
     protected static final int MIN_WIDTH = 580;
     protected static final int MIN_BAR_HEIGHT = 30;
+    
+        //Integers used in the compact grids
+    private static final int PANEL_NUMBER_OF_COLUMN = 1;
+    private static final int PANEL_NUMBER_OF_ROW = 3;
+    private static final int GRID_INITIAL_X = 5;
+    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * Build the frame
@@ -49,8 +59,90 @@ public abstract class AbstractMainFrame extends JFrame {
      * 
      * @return the main panel
      */
-    protected abstract JPanel buildContentPane();
+    protected JPanel buildContentPane(){
+        JPanel panelCenter = new JPanel();
+        panelCenter.setLayout(new BorderLayout());
+        panelCenter.setBackground(Color.white);
 
+        JPanel panel = new JPanel(new SpringLayout());
+        panel.setBackground(Color.white);
+
+        //Menu
+        panel.add(buildMenuBar());
+
+        //2nd line with buttons
+        panel.add(buildButtonPanel());
+
+        //Representation of the project
+        middlePanel = new JPanel(new BorderLayout());
+
+        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
+
+        projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
+        middlePanel.add(projectTitle, BorderLayout.PAGE_START);
+
+        projectTable = new JTable(tableModel);
+
+        projectTable.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+
+                if (arg0.getClickCount() == 2) {
+                    int rowNumb = projectTable.rowAtPoint(arg0.getPoint());
+                    int colNumb = projectTable.columnAtPoint(arg0.getPoint());
+                    if (rowNumb != -1 && colNumb > 0) {
+                        String criteria = projectTable.getValueAt(rowNumb, 0).
+                                toString();
+                        String value = projectTable.getValueAt(rowNumb, colNumb).
+                                toString();
+                        SummaryPopup popup = new SummaryPopup(criteria, value);
+                        popup.setVisible(true);
+                    }
+                }
+            }
+
+            public void mousePressed(MouseEvent me) {
+            }
+            
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+        
+        middlePanel.add(projectTable, BorderLayout.CENTER);
+
+        //SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
+
+        scrollpane = new JScrollPane(middlePanel);
+        panel.add(scrollpane);
+
+        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
+
+        panelCenter.add(panel, BorderLayout.CENTER);
+
+        return panelCenter;
+    }
+    
+    /**
+     * Build the menu bar
+     * 
+     * @return the menuBar 
+     */
+    protected abstract JMenuBar buildMenuBar();
+    
+    /**
+     * Build the buttons Panel used in buildContentPane
+     * 
+     * @return the buttonPanel
+     */
+    protected abstract JPanel buildButtonPanel();
+        
     /**
      * Get the projectTable
      * 
