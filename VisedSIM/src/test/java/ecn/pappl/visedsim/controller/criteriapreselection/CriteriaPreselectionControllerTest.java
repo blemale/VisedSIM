@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.controller.criteriapreselection;
 
+import ecn.pappl.visedsim.LaunchApp;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.io.File;
 import junit.framework.TestCase;
@@ -13,6 +14,8 @@ import junit.framework.TestCase;
  * @author bastien
  */
 public class CriteriaPreselectionControllerTest extends TestCase {
+    public final static String TEST_SAVE_FILE_PATH = "testSaveCriteriaPreselection";
+    public final static String TEST_LOAD_FILE_PATH = "testSaveCriteriaPreselection";
 
     public CriteriaPreselectionControllerTest(String testName) {
         super(testName);
@@ -21,12 +24,13 @@ public class CriteriaPreselectionControllerTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        LaunchApp.initApp();
     }
 
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        File testFile = new File("testSaveCriteriaPreselection");
+        File testFile = new File(TEST_SAVE_FILE_PATH);
         testFile.delete();
     }
 
@@ -72,7 +76,7 @@ public class CriteriaPreselectionControllerTest extends TestCase {
      */
     public void testLoadCriteriaPreselection() throws Exception {
         System.out.println("loadCriteriaPreselection");
-        String fileName = "testCriteriaPreselection";
+        String fileName = TEST_LOAD_FILE_PATH;
         CriteriaPreselectionController instance =
                 CriteriaPreselectionController.getInstance();
         CriteriaPreselection result =
@@ -86,11 +90,26 @@ public class CriteriaPreselectionControllerTest extends TestCase {
      */
     public void testSaveAndLoadCriteriaPreselection() throws Exception {
         System.out.println("saveCriteriaPreselection");
-        String fileName = "testSaveCriteriaPreselection";
+        String fileName = TEST_SAVE_FILE_PATH;
         CriteriaPreselectionController instance =
                 CriteriaPreselectionController.getInstance();
         instance.createCriteriaPreselection();
         instance.saveCriteriaPreselection(fileName);
-        instance.loadCriteriaPreselection(fileName);
+        assertNotNull(instance.loadCriteriaPreselection(fileName));
+    }
+    
+     /**
+     * Test of saveCriteriaPreselection method, of class
+     * CriteriaPreselectionController.
+     */
+    public void testSaveAndDeleteCriteriaPreselection() throws Exception {
+        System.out.println("saveAndDeleteCriteriaPreselection");
+        String fileName = TEST_SAVE_FILE_PATH;
+        CriteriaPreselectionController instance =
+                CriteriaPreselectionController.getInstance();
+        instance.createCriteriaPreselection();
+        instance.saveCriteriaPreselection(fileName);
+        instance.deleteCriteriaPreselection(fileName);
+        assertTrue(!instance.getLoadableCriteriaPreselectionsNames().contains(fileName));
     }
 }
