@@ -212,6 +212,7 @@ public final class ConfidentialProjects extends JDialog {
                 Labels.CHOOSE_NEW_LIST_BUTTON);
         saveFileOption.actionPerformed(null);
         String filePath = filePathField.getText();
+        filePath = addXMLExtension(filePath);
         CriteriaPreselection criteriaPreselection =
                 CriteriaPreselectionController.getInstance().
                 getCriteriaPreselection();
@@ -225,4 +226,11 @@ public final class ConfidentialProjects extends JDialog {
         }
         this.dispose();
     }
+    
+    private String addXMLExtension(String fileName){
+        if(!fileName.endsWith(".xml")){
+            fileName = fileName+".xml";
+        }    
+        return fileName;
+    } 
 }
