@@ -52,7 +52,6 @@ public class CriteriaPreselectionControllerTest extends TestCase {
                 CriteriaPreselectionController.getInstance();
         CriteriaPreselection result = instance.createCriteriaPreselection();
         assertNotNull(result);
-        assertTrue(result.getClass().equals(CriteriaPreselection.class));
     }
 
     /**
@@ -65,7 +64,6 @@ public class CriteriaPreselectionControllerTest extends TestCase {
                 CriteriaPreselectionController.getInstance();
         CriteriaPreselection result = instance.initCriteriaPreselection();
         assertNotNull(result);
-        assertTrue(result.getClass().equals(CriteriaPreselection.class));
     }
 
     /**
@@ -80,7 +78,6 @@ public class CriteriaPreselectionControllerTest extends TestCase {
         CriteriaPreselection result =
                 instance.loadCriteriaPreselection(fileName);
         assertNotNull(result);
-        assertTrue(result.getClass().equals(CriteriaPreselection.class));
     }
 
     /**
