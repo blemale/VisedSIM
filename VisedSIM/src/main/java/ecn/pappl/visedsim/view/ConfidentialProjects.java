@@ -186,7 +186,6 @@ public final class ConfidentialProjects extends JDialog {
         if (conflict) {
             ChooseConflictCriteria ccc = new ChooseConflictCriteria();
             ccc.setVisible(true);
-            this.dispose();
         } else {
             //TODO
             SaveFileOption saveFileOption = new SaveFileOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
