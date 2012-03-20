@@ -29,8 +29,6 @@ public class MainFrameAdmin extends AbstractMainFrame {
     //Integers used in the compact grids
     private static final int BUTTONPANEL_NUMBER_OF_COLUMN = 2;
     private static final int BUTTONPANEL_NUMBER_OF_ROW = 1;
-    private static final int GRID_INITIAL_X = 5;
-    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * The constructor of the main frame

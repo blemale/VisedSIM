@@ -36,8 +36,8 @@ public abstract class AbstractMainFrame extends JFrame {
         //Integers used in the compact grids
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
     private static final int PANEL_NUMBER_OF_ROW = 3;
-    private static final int GRID_INITIAL_X = 5;
-    private static final int GRID_INITIAL_Y = 5;
+    protected static final int GRID_INITIAL_X = 5;
+    protected static final int GRID_INITIAL_Y = 5;
 
     /**
      * Build the frame

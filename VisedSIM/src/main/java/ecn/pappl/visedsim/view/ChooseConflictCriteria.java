@@ -26,6 +26,12 @@ public final class ChooseConflictCriteria extends AbstractChooseCriteria {
     }
     
     @Override
+    protected void build(){
+        super.build();
+        setTitle(Labels.CHOOSE_CRITERIA_CONFLICT_LABEL);
+    }
+    
+    @Override
     protected void validateButtonActionPerformed(){
         super.validateButtonActionPerformed();
         confidentialProjects.saveXML();
