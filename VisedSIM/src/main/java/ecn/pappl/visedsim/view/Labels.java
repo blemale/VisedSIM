@@ -23,6 +23,8 @@ public final class Labels {
     
     //ColumnsOrder
     public static final String COLUMNS_ORDER_TITLE = "Ordre des colonnes";
+    public static final String COLUMNS_ORDER_VALIDATE = "Valider";
+    public static final String COLUMNS_ORDER_CANCEL = "Annuler";
     
     //ChooseCriteria
     public static final String CHOOSE_CRITERIA_TITLE = "Choix des critères";
