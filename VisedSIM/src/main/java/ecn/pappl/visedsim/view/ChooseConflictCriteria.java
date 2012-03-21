@@ -32,6 +32,7 @@ public final class ChooseConflictCriteria extends AbstractChooseCriteria {
     @Override
     protected void validateButtonActionPerformed() {
         super.validateButtonActionPerformed();
+        this.setVisible(false);
         confidentialProjects.saveXML();
         this.dispose();
     }
