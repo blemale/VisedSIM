@@ -7,24 +7,23 @@ package ecn.pappl.visedsim.controller.projectlistprinter;
 import java.io.FileOutputStream;
 
 import com.itextpdf.text.Anchor;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import ecn.pappl.visedsim.Configuration;
+import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
+import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
+import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import ecn.pappl.visedsim.struct.Project;
+import ecn.pappl.visedsim.struct.ProjectList;
+import ecn.pappl.visedsim.utilities.PDFTools;
+import ecn.pappl.visedsim.utilities.ProjectTools;
+import java.util.*;
 
 /**
  * Generate the pdf
@@ -33,86 +32,109 @@ import java.util.logging.Logger;
  */
 public class PDFPrinterController {
 
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+    private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             Font.BOLD);
-    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+    private static final Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.NORMAL, BaseColor.RED);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+    private static final Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
             Font.BOLD);
-    private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+    private static final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN,
+            12,
             Font.BOLD);
-    private Document document;
+    private static final String TITLE = "title";
+    private static final String ACRONYM = "acronym";
+    /**
+     * Unique instance of {@link ProjectListController}.
+     */
+    private volatile static PDFPrinterController instance = null;
 
     /**
-     * Constructor
-     * 
-     * @param fileName 
+     * The default constructor.
      */
-    public PDFPrinterController(String fileName) {
+    private PDFPrinterController() {
+        super();
+    }
+
+    /**
+     * Get the unique instance of {@link ProjectListController}.
+     * <p/>
+     * @return the unique instance of {@link ProjectListController}.
+     */
+    public static PDFPrinterController getInstance() {
+        if (PDFPrinterController.instance == null) {
+            synchronized (ProjectListController.class) {
+                PDFPrinterController.instance = new PDFPrinterController();
+            }
+        }
+
+        return PDFPrinterController.instance;
+    }
+
+    /**
+     * Print a {@link ProjectList}.
+     * <p/>
+     * @param fileName
+     */
+    public void printProjectList(String fileName) {
         try {
-            document = new Document();
+            CriteriaPreselection criteriaPreselection =
+                    CriteriaPreselectionController.getInstance().
+                    getCriteriaPreselection();
+            ProjectList projectList = ProjectListController.getInstance().
+                    getProjectList();
+
+            Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
-            addTitlePage(document);
 
-            LinkedList<String> projectList = new LinkedList<String>();
-            for (String project : projectList) {
-                printProject(project);
+            for (Project project : projectList.getProjectList()) {
+                addProjectToPDFDoc(document, project, criteriaPreselection);
             }
-
             document.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Generate the pdf for only one project
-     * 
-     * @param project 
-     */
-    private void printProject(String project) {
-        //TODO : charger la map des critères pour le projet donné
-        Map<String, String> criteriaMap = new HashMap<String, String>();
-        try {
-            addContent(document, criteriaMap, project);
-        } catch (DocumentException ex) {
-            Logger.getLogger(PDFPrinterController.class.getName()).log(Level.SEVERE, null, ex);
+    private void addProjectToPDFDoc(Document document, Project project,
+            CriteriaPreselection criteriaPreselection) throws DocumentException {
+        int j = 2;
+        int i = ProjectTools.getNumberOfCriteriaLines(project,
+                criteriaPreselection);
+        int index = 0;
+        Object[][] criteriaArray = new Object[i][j];
+        Map<String, List<String>> selectedCriteria = ProjectTools.
+                getSelectedCriteria(project, criteriaPreselection);
+        String path = Configuration.I18N_FOLDER + "/Criteria";
+        ResourceBundle bundle = ResourceBundle.getBundle(path,
+                Locale.getDefault());
+        Map<String, String> criteriaNamesMap = new HashMap<String, String>();
+        for (String criteria : selectedCriteria.keySet()) {
+            criteriaNamesMap.put(bundle.getString(criteria), criteria);
         }
-        // Start a new page
-        document.newPage();
-    }
-
-    /**
-     * Add a title in the first page of a document
-     * 
-     * @param document
-     * @throws DocumentException 
-     */
-    private static void addTitlePage(Document document)
-            throws DocumentException {
-        Paragraph preface = new Paragraph();
-        // We add one empty line
-        addEmptyLine(preface, 1);
-        // Lets write a big header
-        preface.add(new Paragraph("Projet de visedSim", catFont));
-
-        addEmptyLine(preface, 1);
-
-        document.add(preface);
-    }
-
-    /**
-     * Add the content for a page
-     * 
-     * @param document
-     * @param criteriaMap
-     * @param project
-     * @throws DocumentException 
-     */
-    private static void addContent(Document document, Map<String, String> criteriaMap, String project) throws DocumentException {
-        Anchor anchor = new Anchor(project, catFont);
-        anchor.setName(project);
+        List<String> criteriaNames = new ArrayList<String>(criteriaNamesMap.
+                keySet());
+        Collections.sort(criteriaNames);
+        for (String criteriaName : criteriaNames) {
+            String criteria = criteriaNamesMap.get(criteriaName);
+            for (String value : selectedCriteria.get(criteria)) {
+                criteriaArray[index][0] = criteriaName;
+                criteriaArray[index][1] = value;
+                index++;
+            }
+        }
+        String projectTitle = "";
+        if (project.getCriteriaMap().containsKey(TITLE)) {
+            projectTitle = project.getCriteriaMap().get(TITLE).get(0);
+        }
+        String projectAcronym = "";
+        if (project.getCriteriaMap().containsKey(ACRONYM)) {
+            projectAcronym = project.getCriteriaMap().get(ACRONYM).get(0);
+        }
+        String projectName = projectAcronym+" : "+projectTitle;
+        
+        Anchor anchor = new Anchor(projectTitle, catFont);
+        anchor.setName(projectName);
 
         // Second parameter is the number of the chapter
         Chapter catPart = new Chapter(new Paragraph(anchor), 1);
@@ -121,56 +143,11 @@ public class PDFPrinterController {
         Section subCatPart = catPart.addSection(subPara);
 
         // Add a table
-        createTable(subCatPart, criteriaMap);
+        String[] columnName = new String[]{"Critère", "Valeur"};
+        PDFTools.createTable(subCatPart, (String[][]) criteriaArray, columnName);
 
         // Now add all this to the document
         document.add(catPart);
-    }
-
-    /**
-     * Create the table for one project
-     * 
-     * @param subCatPart
-     * @param criteriaMap
-     * @throws BadElementException 
-     */
-    private static void createTable(Section subCatPart, Map<String, String> criteriaMap)
-            throws BadElementException {
-
-        PdfPTable table = new PdfPTable(criteriaMap.size());
-
-        // t.setBorderColor(BaseColor.GRAY);
-        // t.setPadding(4);
-        // t.setSpacing(4);
-        // t.setBorderWidth(1);
-
-        PdfPCell c1 = new PdfPCell(new Phrase("Critères"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Valeur"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        table.setHeaderRows(1);
-
-        for (String criteria : criteriaMap.keySet()) {
-            table.addCell(criteria);
-            table.addCell(criteriaMap.get(criteria));
-        }
-
-        subCatPart.add(table);
-    }
-
-    /**
-     * Add empty line in a paragraph
-     * 
-     * @param paragraph
-     * @param number 
-     */
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
+        document.newPage();
     }
 }
