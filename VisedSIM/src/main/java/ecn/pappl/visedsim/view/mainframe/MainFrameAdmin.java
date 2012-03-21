@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Denis
  */
 public class MainFrameAdmin extends AbstractMainFrame {
-
+    
     private JMenuBar menuBar;
     private JMenu projectMenu, criteriaMenu, helpMenu;
     private JMenuItem newListProjectItem, printProjectItem, printAllProjectItem, generateXMLItem, generateAllXMLItem, preselectionSavedItem, preselectionManagementItem, chooseCriteriaItem;
@@ -42,13 +42,14 @@ public class MainFrameAdmin extends AbstractMainFrame {
      */
     public MainFrameAdmin() {
         super();
-        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
+        SwingProjectViewerController spvc = SwingProjectViewerController.
+                getInstance();
         Object[][] tableContent =
                 spvc.getCriteria(CriteriaPreselectionController.getInstance().
                 getCriteriaPreselection());
         Object[] columnsName = new Object[]{"Critère", "Valeur"};
         tableModel = new DefaultTableModel(tableContent, columnsName) {
-
+            
             @Override
             public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
                 return false;
@@ -58,15 +59,15 @@ public class MainFrameAdmin extends AbstractMainFrame {
     }
     
     @Override
-    protected void build(){
+    protected void build() {
         super.build();
         fileChooser = new JFileChooser();
         
-         FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "XML File", "xml");
         fileChooser.setFileFilter(filter);
         fileChooser.setDialogTitle("Sauvegarder");
-
+        
         filePathField = new JTextField();
     }
 
@@ -78,13 +79,13 @@ public class MainFrameAdmin extends AbstractMainFrame {
     public JFileChooser getFileChooser() {
         return fileChooser;
     }
-    
+
     /**
      * Get the file path field
-     * 
+     * <p/>
      * @return the filePathField
      */
-    public JTextField getFilePathField(){
+    public JTextField getFilePathField() {
         return filePathField;
     }
 
@@ -103,20 +104,22 @@ public class MainFrameAdmin extends AbstractMainFrame {
      */
     private void printAllProjectsActionEvent() {
         filePathField.setText(null);
-        SavePDFOption savePDFOption = new SavePDFOption(this,Labels.CHOOSE_NEW_LIST_BUTTON);
+        SavePDFOption savePDFOption = new SavePDFOption(this,
+                Labels.CHOOSE_NEW_LIST_BUTTON);
         savePDFOption.actionPerformed(null);
         
-        if(filePathField.getText() != null){
-            PDFPrinterController printerController = new PDFPrinterController(filePathField.getText());
+        if (filePathField.getText() != null) {
+            PDFPrinterController.getInstance().printProjectList(filePathField.
+                    getText());
         }
     }
-
+    
     @Override
     protected JMenuBar buildMenuBar() {
         menuBar = new JMenuBar();
         menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
-
+        
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
         newListProjectItem.addActionListener(new java.awt.event.ActionListener() {
 
@@ -158,11 +161,11 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         projectMenu.add(generateAllXMLItem);
-
+        
         menuBar.add(projectMenu);
-
+        
         criteriaMenu = new JMenu(Labels.MENU_CRITERIA);
-
+        
         preselectionSavedItem = new JMenuItem(Labels.MENU_CRITERIA_SAVE);
         preselectionSavedItem.addActionListener(new java.awt.event.ActionListener() {
 
@@ -175,8 +178,9 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaMenu.add(preselectionSavedItem);
-
-        preselectionManagementItem = new JMenuItem(Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
+        
+        preselectionManagementItem = new JMenuItem(
+                Labels.MENU_CRITERIA_PRESELECTION_MANAGEMENT);
         preselectionManagementItem.addActionListener(new java.awt.event.ActionListener() {
 
             /**
@@ -188,7 +192,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaMenu.add(preselectionManagementItem);
-
+        
         chooseCriteriaItem = new JMenuItem(Labels.MENU_CRITERIA_CHOOSE);
         chooseCriteriaItem.addActionListener(new java.awt.event.ActionListener() {
 
@@ -200,24 +204,25 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaMenu.add(chooseCriteriaItem);
-
+        
         menuBar.add(criteriaMenu);
-
+        
         helpMenu = new JMenu(Labels.MENU_HELP);
         menuBar.add(helpMenu);
-
+        
         return menuBar;
     }
-
+    
     @Override
     protected JPanel buildButtonPanel() {
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
-
+        
         JPanel criteriaPanel = new JPanel(new FlowLayout());
         criteriaPanel.setBackground(Color.white);
-
-        chooseCriteriaButton = new JButton(Labels.MAIN_FRAME_CHOOSE_CRITERIA_BUTTON);
+        
+        chooseCriteriaButton = new JButton(
+                Labels.MAIN_FRAME_CHOOSE_CRITERIA_BUTTON);
         chooseCriteriaButton.addActionListener(new java.awt.event.ActionListener() {
 
             /**
@@ -228,8 +233,9 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaPanel.add(chooseCriteriaButton);
-
-        generateAllXMLButton = new JButton(Labels.MAIN_FRAME_GENERATE_ALL_XML_BUTTON);
+        
+        generateAllXMLButton = new JButton(
+                Labels.MAIN_FRAME_GENERATE_ALL_XML_BUTTON);
         generateAllXMLButton.addActionListener(new java.awt.event.ActionListener() {
 
             /**
@@ -240,7 +246,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaPanel.add(generateAllXMLButton);
-
+        
         printAllButton = new JButton(Labels.MAIN_FRAME_PRINT_ALL_BUTTON);
         printAllButton.addActionListener(new java.awt.event.ActionListener() {
 
@@ -252,17 +258,17 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         criteriaPanel.add(printAllButton);
-
+        
         buttonPanel.add(criteriaPanel);
-
+        
         JPanel chooseProjectPanel = new JPanel(new FlowLayout());
         chooseProjectPanel.setBackground(Color.white);
-
+        
         ProjectListController plc = ProjectListController.getInstance();
         projectsComboBox = new JComboBox(plc.getProjectsAcronyms().toArray(
                 new String[0]));
         chooseProjectPanel.add(projectsComboBox);
-
+        
         validateButton = new JButton(Labels.MAIN_FRAME_VALIDATE_PROJECT_BUTTON);
         validateButton.addActionListener(new java.awt.event.ActionListener() {
 
@@ -274,11 +280,13 @@ public class MainFrameAdmin extends AbstractMainFrame {
             }
         });
         chooseProjectPanel.add(validateButton);
-
+        
         buttonPanel.add(chooseProjectPanel);
-
-        SpringUtilities.makeCompactGrid(buttonPanel, BUTTONPANEL_NUMBER_OF_ROW, BUTTONPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
-
+        
+        SpringUtilities.makeCompactGrid(buttonPanel, BUTTONPANEL_NUMBER_OF_ROW,
+                BUTTONPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5,
+                5);
+        
         return buttonPanel;
     }
 }
