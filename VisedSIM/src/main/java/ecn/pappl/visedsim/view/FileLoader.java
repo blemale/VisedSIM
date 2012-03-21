@@ -1,6 +1,8 @@
 package ecn.pappl.visedsim.view;
 
 //import java.awt.BorderLayout;
+import ecn.pappl.visedsim.view.mainframe.MainFrameAdmin;
+import ecn.pappl.visedsim.view.mainframe.MainFrameUser;
 import ecn.pappl.visedsim.view.fileoption.ChooseFileOption;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
@@ -146,8 +148,7 @@ public final class FileLoader extends JFrame {
                 projectListController.loadProjectList(filePathField.getText());
                 SwingProjectViewerController swingProjectViewerController =
                         SwingProjectViewerController.getInstance();
-                swingProjectViewerController.loadProject(projectListController.
-                        getFirstProject());
+                swingProjectViewerController.loadProject(projectListController.getFirstProject());
                 MainFrameUser mainFrameUser = new MainFrameUser();
                 mainFrameUser.setVisible(true);
                 this.dispose();
@@ -161,20 +162,8 @@ public final class FileLoader extends JFrame {
             }
         } else {
             try {
-                ProjectListController plc = ProjectListController.getInstance();
-                InputStream is = getClass().getClassLoader().getResourceAsStream(
-                        Configuration.COLUMNS_ORDER_FILE_PATH);
-                Map<String, List<Integer>> columsOrder =
-                        (Map<String, List<Integer>>) XMLPersistanceTools.
-                        decodeFromFile(is);
-                plc.loadExcelProjectList(filePathField.getText(), columsOrder, 3,
-                        0);
-                SwingProjectViewerController swingProjectViewerController =
-                        SwingProjectViewerController.getInstance();
-                swingProjectViewerController.loadProject(plc.
-                        getFirstProject());
-                MainFrameAdmin mainFrameAdmin = new MainFrameAdmin();
-                mainFrameAdmin.setVisible(true);
+                ColumnsOrder columnsOrder = new ColumnsOrder(filePathField.getText());
+                columnsOrder.setVisible(true);
                 this.dispose();
             } catch (Exception ex) {
                 ex.printStackTrace();

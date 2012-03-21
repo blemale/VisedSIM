@@ -2,12 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecn.pappl.visedsim.view;
+package ecn.pappl.visedsim.view.mainframe;
 
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectlistprinter.PDFPrinterController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
+import ecn.pappl.visedsim.view.ConfidentialProjects;
+import ecn.pappl.visedsim.view.Labels;
+import ecn.pappl.visedsim.view.SpringUtilities;
 import ecn.pappl.visedsim.view.fileoption.SaveFileOption;
 import ecn.pappl.visedsim.view.fileoption.SavePDFOption;
 import java.awt.Color;

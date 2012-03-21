@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.view.mainframe.AbstractMainFrame;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import java.awt.BorderLayout;
