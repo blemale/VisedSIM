@@ -83,5 +83,10 @@
             <version>1.0</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.2.0</version>
+        </dependency>
     </dependencies>
 </project>

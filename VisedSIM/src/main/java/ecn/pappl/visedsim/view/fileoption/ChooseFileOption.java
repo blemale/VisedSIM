@@ -1,5 +1,6 @@
-package ecn.pappl.visedsim.view;
+package ecn.pappl.visedsim.view.fileoption;
 
+import ecn.pappl.visedsim.view.FileLoader;
 import java.awt.event.ActionEvent;
 import java.io.File;
 

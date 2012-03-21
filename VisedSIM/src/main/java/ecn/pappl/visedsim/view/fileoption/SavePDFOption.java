@@ -2,21 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecn.pappl.visedsim.view;
+package ecn.pappl.visedsim.view.fileoption;
 
+import ecn.pappl.visedsim.view.ConfidentialProjects;
+import ecn.pappl.visedsim.view.MainFrameAdmin;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 /**
  *
  * @author Denis
  */
-public class SaveFileOption extends AbstractAction {
+public class SavePDFOption extends AbstractAction {
     
-    private ConfidentialProjects fenetre;
+    private MainFrameAdmin fenetre;
 
     /**
      * Constructor
@@ -24,15 +25,11 @@ public class SaveFileOption extends AbstractAction {
      * @param fenetre
      * @param message
      */
-    public SaveFileOption(ConfidentialProjects fenetre, String message) {
+    public SavePDFOption(MainFrameAdmin fenetre, String message) {
         super(message);
         this.fenetre = fenetre;
     }
 
-    /**
-     * Action realized when the user has choosen a directory
-     * @param e 
-     */
     public void actionPerformed(ActionEvent e) {
         fenetre.getFileChooser().setFileSelectionMode(JFileChooser.FILES_ONLY);
         int returnVal = fenetre.getFileChooser().showOpenDialog(fenetre);
@@ -42,4 +39,5 @@ public class SaveFileOption extends AbstractAction {
             fenetre.getFilePathField().setText(file.getAbsolutePath());
         }
     }
+    
 }

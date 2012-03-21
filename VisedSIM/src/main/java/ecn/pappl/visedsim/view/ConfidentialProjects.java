@@ -4,6 +4,8 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.view.fileoption.SaveFileOption;
+
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
@@ -66,6 +68,7 @@ public final class ConfidentialProjects extends JDialog {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "XML File", "xml");
         fileChooser.setFileFilter(filter);
+        fileChooser.setDialogTitle("Sauvegarder");
 
         filePathField = new JTextField();
 
