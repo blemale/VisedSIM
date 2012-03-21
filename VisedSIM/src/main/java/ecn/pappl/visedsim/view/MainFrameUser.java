@@ -8,12 +8,9 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.Project;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,14 +30,8 @@ public class MainFrameUser extends AbstractMainFrame {
     private JTextField searchProjectField;
     
     //Integers used in the compact grids
-    private static final int PANEL_NUMBER_OF_COLUMN = 1;
-    private static final int PANEL_NUMBER_OF_ROW = 3;
-    private static final int MIDDLEPANEL_NUMBER_OF_COLUMN = 1;
-    private static final int MIDDLEPANEL_NUMBER_OF_ROW = 2;
     private static final int BUTTONPANEL_NUMBER_OF_COLUMN = 3;
     private static final int BUTTONPANEL_NUMBER_OF_ROW = 1;
-    private static final int GRID_INITIAL_X = 5;
-    private static final int GRID_INITIAL_Y = 5;
 
     /**
      * The constructor of the main frame
@@ -62,16 +53,33 @@ public class MainFrameUser extends AbstractMainFrame {
         build();
     }
 
+    /**
+     * Launch the given project or the SeekingProject if there are several
+     * projects with the same first letters in their acronyme
+     *
+     * @param evt
+     */
+    protected void searchButtonActionEvent(java.awt.event.ActionEvent evt) {
+        ProjectListController plc = ProjectListController.getInstance();
+        String fileName = searchProjectField.getText();
+
+        if (plc.getProjectsAcronymsByFirstLetters(fileName).
+                isEmpty()) {
+            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_POPUP);
+        } else if (plc.getProjectsAcronymsByFirstLetters(fileName).size() == 1) {
+            Project project = plc.getProjectByAcronym(fileName);
+            if (project != null) {
+                SwingProjectViewerController.getInstance().loadProject(project);
+                this.updateProjectView();
+            }
+        } else {
+            SeekingProjects sp = new SeekingProjects(this, fileName);
+            sp.setVisible(true);
+        }
+    }
+
     @Override
-    protected JPanel buildContentPane() {
-        JPanel panelCenter = new JPanel();
-        panelCenter.setLayout(new BorderLayout());
-        panelCenter.setBackground(Color.white);
-
-        JPanel panel = new JPanel(new SpringLayout());
-        panel.setBackground(Color.white);
-
-        //Menu
+    protected JMenuBar buildMenuBar() {
         menuBar = new JMenuBar();
         menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
@@ -133,9 +141,11 @@ public class MainFrameUser extends AbstractMainFrame {
         helpMenu = new JMenu(Labels.MENU_HELP);
         menuBar.add(helpMenu);
 
-        panel.add(menuBar);
+        return menuBar;
+    }
 
-        //2nd line with buttons
+    @Override
+    protected JPanel buildButtonPanel() {
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
 
@@ -203,86 +213,6 @@ public class MainFrameUser extends AbstractMainFrame {
 
         SpringUtilities.makeCompactGrid(buttonPanel, BUTTONPANEL_NUMBER_OF_ROW, BUTTONPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 5, 5);
 
-        panel.add(buttonPanel);
-
-        //Representation of the project
-        middlePanel = new JPanel(new BorderLayout());
-
-        SwingProjectViewerController spvc = SwingProjectViewerController.getInstance();
-
-        projectTitle = new JLabel(spvc.getAcronym() + " : " + spvc.getTitle());
-        middlePanel.add(projectTitle, BorderLayout.PAGE_START);
-
-        projectTable = new JTable(tableModel);
-
-        projectTable.addMouseListener(new MouseListener() {
-
-            @Override
-            public void mouseClicked(MouseEvent arg0) {
-
-                if (arg0.getClickCount() == 2) {
-                    int rowNumb = projectTable.rowAtPoint(arg0.getPoint());
-                    int colNumb = projectTable.columnAtPoint(arg0.getPoint());
-                    if (rowNumb != -1 && colNumb > 0) {
-                        String criteria = projectTable.getValueAt(rowNumb, 0).
-                                toString();
-                        String value = projectTable.getValueAt(rowNumb, colNumb).
-                                toString();
-                        SummaryPopup popup = new SummaryPopup(criteria, value);
-                        popup.setVisible(true);
-                    }
-                }
-            }
-
-            public void mousePressed(MouseEvent me) {
-            }
-            
-            public void mouseReleased(MouseEvent me) {
-            }
-
-            public void mouseEntered(MouseEvent me) {
-            }
-
-            public void mouseExited(MouseEvent me) {
-            }
-        });
-        
-        middlePanel.add(projectTable, BorderLayout.CENTER);
-
-        //SpringUtilities.makeCompactGrid(middlePanel, MIDDLEPANEL_NUMBER_OF_ROW, MIDDLEPANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X,GRID_INITIAL_Y, 5, 5);
-
-        scrollpane = new JScrollPane(middlePanel);
-        panel.add(scrollpane);
-
-        SpringUtilities.makeCompactGrid(panel, PANEL_NUMBER_OF_ROW, PANEL_NUMBER_OF_COLUMN, GRID_INITIAL_X, GRID_INITIAL_Y, 10, 10);
-
-        panelCenter.add(panel, BorderLayout.CENTER);
-
-        return panelCenter;
-    }
-
-    /**
-     * Launch the given project or the SeekingProject if there are several
-     * projects with the same first letters in their acronyme
-     *
-     * @param evt
-     */
-    protected void searchButtonActionEvent(java.awt.event.ActionEvent evt) {
-        ProjectListController plc = ProjectListController.getInstance();
-        String fileName = searchProjectField.getText();
-
-        if (plc.getProjectsAcronymsByFirstLetters(fileName).
-                isEmpty()) {
-            JOptionPane.showMessageDialog(this, Labels.SEEKING_PROJECTS_POPUP);
-        } else if (plc.getProjectsAcronymsByFirstLetters(fileName).size() == 1) {
-            Project project = plc.getProjectByAcronym(fileName);
-            if (project != null) {
-                SwingProjectViewerController.getInstance().loadProject(project);
-                this.updateProjectView();
-            }
-        } else {
-            SeekingProjects sp = new SeekingProjects(this, fileName);
-            sp.setVisible(true);
-        }
+        return buttonPanel;
     }
 }

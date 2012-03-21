@@ -10,8 +10,6 @@ import ecn.pappl.visedsim.struct.CriteriaPreselection;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,7 +199,6 @@ public final class ConfidentialProjects extends JDialog {
             ChooseConflictCriteria ccc = new ChooseConflictCriteria(this);
             ccc.setVisible(true);
         } else {
-            //TODO
             saveXML();
 
         }
