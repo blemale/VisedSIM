@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.controller.projectlist;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.io.ExcelDatasExtractor;
 import ecn.pappl.visedsim.io.MapCleaner;
 import ecn.pappl.visedsim.io.MapConverter;
@@ -15,6 +16,7 @@ import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -186,8 +188,8 @@ public final class ProjectListController implements ProjectListLoader,
 
     /**
      * Get the first {@link Project} of the current {@link ProjectList}.
-     * 
-     * @return the first {@link Project}. 
+     * <p/>
+     * @return the first {@link Project}.
      */
     public Project getFirstProject() {
         if (this.projectList != null && this.projectList.getProjectList().size()
@@ -196,5 +198,13 @@ public final class ProjectListController implements ProjectListLoader,
         } else {
             return null;
         }
+    }
+
+    public Map<String, List<Integer>> getDefaultColumnsOrder() throws
+            IOException {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(
+                Configuration.COLUMNS_ORDER_FILE_PATH);
+        return (Map<String, List<Integer>>) XMLPersistanceTools.decodeFromFile(
+                is);
     }
 }
