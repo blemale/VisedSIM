@@ -200,6 +200,11 @@ public final class ProjectListController implements ProjectListLoader,
         }
     }
 
+    /**
+     * Get the default columns order.
+     * @return a {@link Map}.
+     * @throws IOException 
+     */
     public Map<String, List<Integer>> getDefaultColumnsOrder() throws
             IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(
@@ -207,4 +212,10 @@ public final class ProjectListController implements ProjectListLoader,
         return (Map<String, List<Integer>>) XMLPersistanceTools.decodeFromFile(
                 is);
     }
+
+    public ProjectList getProjectList() {
+        return projectList;
+    }
+    
+    
 }
