@@ -21,6 +21,9 @@ public final class Labels {
     public static final String LOAD_SAVED_LIST_BUTTON = "Charger";
     public static final String LOAD_NEW_LIST_BUTTON = "Charger";
     
+    //ColumnsOrder
+    public static final String COLUMNS_ORDER_TITLE = "Ordre des colonnes";
+    
     //ChooseCriteria
     public static final String CHOOSE_CRITERIA_TITLE = "Choix des critères";
     public static final String CHOOSE_CRITERIA_CONFLICT_LABEL = "Choix des critères pour les projets en conflits";

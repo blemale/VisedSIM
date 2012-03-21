@@ -5,7 +5,7 @@
 package ecn.pappl.visedsim.view.fileoption;
 
 import ecn.pappl.visedsim.view.ConfidentialProjects;
-import ecn.pappl.visedsim.view.MainFrameAdmin;
+import ecn.pappl.visedsim.view.mainframe.MainFrameAdmin;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.swing.AbstractAction;

@@ -4,6 +4,8 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.view.mainframe.AbstractMainFrame;
+
 /**
  *
  * @author Denis
