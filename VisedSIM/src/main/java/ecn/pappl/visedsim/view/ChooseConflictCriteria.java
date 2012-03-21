@@ -4,16 +4,14 @@
  */
 package ecn.pappl.visedsim.view;
 
-import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
-
 /**
  *
  * @author Denis
  */
 public final class ChooseConflictCriteria extends AbstractChooseCriteria {
-    
+
     private ConfidentialProjects confidentialProjects;
-    
+
     /**
      * Constructor of the JDialog
      *
@@ -24,18 +22,17 @@ public final class ChooseConflictCriteria extends AbstractChooseCriteria {
         this.confidentialProjects = confidentialProjects;
         build();
     }
-    
+
     @Override
-    protected void build(){
+    protected void build() {
         super.build();
         setTitle(Labels.CHOOSE_CRITERIA_CONFLICT_LABEL);
     }
-    
+
     @Override
-    protected void validateButtonActionPerformed(){
+    protected void validateButtonActionPerformed() {
         super.validateButtonActionPerformed();
         confidentialProjects.saveXML();
         this.dispose();
     }
-    
 }

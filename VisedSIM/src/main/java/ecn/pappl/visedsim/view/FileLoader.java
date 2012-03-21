@@ -1,6 +1,7 @@
 package ecn.pappl.visedsim.view;
 
 //import java.awt.BorderLayout;
+import ecn.pappl.visedsim.view.fileoption.ChooseFileOption;
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
