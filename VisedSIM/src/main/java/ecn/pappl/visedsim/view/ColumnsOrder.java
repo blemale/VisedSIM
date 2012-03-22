@@ -5,10 +5,8 @@
 package ecn.pappl.visedsim.view;
 
 import ecn.pappl.visedsim.Configuration;
-import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
-import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import ecn.pappl.visedsim.view.mainframe.MainFrameAdmin;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -173,15 +171,16 @@ public final class ColumnsOrder extends JDialog {
         Map<String, List<Integer>> columsOrder = new HashMap<String, List<Integer>>();
 
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            String s = (String) tableModel.getValueAt(i, 2);
+            String s = (String) tableModel.getValueAt(i, 1);
             String[] columnList = s.split(",");
             List<Integer> numbersList = new LinkedList<Integer>();
 
             for (String columnNumber : columnList) {
-                numbersList.add(Integer.parseInt(columnNumber));
+                int parseNumber = Integer.parseInt(columnNumber.trim());
+                numbersList.add(parseNumber);
             }
 
-            columsOrder.put((String) tableModel.getValueAt(i, 1), numbersList);
+            columsOrder.put((String) tableModel.getValueAt(i, 0), numbersList);
         }
 
         return columsOrder;
