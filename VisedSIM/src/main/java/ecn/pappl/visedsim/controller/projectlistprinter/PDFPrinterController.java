@@ -102,7 +102,7 @@ public class PDFPrinterController {
         int i = ProjectTools.getNumberOfCriteriaLines(project,
                 criteriaPreselection);
         int index = 0;
-        Object[][] criteriaArray = new Object[i][j];
+        String[][] criteriaArray = new String[i][j];
         Map<String, List<String>> selectedCriteria = ProjectTools.
                 getSelectedCriteria(project, criteriaPreselection);
         String path = Configuration.I18N_FOLDER + "/Criteria";
@@ -144,7 +144,7 @@ public class PDFPrinterController {
 
         // Add a table
         String[] columnName = new String[]{"Critère", "Valeur"};
-        PDFTools.createTable(subCatPart, (String[][]) criteriaArray, columnName);
+        PDFTools.createTable(subCatPart, criteriaArray, columnName);
 
         // Now add all this to the document
         document.add(catPart);
