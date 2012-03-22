@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecn.pappl.visedsim.view;
+package ecn.pappl.visedsim.view.choosecriteria;
 
 import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
 import ecn.pappl.visedsim.struct.CriteriaPreselection;
+import ecn.pappl.visedsim.view.Labels;
+import ecn.pappl.visedsim.view.SpringUtilities;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;

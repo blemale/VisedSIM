@@ -51,8 +51,13 @@ public final class ColumnsOrder extends JDialog {
             for (String criteria : criteriaMap.keySet()) {
                 tableContent[i][0] = criteria;
                 for (Integer integer : criteriaMap.get(criteria)) {
-                    tableContent[i][1] = tableContent[i][1] + ", " + integer;
+                    if (tableContent[i][1] != null) {
+                        tableContent[i][1] = tableContent[i][1] + ", " + String.valueOf(integer);
+                    } else {
+                        tableContent[i][1] = String.valueOf(integer);
+                    }
                 }
+                i++;
             }
 
             Object[] columnsName = new Object[]{"Critère", "Numéro colonne"};
@@ -60,7 +65,7 @@ public final class ColumnsOrder extends JDialog {
 
                 @Override
                 public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
-                    return false;
+                    return true;
                 }
             };
 
@@ -77,8 +82,8 @@ public final class ColumnsOrder extends JDialog {
     private void build() {
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(true);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setContentPane(buildContentPane());
         pack();
     }
@@ -94,7 +99,7 @@ public final class ColumnsOrder extends JDialog {
         panelCenter.setBackground(Color.white);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new ScrollPaneLayout());
+        panel.setLayout(new SpringLayout());
         panel.setBackground(Color.white);
 
         columnsOrderLabel = new JLabel(Labels.COLUMNS_ORDER_TITLE);
@@ -134,6 +139,8 @@ public final class ColumnsOrder extends JDialog {
 
         panel.add(buttonPanel);
 
+        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 5, 5);
+
         panelCenter.add(panel, BorderLayout.CENTER);
 
         return panelCenter;
@@ -161,29 +168,29 @@ public final class ColumnsOrder extends JDialog {
             e.printStackTrace();
         }
     }
-    
-    private Map<String, List<Integer>> readTable(){
+
+    private Map<String, List<Integer>> readTable() {
         Map<String, List<Integer>> columsOrder = new HashMap<String, List<Integer>>();
-        
-        for(int i = 0; i< tableModel.getRowCount(); i++){
+
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
             String s = (String) tableModel.getValueAt(i, 2);
             String[] columnList = s.split(",");
             List<Integer> numbersList = new LinkedList<Integer>();
-            
-            for(String columnNumber : columnList){
+
+            for (String columnNumber : columnList) {
                 numbersList.add(Integer.parseInt(columnNumber));
             }
-            
-            columsOrder.put((String)tableModel.getValueAt(i, 1), numbersList);
+
+            columsOrder.put((String) tableModel.getValueAt(i, 1), numbersList);
         }
-        
+
         return columsOrder;
     }
-    
+
     /**
      * Launch the fileLoader
      */
-    private void cancelButtonActionEvent(){
+    private void cancelButtonActionEvent() {
         FileLoader fileLoader = new FileLoader();
         fileLoader.getFilePathField().setText(fileName);
         fileLoader.setVisible(true);

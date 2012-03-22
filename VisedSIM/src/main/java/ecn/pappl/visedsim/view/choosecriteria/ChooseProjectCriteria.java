@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ecn.pappl.visedsim.view;
+package ecn.pappl.visedsim.view.choosecriteria;
 
+import ecn.pappl.visedsim.view.choosecriteria.AbstractChooseCriteria;
 import ecn.pappl.visedsim.view.mainframe.AbstractMainFrame;
 
 /**
