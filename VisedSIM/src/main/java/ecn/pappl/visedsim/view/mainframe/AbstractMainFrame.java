@@ -8,7 +8,7 @@ import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionCo
 import ecn.pappl.visedsim.controller.projectlist.ProjectListController;
 import ecn.pappl.visedsim.controller.projectviewers.SwingProjectViewerController;
 import ecn.pappl.visedsim.struct.Project;
-import ecn.pappl.visedsim.view.ChooseProjectCriteria;
+import ecn.pappl.visedsim.view.choosecriteria.ChooseProjectCriteria;
 import ecn.pappl.visedsim.view.CriteriaManagement;
 import ecn.pappl.visedsim.view.FileLoader;
 import ecn.pappl.visedsim.view.Labels;

@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.view;
 
+import ecn.pappl.visedsim.view.choosecriteria.ChooseConflictCriteria;
 import ecn.pappl.visedsim.view.fileoption.SaveFileOption;
 
 import ecn.pappl.visedsim.controller.criteriapreselection.CriteriaPreselectionController;
