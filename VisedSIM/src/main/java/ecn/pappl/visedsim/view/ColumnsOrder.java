@@ -32,6 +32,7 @@ public final class ColumnsOrder extends JDialog {
     private DefaultTableModel tableModel;
     private JButton validateButton, cancelButton;
     private String fileName;
+    private List<String> criteriaList;
 
     /**
      * Constructor
@@ -47,7 +48,8 @@ public final class ColumnsOrder extends JDialog {
             ResourceBundle bundle = ResourceBundle.getBundle(path,
                     Locale.getDefault());
             int i = 0;
-            for (String criteria : criteriaMap.keySet()) {
+            criteriaList = new ArrayList<String>(criteriaMap.keySet());
+            for (String criteria : criteriaList) {
                 tableContent[i][0] = bundle.getString(criteria);
                 for (Integer integer : criteriaMap.get(criteria)) {
                     if (tableContent[i][1] != null) {
@@ -184,14 +186,11 @@ public final class ColumnsOrder extends JDialog {
             List<Integer> numbersList = new LinkedList<Integer>();
 
             for (String columnNumber : columnList) {
-                //if(columnNumber.contains(" ")){
-                    columnNumber.replace(" ", "");
-                //}
                 int parseNumber = Integer.parseInt(columnNumber.trim());
                 numbersList.add(parseNumber);
             }
 
-            columsOrder.put((String) tableModel.getValueAt(i, 0), numbersList);
+            columsOrder.put(criteriaList.get(i), numbersList);
         }
 
         return columsOrder;
