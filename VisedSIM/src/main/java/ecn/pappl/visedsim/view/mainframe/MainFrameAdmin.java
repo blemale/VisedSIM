@@ -64,7 +64,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
         fileChooser = new JFileChooser();
         
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "XML File", "xml");
+                "PDF File", "pdf");
         fileChooser.setFileFilter(filter);
         fileChooser.setDialogTitle("Sauvegarder");
         
