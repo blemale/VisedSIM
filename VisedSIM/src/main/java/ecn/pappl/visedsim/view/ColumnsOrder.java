@@ -12,12 +12,10 @@ import ecn.pappl.visedsim.utilities.XMLPersistanceTools;
 import ecn.pappl.visedsim.view.mainframe.MainFrameAdmin;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -47,9 +45,12 @@ public final class ColumnsOrder extends JDialog {
         try {
             Map<String, List<Integer>> criteriaMap = ProjectListController.getInstance().getDefaultColumnsOrder();
             tableContent = new String[criteriaMap.keySet().size()][2];
+            String path = Configuration.I18N_FOLDER + "/Criteria";
+            ResourceBundle bundle = ResourceBundle.getBundle(path,
+                    Locale.getDefault());
             int i = 0;
             for (String criteria : criteriaMap.keySet()) {
-                tableContent[i][0] = criteria;
+                tableContent[i][0] = bundle.getString(criteria);
                 for (Integer integer : criteriaMap.get(criteria)) {
                     if (tableContent[i][1] != null) {
                         tableContent[i][1] = tableContent[i][1] + ", " + String.valueOf(integer);
@@ -82,6 +83,7 @@ public final class ColumnsOrder extends JDialog {
     private void build() {
         setTitle(Labels.FILE_LOADER_TITLE);
         setLocationRelativeTo(null);
+        setMinimumSize(new Dimension(300, 300));
         setResizable(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setContentPane(buildContentPane());
@@ -95,18 +97,18 @@ public final class ColumnsOrder extends JDialog {
      */
     private JPanel buildContentPane() {
         JPanel panelCenter = new JPanel();
-        panelCenter.setLayout(new BorderLayout());
+        panelCenter.setLayout(new SpringLayout());
         panelCenter.setBackground(Color.white);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new SpringLayout());
+        panel.setLayout(new BorderLayout());
         panel.setBackground(Color.white);
 
         columnsOrderLabel = new JLabel(Labels.COLUMNS_ORDER_TITLE);
-        panel.add(columnsOrderLabel);
+        panel.add(columnsOrderLabel, BorderLayout.PAGE_START);
 
         columnsTable = new JTable(tableModel);
-        panel.add(columnsTable);
+        panel.add(columnsTable, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
@@ -136,12 +138,15 @@ public final class ColumnsOrder extends JDialog {
         buttonPanel.add(cancelButton);
 
         SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, 5, 5, 10, 10);
+        
+        JScrollPane scrollpane = new JScrollPane(panel);
+        panelCenter.add(scrollpane);
+        
+        panelCenter.add(buttonPanel);
 
-        panel.add(buttonPanel);
+        SpringUtilities.makeCompactGrid(panelCenter, 2, 1, 5, 5, 15, 5);
 
-        SpringUtilities.makeCompactGrid(panel, 3, 1, 5, 5, 5, 5);
-
-        panelCenter.add(panel, BorderLayout.CENTER);
+        //panelCenter.add(scrollpane, BorderLayout.CENTER);
 
         return panelCenter;
     }
@@ -152,8 +157,6 @@ public final class ColumnsOrder extends JDialog {
     private void validateButtonActionEvent() {
         try {
             ProjectListController plc = ProjectListController.getInstance();
-            InputStream is = getClass().getClassLoader().getResourceAsStream(
-                    Configuration.COLUMNS_ORDER_FILE_PATH);
             Map<String, List<Integer>> columsOrder = readTable();
             plc.loadExcelProjectList(fileName, columsOrder, 3,
                     0);
@@ -169,15 +172,23 @@ public final class ColumnsOrder extends JDialog {
         }
     }
 
+    /**
+     * Read the values in the tables
+     * 
+     * @return 
+     */
     private Map<String, List<Integer>> readTable() {
         Map<String, List<Integer>> columsOrder = new HashMap<String, List<Integer>>();
 
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            String s = (String) tableModel.getValueAt(i, 2);
+            String s = (String) tableModel.getValueAt(i, 1);
             String[] columnList = s.split(",");
             List<Integer> numbersList = new LinkedList<Integer>();
 
             for (String columnNumber : columnList) {
+                //if(columnNumber.contains(" ")){
+                    columnNumber.replace(" ", "");
+                //}
                 numbersList.add(Integer.parseInt(columnNumber));
             }
 
