@@ -8,10 +8,11 @@ import java.io.File;
 
 /**
  * Class representing the configuration of the application
- * 
+ * <p/>
  * @author bastien
  */
 public final class Configuration {
+
     /**
      * Is the admin or user application.
      */
@@ -54,6 +55,9 @@ public final class Configuration {
      * Path of the i18n folder.
      */
     public static final String I18N_FOLDER = "i18n";
+    
+    public static final String ACRONYM = "acronym";
+    public static final String TITLE = "title";
 
     private Configuration() {
     }
