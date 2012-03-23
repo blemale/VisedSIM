@@ -42,7 +42,8 @@ public final class ColumnsOrder extends JDialog {
         this.fileName = fileName;
         Object[][] tableContent;
         try {
-            Map<String, List<Integer>> criteriaMap = ProjectListController.getInstance().getDefaultColumnsOrder();
+            Map<String, List<Integer>> criteriaMap = ProjectListController.
+                    getInstance().getDefaultColumnsOrder();
             tableContent = new String[criteriaMap.keySet().size()][2];
             String path = Configuration.I18N_FOLDER + "/Criteria";
             ResourceBundle bundle = ResourceBundle.getBundle(path,
@@ -52,8 +53,10 @@ public final class ColumnsOrder extends JDialog {
             for (String criteria : criteriaList) {
                 tableContent[i][0] = bundle.getString(criteria);
                 for (Integer integer : criteriaMap.get(criteria)) {
+                    integer += 1;
                     if (tableContent[i][1] != null) {
-                        tableContent[i][1] = tableContent[i][1] + ", " + String.valueOf(integer);
+                        tableContent[i][1] = tableContent[i][1] + ", " + String.
+                                valueOf((integer));
                     } else {
                         tableContent[i][1] = String.valueOf(integer);
                     }
@@ -71,7 +74,8 @@ public final class ColumnsOrder extends JDialog {
             };
 
         } catch (IOException ex) {
-            Logger.getLogger(ColumnsOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ColumnsOrder.class.getName()).log(Level.SEVERE,
+                    null, ex);
         }
 
         build();
@@ -138,10 +142,10 @@ public final class ColumnsOrder extends JDialog {
         buttonPanel.add(cancelButton);
 
         SpringUtilities.makeCompactGrid(buttonPanel, 1, 2, 5, 5, 10, 10);
-        
+
         JScrollPane scrollpane = new JScrollPane(panel);
         panelCenter.add(scrollpane);
-        
+
         panelCenter.add(buttonPanel);
 
         SpringUtilities.makeCompactGrid(panelCenter, 2, 1, 5, 5, 15, 5);
@@ -174,11 +178,12 @@ public final class ColumnsOrder extends JDialog {
 
     /**
      * Read the values in the tables
-     * 
-     * @return 
+     * <p/>
+     * @return
      */
     private Map<String, List<Integer>> readTable() {
-        Map<String, List<Integer>> columsOrder = new HashMap<String, List<Integer>>();
+        Map<String, List<Integer>> columsOrder =
+                new HashMap<String, List<Integer>>();
 
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             String s = (String) tableModel.getValueAt(i, 1);
@@ -186,8 +191,11 @@ public final class ColumnsOrder extends JDialog {
             List<Integer> numbersList = new LinkedList<Integer>();
 
             for (String columnNumber : columnList) {
-                int parseNumber = Integer.parseInt(columnNumber.trim());
-                numbersList.add(parseNumber);
+                try {
+                    int parseNumber = Integer.parseInt(columnNumber.trim()) - 1;
+                    numbersList.add(parseNumber);
+                } catch (Exception ex) {
+                }
             }
 
             columsOrder.put(criteriaList.get(i), numbersList);
