@@ -4,6 +4,7 @@
  */
 package ecn.pappl.visedsim.io;
 
+import ecn.pappl.visedsim.Configuration;
 import ecn.pappl.visedsim.struct.Project;
 import ecn.pappl.visedsim.struct.ProjectList;
 import java.util.LinkedList;
@@ -61,7 +62,12 @@ public final class MapConverter {
         for (Integer rowNumber : map.keySet()) {
             Project project = convertMapToProject(map.get(rowNumber),
                     columnsOrder);
-            projects.add(project);
+            String acronym = project.getCriteriaMap().get(Configuration.ACRONYM).
+                    get(
+                    0);
+            if (!acronym.trim().isEmpty()) {
+                projects.add(project);
+            }
         }
         return projectList;
     }
