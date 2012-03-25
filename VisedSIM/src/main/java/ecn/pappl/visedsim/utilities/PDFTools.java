@@ -40,15 +40,15 @@ public class PDFTools {
      * @param criteriaMap
      * @throws BadElementException 
      */
-    public static void createTable(Section subCatPart, String[][] tableContent, String[] columnName)
+    public static void createTable(Chapter catPara, String[][] tableContent, String[] columnName)
             throws BadElementException {
 
-        PdfPTable table = new PdfPTable(tableContent.length);
+        PdfPTable table = new PdfPTable(2);
         PdfPCell c1 = new PdfPCell(new Phrase(columnName[0]));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase(columnName.length));
+        c1 = new PdfPCell(new Phrase(new Phrase(columnName[1])));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
@@ -59,7 +59,9 @@ public class PDFTools {
             table.addCell(tableContent[i][1]);
         }
 
-        subCatPart.add(table);
+        //subCatPart.add(table);
+        //subPara.add(table);
+        catPara.add(table);
     }
 
     /**
@@ -71,6 +73,18 @@ public class PDFTools {
     public static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
+        }
+    }
+    
+    /**
+     * Add empty line in a paragraph
+     * 
+     * @param chapter
+     * @param number 
+     */
+    public static void addEmptyLine(Chapter chapter, int number) {
+        for (int i = 0; i < number; i++) {
+            chapter.add(new Paragraph(" "));
         }
     }
 }

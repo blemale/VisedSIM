@@ -87,8 +87,10 @@ public class PDFPrinterController {
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
 
+            int numeroProjet = 1;
             for (Project project : projectList.getProjectList()) {
-                addProjectToPDFDoc(document, project, criteriaPreselection);
+                addProjectToPDFDoc(document, project, criteriaPreselection, numeroProjet);
+                numeroProjet++;
             }
             document.close();
         } catch (Exception e) {
@@ -97,7 +99,7 @@ public class PDFPrinterController {
     }
 
     private void addProjectToPDFDoc(Document document, Project project,
-            CriteriaPreselection criteriaPreselection) throws DocumentException {
+            CriteriaPreselection criteriaPreselection, int numeroProjet) throws DocumentException {
         int j = 2;
         int i = ProjectTools.getNumberOfCriteriaLines(project,
                 criteriaPreselection);
@@ -137,14 +139,17 @@ public class PDFPrinterController {
         anchor.setName(projectName);
 
         // Second parameter is the number of the chapter
-        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+        Chapter catPart = new Chapter(new Paragraph(anchor), numeroProjet);
 
-        Paragraph subPara = new Paragraph("Subcategory 1", subFont);
-        Section subCatPart = catPart.addSection(subPara);
+        Paragraph subPara = new Paragraph();
+        
+        //Section subCatPart = catPart.addSection(subPara);
+        
+        PDFTools.addEmptyLine(catPart, 2);
 
         // Add a table
         String[] columnName = new String[]{"Critère", "Valeur"};
-        PDFTools.createTable(subCatPart, criteriaArray, columnName);
+        PDFTools.createTable(catPart, criteriaArray, columnName);
 
         // Now add all this to the document
         document.add(catPart);
