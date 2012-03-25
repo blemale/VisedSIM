@@ -27,9 +27,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class ColumnsOrder extends JDialog {
 
-    private JLabel columnsOrderLabel, firstRowLabel;
+    private JLabel columnsOrderLabel;
     private JTable columnsTable;
-    private JTextField firstRowField,firstColumnField; 
+    private int firstRow = 2,firstColumn = 1; 
     private DefaultTableModel tableModel;
     private JButton validateButton, cancelButton;
     private String fileName;
@@ -61,6 +61,14 @@ public final class ColumnsOrder extends JDialog {
                 }
                 i++;
             }
+            /*
+            i++;
+            tableContent[i][0] = "Abscisse première cellule";
+            tableContent[i][1] = firstRow;
+            i++;
+            tableContent[i][0] = "Ordonnée première cellule";
+            tableContent[i][1] = firstColumn;
+            */
 
             Object[] columnsName = new Object[]{"Critère", "Numéro colonne"};
             tableModel = new DefaultTableModel(tableContent, columnsName) {
@@ -108,21 +116,6 @@ public final class ColumnsOrder extends JDialog {
         columnsOrderLabel = new JLabel(Labels.COLUMNS_ORDER_TITLE);
         panel.add(columnsOrderLabel, BorderLayout.PAGE_START);
         
-        JPanel firstExcelCell = new JPanel(new SpringLayout());
-        firstExcelCell.setBackground(Color.white);
-        
-        firstRowLabel = new JLabel(Labels.COLUMNS_ORDER_FIRST_CELL);
-        firstExcelCell.add(firstRowLabel);
-        
-        firstRowField = new JTextField(4);
-        firstExcelCell.add(firstRowField);
-        
-        firstColumnField = new JTextField(4);
-        firstExcelCell.add(firstColumnField);
-        
-        SpringUtilities.makeCompactGrid(firstExcelCell, 1, 3, 5, 5, 5,5);
-        panel.add(firstExcelCell);
-
         columnsTable = new JTable(tableModel);
         panel.add(columnsTable, BorderLayout.CENTER);
 

@@ -152,6 +152,7 @@ public class MainFrameUser extends AbstractMainFrame {
     protected JPanel buildButtonPanel() {
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
+        buttonPanel.setMaximumSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, MAX_BUTTON_PANEL_HEIGHT));
 
         JPanel criteriaPanel = new JPanel(new FlowLayout());
         criteriaPanel.setBackground(Color.white);
