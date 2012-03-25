@@ -86,6 +86,7 @@ public class MainFrameUser extends AbstractMainFrame {
         menuBar = new JMenuBar();
         menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
         menuBar.setMaximumSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, MAX_BAR_HEIGHT));
+
         projectMenu = new JMenu(Labels.MENU_PROJECT);
 
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
