@@ -118,6 +118,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
     protected JMenuBar buildMenuBar() {
         menuBar = new JMenuBar();
         menuBar.setMinimumSize(new Dimension(MIN_WIDTH, MIN_BAR_HEIGHT));
+        menuBar.setMaximumSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, MIN_BAR_HEIGHT));
         projectMenu = new JMenu(Labels.MENU_PROJECT);
         
         newListProjectItem = new JMenuItem(Labels.MENU_PROJECT_NEW_LIST);
@@ -217,6 +218,7 @@ public class MainFrameAdmin extends AbstractMainFrame {
     protected JPanel buildButtonPanel() {
         JPanel buttonPanel = new JPanel(new SpringLayout());
         buttonPanel.setBackground(Color.white);
+        buttonPanel.setMaximumSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, MAX_BUTTON_PANEL_HEIGHT));
         
         JPanel criteriaPanel = new JPanel(new FlowLayout());
         criteriaPanel.setBackground(Color.white);

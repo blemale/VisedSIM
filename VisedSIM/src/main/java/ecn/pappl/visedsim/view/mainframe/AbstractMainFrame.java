@@ -39,6 +39,7 @@ public abstract class AbstractMainFrame extends JFrame {
     private static final int MIN_HEIGHT = 300;
     protected static final int MIN_WIDTH = 580;
     protected static final int MIN_BAR_HEIGHT = 30;
+    protected static final int MAX_BUTTON_PANEL_HEIGHT = 100;
     
         //Integers used in the compact grids
     private static final int PANEL_NUMBER_OF_COLUMN = 1;
