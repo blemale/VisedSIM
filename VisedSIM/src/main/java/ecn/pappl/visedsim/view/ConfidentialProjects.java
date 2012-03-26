@@ -208,6 +208,9 @@ public final class ConfidentialProjects extends JDialog {
         }
     }
 
+    /**
+     * Let the user choose the XML name and save the projects
+     */
     public void saveXML() {
         SaveFileOption saveFileOption = new SaveFileOption(this,
                 Labels.CHOOSE_NEW_LIST_BUTTON);
@@ -228,6 +231,12 @@ public final class ConfidentialProjects extends JDialog {
         this.dispose();
     }
     
+    /**
+     * Add .xml at the end of the XML file
+     * 
+     * @param fileName
+     * @return the new fileName
+     */
     private String addXMLExtension(String fileName){
         if(!fileName.endsWith(".xml")){
             fileName = fileName+".xml";
