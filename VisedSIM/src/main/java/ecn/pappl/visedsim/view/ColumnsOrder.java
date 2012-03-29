@@ -181,6 +181,8 @@ public final class ColumnsOrder extends JDialog {
             mainFrameAdmin.setVisible(true);
             this.dispose();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                        "Un problème est survenue au chargement du fichier.");
             e.printStackTrace();
         }
     }
